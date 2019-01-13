@@ -24,5 +24,6 @@
         "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
         "builtin-modules": "^3.0.0",
         "rollup-plugin-babel": "^4.3.0"
-    }
+    },
+    "gitHead": "d5f1f6f971d9ae76d89aec761075f70270140ea8"
 }

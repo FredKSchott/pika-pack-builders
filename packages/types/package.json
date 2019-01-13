@@ -1,0 +1,10 @@
+{
+    "name": "@pika/types",
+    "version": "0.1.0",
+    "types": "types.d.ts",
+    "dependencies": {},
+    "publishConfig": {
+      "access": "public"
+    },
+    "gitHead": "d5f1f6f971d9ae76d89aec761075f70270140ea8"
+}

@@ -25,5 +25,6 @@
         "@pika/babel-plugin-esm-import-rewrite": "^0.1.0",
         "@types/node": "^10.12.18",
         "mkdirp": "^0.5.1"
-    }
+    },
+    "gitHead": "d5f1f6f971d9ae76d89aec761075f70270140ea8"
 }

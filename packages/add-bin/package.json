@@ -16,5 +16,6 @@
     },
     "scripts": {
         "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
-    }
+    },
+    "gitHead": "d5f1f6f971d9ae76d89aec761075f70270140ea8"
 }
