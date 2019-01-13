@@ -1,6 +1,9 @@
 {
     "name": "@pika/deno-builder",
     "version": "0.1.0",
+    "publishConfig": {
+      "access": "public"
+    },
     "dependencies": {
         "@types/node": "^10.12.18",
         "mkdirp": "^0.5.1"

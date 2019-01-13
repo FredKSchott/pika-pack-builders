@@ -1,8 +1,8 @@
 {
     "name": "@pika/add-wasm-wrapper",
     "version": "0.1.0",
-    "dependencies": {
-        "mkdirp": "^0.5.0"
+    "publishConfig": {
+      "access": "public"
     },
     "distributions": {
       "src": [true],
@@ -10,5 +10,8 @@
     },
     "scripts": {
         "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
+    },
+    "dependencies": {
+        "mkdirp": "^0.5.0"
     }
 }

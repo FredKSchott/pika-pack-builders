@@ -1,12 +1,15 @@
 {
     "name": "@pika/add-bin",
     "version": "0.1.0",
-    "dependencies": {},
+    "publishConfig": {
+      "access": "public"
+    },
     "distributions": {
       "src": [true],
       "plugins": [["@pika/node-builder"]]
     },
     "scripts": {
         "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
-    }
+    },
+    "dependencies": {}
 }

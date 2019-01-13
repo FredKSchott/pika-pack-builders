@@ -1,6 +1,9 @@
 {
     "name": "@pika/assemblyscript-builder",
     "version": "0.1.0",
+    "publishConfig": {
+      "access": "public"
+    },
     "dependencies": {
         "assemblyscript": "^0.3.0"
     },
