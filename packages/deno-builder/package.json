@@ -1,6 +1,6 @@
 {
     "name": "@pika/deno-builder",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -9,9 +9,9 @@
         "mkdirp": "^0.5.1"
     },
     "devDependencies": {
-        "@pika/types": "^0.1.1",
-        "@types/node": "^10.12.18",
-        "@pika/node-builder": "^0.1.1"
+        "@pika/node-builder": "^0.1.2",
+        "@pika/types": "^0.1.2",
+        "@types/node": "^10.12.18"
     },
     "distributions": {
         "src": [

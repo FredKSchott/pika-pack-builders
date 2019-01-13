@@ -1,6 +1,6 @@
 {
     "name": "@pika/assemblyscript-builder",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -9,8 +9,8 @@
         "assemblyscript": "github:AssemblyScript/assemblyscript"
     },
     "devDependencies": {
-        "@pika/types": "^0.1.1",
-        "@pika/node-builder": "^0.1.1"
+        "@pika/node-builder": "^0.1.2",
+        "@pika/types": "^0.1.2"
     },
     "distributions": {
         "src": [

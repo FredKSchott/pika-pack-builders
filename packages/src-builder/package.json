@@ -1,6 +1,6 @@
 {
     "name": "@pika/src-builder",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -24,13 +24,13 @@
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/plugin-syntax-import-meta": "^7.2.0",
         "@babel/preset-typescript": "^7.1.0",
-        "@pika/babel-plugin-esm-import-rewrite": "^0.1.1",
+        "@pika/babel-plugin-esm-import-rewrite": "^0.1.2",
         "@types/node": "^10.12.18",
         "mkdirp": "^0.5.1"
     },
     "devDependencies": {
-        "@pika/types": "^0.1.1",
-        "@pika/node-builder": "0.1.1"
+        "@pika/node-builder": "^0.1.2",
+        "@pika/types": "^0.1.2"
     },
     "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5"
 }
