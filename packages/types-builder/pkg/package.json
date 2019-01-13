@@ -1,0 +1,23 @@
+{
+  "name": "@pika/types-builder",
+  "version": "0.1.0",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "execa": "^1.0.0",
+    "import-from": "^2.1.0",
+    "import-global": "^0.1.0",
+    "mkdirp": "^0.5.1"
+  },
+  "source": "dist-src/index",
+  "main": "dist-node/index"
+}

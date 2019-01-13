@@ -1,0 +1,17 @@
+{
+  "name": "@pika/add-bin",
+  "version": "0.1.0",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {},
+  "source": "dist-src/index",
+  "main": "dist-node/index"
+}

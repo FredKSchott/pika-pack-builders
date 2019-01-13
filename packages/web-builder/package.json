@@ -1,0 +1,18 @@
+{
+    "name": "@pika/web-builder",
+    "version": "0.1.0",
+    "distributions": {
+        "src": [true],
+        "plugins": [["@pika/node-builder"]]
+    },
+    "scripts": {
+        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
+    },
+    "dependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/plugin-syntax-import-meta": "^7.2.0",
+        "@babel/preset-env": "^7.2.3",
+        "@types/node": "^10.12.18",
+        "rollup-plugin-babel": "^4.3.0"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "name": "@pika/types",
+    "version": "0.1.0",
+    "types": "types.d.ts",
+    "dependencies": {}
+}

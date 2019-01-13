@@ -1,0 +1,10 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "publish": "lerna publish --contents pkg"
+  },
+  "devDependencies": {
+    "lerna": "^3.10.5"
+  }
+}
