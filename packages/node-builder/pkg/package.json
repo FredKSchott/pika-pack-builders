@@ -19,6 +19,9 @@
     "builtin-modules": "^3.0.0",
     "rollup-plugin-babel": "^4.3.0"
   },
-  "source": "dist-src/index",
-  "main": "dist-node/index"
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js",
+  "publishConfig": {
+    "access": "public"
+  }
 }

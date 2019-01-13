@@ -15,6 +15,9 @@
     "@types/node": "^10.12.18",
     "mkdirp": "^0.5.1"
   },
-  "source": "dist-src/index",
-  "main": "dist-node/index"
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js",
+  "publishConfig": {
+    "access": "public"
+  }
 }

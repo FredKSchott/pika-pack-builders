@@ -1,5 +1,5 @@
 {
-  "name": "@pika/web-builder",
+  "name": "@pika/src-builder",
   "version": "0.1.0",
   "pika": true,
   "keywords": [
@@ -12,11 +12,13 @@
   ],
   "sideEffects": false,
   "dependencies": {
+    "@babel/core": "^7.2.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-typescript": "^7.1.0",
+    "@pika/babel-plugin-esm-import-rewrite": "^0.1.0",
     "@types/node": "^10.12.18",
-    "rollup-plugin-babel": "^4.3.0"
+    "mkdirp": "^0.5.1"
   },
   "source": "dist-src/index.js",
   "main": "dist-node/index.js",

@@ -12,6 +12,9 @@
   ],
   "sideEffects": false,
   "dependencies": {},
-  "source": "dist-src/index",
-  "main": "dist-node/index"
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js",
+  "publishConfig": {
+    "access": "public"
+  }
 }

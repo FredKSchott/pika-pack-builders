@@ -4,6 +4,13 @@
     "publishConfig": {
       "access": "public"
     },
+    "distributions": {
+        "src": [true],
+        "plugins": [["@pika/node-builder"]]
+    },
+    "scripts": {
+        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
+    },
     "dependencies": {
         "@babel/core": "^7.2.2",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
