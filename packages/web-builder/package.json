@@ -1,6 +1,7 @@
 {
     "name": "@pika/web-builder",
     "version": "0.1.1",
+    "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
     },
@@ -15,7 +16,8 @@
         ]
     },
     "scripts": {
-        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
+        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build",
+        "prepublishOnly": "npm run build"
     },
     "dependencies": {
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -24,5 +26,9 @@
         "@types/node": "^10.12.18",
         "rollup-plugin-babel": "^4.3.0"
     },
-    "gitHead": "d5f1f6f971d9ae76d89aec761075f70270140ea8"
+    "devDependencies": {
+        "@pika/types": "^0.1.1",
+        "@pika/node-builder": "^0.1.1"
+    },
+    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5"
 }

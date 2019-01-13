@@ -1,6 +1,6 @@
 {
   "name": "@pika/add-wasm-wrapper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "pika": true,
   "keywords": [
     "pika-pkg"
@@ -15,8 +15,5 @@
     "mkdirp": "^0.5.0"
   },
   "source": "dist-src/index.js",
-  "main": "dist-node/index.js",
-  "publishConfig": {
-    "access": "public"
-  }
+  "main": "dist-node/index.js"
 }

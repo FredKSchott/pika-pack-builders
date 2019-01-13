@@ -1,6 +1,6 @@
 {
   "name": "@pika/types-builder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "pika": true,
   "keywords": [
     "pika-pkg"
@@ -12,15 +12,11 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@types/node": "^10.12.18",
     "execa": "^1.0.0",
     "import-from": "^2.1.0",
     "import-global": "^0.1.0",
     "mkdirp": "^0.5.1"
   },
   "source": "dist-src/index.js",
-  "main": "dist-node/index.js",
-  "publishConfig": {
-    "access": "public"
-  }
+  "main": "dist-node/index.js"
 }

@@ -1,6 +1,7 @@
 {
     "name": "@pika/add-wasm-wrapper",
     "version": "0.1.1",
+    "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
     },
@@ -15,10 +16,15 @@
         ]
     },
     "scripts": {
-        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
+        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build",
+        "prepublishOnly": "npm run build"
     },
     "dependencies": {
         "mkdirp": "^0.5.0"
     },
-    "gitHead": "d5f1f6f971d9ae76d89aec761075f70270140ea8"
+    "devDependencies": {
+        "@pika/types": "^0.1.1",
+        "@pika/node-builder": "^0.1.1"
+    },
+    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5"
 }
