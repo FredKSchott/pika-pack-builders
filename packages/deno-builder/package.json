@@ -2,15 +2,21 @@
     "name": "@pika/deno-builder",
     "version": "0.1.0",
     "publishConfig": {
-      "access": "public"
+        "access": "public"
     },
     "dependencies": {
         "@types/node": "^10.12.18",
         "mkdirp": "^0.5.1"
     },
     "distributions": {
-        "src": [true],
-        "plugins": [["@pika/node-builder"]]
+        "src": [
+            true
+        ],
+        "plugins": [
+            [
+                "@pika/node-builder"
+            ]
+        ]
     },
     "scripts": {
         "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"

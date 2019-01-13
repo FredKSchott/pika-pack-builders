@@ -2,14 +2,20 @@
     "name": "@pika/assemblyscript-builder",
     "version": "0.1.0",
     "publishConfig": {
-      "access": "public"
+        "access": "public"
     },
     "dependencies": {
         "assemblyscript": "^0.3.0"
     },
     "distributions": {
-        "src": [true],
-        "plugins": [["@pika/node-builder"]]
+        "src": [
+            true
+        ],
+        "plugins": [
+            [
+                "@pika/node-builder"
+            ]
+        ]
     },
     "scripts": {
         "build": "../../../stdpkg/pkg/dist-node/index.bin.js build"
