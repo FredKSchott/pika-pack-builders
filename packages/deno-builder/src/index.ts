@@ -21,7 +21,7 @@ export async function build({cwd, out, src}: BuilderOptions): Promise<void> {
   for (const fileAbs of src.files) {
     const fileRel = path.relative(cwd, fileAbs);
     console.log(fileRel, fileRel.replace('/src/', '/dist-deno/'), path.resolve(out, fileRel));
-    const writeToTypeScript = fileAbs.replace('/src/', '/dist-deno/');
+    const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
     mkdirp.sync(path.dirname(writeToTypeScript));
     fs.copyFileSync(fileAbs, writeToTypeScript);
   }
