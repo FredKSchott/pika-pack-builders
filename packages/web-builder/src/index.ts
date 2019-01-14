@@ -5,10 +5,7 @@ import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetEnv from '@babel/preset-env';
 import path from 'path';
 import rollupBabel from 'rollup-plugin-babel';
-
-type BuilderOptions = any;
-
-export const name = 'web';
+import {BuilderOptions} from '@pika/types';
 
 export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';

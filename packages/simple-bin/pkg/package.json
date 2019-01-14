@@ -1,6 +1,6 @@
 {
-  "name": "@pika/add-wasm-wrapper",
-  "version": "0.1.1",
+  "name": "@pika/simple-bin",
+  "version": "0.1.2",
   "pika": true,
   "keywords": [
     "pika-pkg"
@@ -11,9 +11,7 @@
     "bin/"
   ],
   "sideEffects": false,
-  "dependencies": {
-    "mkdirp": "^0.5.0"
-  },
+  "dependencies": {},
   "source": "dist-src/index.js",
   "main": "dist-node/index.js"
 }

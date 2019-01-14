@@ -7,10 +7,7 @@ import path from 'path';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import execa from 'execa';
-
-type BuilderOptions = any;
-
-export const name = 'types';
+import {BuilderOptions} from '@pika/types';
 
 function getPikaGlobalPrefix(): string | null {
   if (process.env.PREFIX) {
@@ -64,7 +61,7 @@ export async function build({cwd, out, reporter, isFull, manifest}: BuilderOptio
   }
   if ((fs.existsSync(tscBin)) && (fs.existsSync(path.join(cwd, 'tsconfig.json')))) {
     await execa(
-      'tscBin',
+      tscBin,
       ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--declarationDir', path.join(out, 'dist-types/')],
       {cwd});
     return;

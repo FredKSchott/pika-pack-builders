@@ -3,10 +3,7 @@
 import path from 'path';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
-
-type BuilderOptions = any;
-
-export const name = 'deno-builder';
+import {BuilderOptions} from '@pika/types';
 
 export async function manifest(manifest, {cwd}: BuilderOptions): Promise<void> {
   const pathToTsconfig = path.join(cwd, 'tsconfig.json');

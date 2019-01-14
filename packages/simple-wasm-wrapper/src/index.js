@@ -38,8 +38,6 @@ export function createWASM(importObject?: object): Promise<ResultObject>;
 export default function createWASM(importObject?: object): Promise<ResultObject>;
 `;
 
-export const name = "add-wasm-wrapper";
-
 export function validate({ cwd }) {
   return true;
 }

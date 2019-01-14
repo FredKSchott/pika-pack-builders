@@ -16,18 +16,20 @@
         ]
     },
     "scripts": {
-        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build",
+        "build": "pika build",
         "prepublishOnly": "npm run build"
     },
     "dependencies": {
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/plugin-syntax-import-meta": "^7.2.0",
         "@babel/preset-env": "^7.2.3",
+        "@pika/types": "^0.1.2",
         "@types/node": "^10.12.18",
         "rollup-plugin-babel": "^4.3.0"
     },
     "devDependencies": {
         "@pika/node-builder": "^0.1.2",
+        "@pika/pack": "^0.1.0",
         "@pika/types": "^0.1.2"
     },
     "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5"

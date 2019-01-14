@@ -1,5 +1,5 @@
 {
-  "name": "@pika/deno-builder",
+  "name": "@pika/bucklescript-builder",
   "version": "0.1.2",
   "pika": true,
   "keywords": [
@@ -12,7 +12,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "mkdirp": "^0.5.1"
+    "rollup-plugin-bucklescript": "^0.7.0"
   },
   "source": "dist-src/index.js",
   "main": "dist-node/index.js"

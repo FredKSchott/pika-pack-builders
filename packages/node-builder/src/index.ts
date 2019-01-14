@@ -5,10 +5,7 @@ import babelPresetEnv from '@babel/preset-env';
 import babelPluginDynamicImport from 'babel-plugin-dynamic-import-node-babel-7';
 import builtinModules from 'builtin-modules';
 import rollupBabel from 'rollup-plugin-babel';
-
-type BuilderOptions = any;
-
-export const name = 'node';
+import {BuilderOptions} from '@pika/types';
 
 export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';

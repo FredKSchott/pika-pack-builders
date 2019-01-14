@@ -1,18 +1,9 @@
 {
-    "name": "@pika/assemblyscript-builder",
+    "name": "@pika/simple-bin",
     "version": "0.1.2",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
-    },
-    "dependencies": {
-        "@pika/types": "^0.1.2",
-        "assemblyscript": "github:AssemblyScript/assemblyscript"
-    },
-    "devDependencies": {
-        "@pika/node-builder": "^0.1.2",
-        "@pika/pack": "^0.1.0",
-        "@pika/types": "^0.1.2"
     },
     "distributions": {
         "src": [
@@ -28,5 +19,13 @@
         "build": "pika build",
         "prepublishOnly": "npm run build"
     },
-    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5"
+    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5",
+    "devDependencies": {
+        "@pika/node-builder": "^0.1.2",
+        "@pika/pack": "^0.1.0",
+        "@pika/types": "^0.1.2"
+    },
+    "dependencies": {
+        "@pika/types": "^0.1.2"
+    }
 }

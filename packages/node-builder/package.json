@@ -16,7 +16,7 @@
         ]
     },
     "scripts": {
-        "build": "../../../stdpkg/pkg/dist-node/index.bin.js build",
+        "build": "pika build",
         "prepublishOnly": "npm run build"
     },
     "dependencies": {
@@ -29,5 +29,8 @@
         "builtin-modules": "^3.0.0",
         "rollup-plugin-babel": "^4.3.0"
     },
-    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5"
+    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5",
+    "devDependencies": {
+        "@pika/pack": "^0.1.0"
+    }
 }

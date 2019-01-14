@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "nuke": "rm -rf package-lock.json node_modules && npm install && lerna exec \"rm -f package-lock.json npm-shrinkwrap.json\" && lerna clean --yes && lerna bootstrap && lerna exec --stream -- \"test -f package-lock.json || npm install --package-lock-only\"",
     "publish": "lerna publish --contents pkg"
   },
   "devDependencies": {

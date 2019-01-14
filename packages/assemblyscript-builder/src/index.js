@@ -2,8 +2,6 @@ import path from "path";
 import fs from "fs";
 import asc from "assemblyscript/cli/asc";
 
-export const name = "assemblyscript-builder";
-
 export function validate({ cwd }) {
   return fs.existsSync(path.join(cwd, "src/index.ts"));
 }

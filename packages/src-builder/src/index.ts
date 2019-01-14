@@ -6,13 +6,11 @@ import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import'
 import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetTypeScript from '@babel/preset-typescript';
 import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
+import {BuilderOptions} from '@pika/types';
 
-type BuilderOptions = any;
-
-export const name = 'src';
-
-export function manifest(manifest) {
-  manifest.source = manifest.source || 'dist-src/index.js';
+export function manifest(newManifest) {
+  newManifest.source = newManifest.source || 'dist-src/index.js';
+  return newManifest;
 }
 
 export async function build({cwd, out, src}: BuilderOptions): Promise<void> {

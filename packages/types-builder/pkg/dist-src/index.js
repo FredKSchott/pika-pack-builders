@@ -72,7 +72,7 @@ export async function build({
   }
 
   if (fs.existsSync(tscBin) && fs.existsSync(path.join(cwd, 'tsconfig.json'))) {
-    await execa('tscBin', ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--declarationDir', path.join(out, 'dist-types/')], {
+    await execa(tscBin, ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--declarationDir', path.join(out, 'dist-types/')], {
       cwd
     });
     return;

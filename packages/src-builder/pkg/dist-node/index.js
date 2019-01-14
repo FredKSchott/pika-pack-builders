@@ -50,8 +50,9 @@ function _asyncToGenerator(fn) {
 }
 
 const name = 'src';
-function manifest(manifest) {
-  manifest.source = manifest.source || 'dist-src/index.js';
+function manifest(newManifest) {
+  newManifest.source = newManifest.source || 'dist-src/index.js';
+  return newManifest;
 }
 function build(_x) {
   return _build.apply(this, arguments);

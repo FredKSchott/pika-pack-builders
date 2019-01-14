@@ -120,7 +120,7 @@ function _build() {
     }
 
     if (fs.existsSync(tscBin) && fs.existsSync(path.join(cwd, 'tsconfig.json'))) {
-      yield execa('tscBin', ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--declarationDir', path.join(out, 'dist-types/')], {
+      yield execa(tscBin, ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--declarationDir', path.join(out, 'dist-types/')], {
         cwd
       });
       return;
