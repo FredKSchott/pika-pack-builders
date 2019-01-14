@@ -1,6 +1,6 @@
 {
   "name": "@pika/web-builder",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "pika": true,
   "keywords": [
     "pika-pkg"
@@ -15,7 +15,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
-    "@pika/types": "^0.2.0",
+    "@pika/types": "^0.2.1",
     "@types/node": "^10.12.18",
     "rollup-plugin-babel": "^4.3.0"
   },
