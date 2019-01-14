@@ -48,7 +48,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const name = 'node';
 function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
@@ -95,6 +94,5 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.name = name;
 exports.manifest = manifest;
 exports.build = build;

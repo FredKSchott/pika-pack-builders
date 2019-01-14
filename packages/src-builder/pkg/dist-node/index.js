@@ -49,7 +49,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const name = 'src';
 function manifest(newManifest) {
   newManifest.source = newManifest.source || 'dist-src/index.js';
   return newManifest;
@@ -100,6 +99,5 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.name = name;
 exports.manifest = manifest;
 exports.build = build;

@@ -44,7 +44,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const name = 'deno-builder';
 function manifest(_x, _x2) {
   return _manifest.apply(this, arguments);
 }
@@ -111,6 +110,5 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.name = name;
 exports.manifest = manifest;
 exports.build = build;

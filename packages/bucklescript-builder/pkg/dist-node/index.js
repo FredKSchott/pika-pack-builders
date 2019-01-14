@@ -44,7 +44,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const name = "bucklescript-builder";
 function validate({
   cwd
 }) {
@@ -79,7 +78,6 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.name = name;
 exports.validate = validate;
 exports.manifest = manifest;
 exports.build = build;

@@ -48,8 +48,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const name = 'types';
-
 function getPikaGlobalPrefix() {
   if (process.env.PREFIX) {
     return process.env.PREFIX;
@@ -159,6 +157,5 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.name = name;
 exports.manifest = manifest;
 exports.build = build;

@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs";
 import rollupBuckleScript from 'rollup-plugin-bucklescript';
-export const name = "bucklescript-builder";
 export function validate({
   cwd
 }) {

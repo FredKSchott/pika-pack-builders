@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs";
 const BIN_FILENAME = "dist-node/index.bin.js";
-export const name = "add-bin";
 export function validate({
   options
 }) {

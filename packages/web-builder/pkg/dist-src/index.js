@@ -3,7 +3,6 @@ import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetEnv from '@babel/preset-env';
 import path from 'path';
 import rollupBabel from 'rollup-plugin-babel';
-export const name = 'web';
 export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }

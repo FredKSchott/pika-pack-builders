@@ -8,7 +8,6 @@ var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 
 const BIN_FILENAME = "dist-node/index.bin.js";
-const name = "add-bin";
 function validate({
   options
 }) {
@@ -79,7 +78,6 @@ if (!cli.autoRun) {
   fs.chmodSync(binFilename, "755");
 }
 
-exports.name = name;
 exports.validate = validate;
 exports.manifest = manifest;
 exports.build = build;

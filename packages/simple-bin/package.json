@@ -19,7 +19,7 @@
         "build": "pika build",
         "prepublishOnly": "npm run build"
     },
-    "gitHead": "317cda0fa4c153618e5040d38a34aaefc4d8d4d5",
+    "gitHead": "a240ddf4e58f321d45046475bff530bdd0e4ad2a",
     "devDependencies": {
         "@pika/node-builder": "^0.2.0",
         "@pika/pack": "^0.1.0",

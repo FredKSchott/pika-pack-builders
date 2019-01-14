@@ -6,7 +6,6 @@ import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import'
 import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetTypeScript from '@babel/preset-typescript';
 import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
-export const name = 'src';
 export function manifest(newManifest) {
   newManifest.source = newManifest.source || 'dist-src/index.js';
   return newManifest;

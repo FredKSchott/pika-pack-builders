@@ -33,7 +33,6 @@ interface ResultObject {module: any; instance: WASMInstance}
 export function createWASM(importObject?: object): Promise<ResultObject>;
 export default function createWASM(importObject?: object): Promise<ResultObject>;
 `;
-export const name = "add-wasm-wrapper";
 export function validate({
   cwd
 }) {

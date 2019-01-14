@@ -5,7 +5,6 @@ import path from 'path';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import execa from 'execa';
-export const name = 'types';
 
 function getPikaGlobalPrefix() {
   if (process.env.PREFIX) {

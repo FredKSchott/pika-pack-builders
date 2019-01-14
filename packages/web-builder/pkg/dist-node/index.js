@@ -46,7 +46,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const name = 'web';
 function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
@@ -91,6 +90,5 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.name = name;
 exports.manifest = manifest;
 exports.build = build;

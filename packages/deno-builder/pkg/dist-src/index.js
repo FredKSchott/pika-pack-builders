@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
-export const name = 'deno-builder';
 export async function manifest(manifest, {
   cwd
 }) {
