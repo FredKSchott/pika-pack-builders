@@ -1,6 +1,6 @@
 {
     "name": "@pika/web-builder",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -27,9 +27,9 @@
         "rollup-plugin-babel": "^4.3.0"
     },
     "devDependencies": {
-        "@pika/node-builder": "^0.2.2",
+        "@pika/node-builder": "^0.2.3",
         "@pika/pack": "^0.1.0",
-        "@pika/types": "^0.2.1"
+        "@pika/types": "^0.2.3"
     },
     "gitHead": "3ba3ea21250c36538ba326ca3a0d7c0b5dbad161"
 }

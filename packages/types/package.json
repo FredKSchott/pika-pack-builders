@@ -1,6 +1,6 @@
 {
     "name": "@pika/types",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "types": "pkg/types.d.ts",
     "publishConfig": {
         "access": "public"

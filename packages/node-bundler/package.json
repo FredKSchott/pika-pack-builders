@@ -1,6 +1,6 @@
 {
     "name": "@pika/node-bundler",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -33,8 +33,8 @@
     },
     "gitHead": "3ba3ea21250c36538ba326ca3a0d7c0b5dbad161",
     "devDependencies": {
-        "@pika/node-builder": "^0.2.2",
-        "@pika/types": "^0.2.2",
-        "@pika/pack": "^0.1.0"
+        "@pika/node-builder": "^0.2.3",
+        "@pika/pack": "^0.1.0",
+        "@pika/types": "^0.2.3"
     }
 }
