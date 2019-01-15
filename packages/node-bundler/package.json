@@ -24,7 +24,6 @@
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/plugin-syntax-import-meta": "^7.2.0",
         "@babel/preset-env": "^7.2.3",
-        "@pika/types": "^0.2.2",
         "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
         "builtin-modules": "^3.0.0",
         "rollup-plugin-babel": "^4.3.0",
@@ -32,9 +31,10 @@
         "rollup-plugin-json": "^3.1.0",
         "rollup-plugin-node-resolve": "^4.0.0"
     },
-    "gitHead": "40385b4725540814907447e1cc45fadebef8207d",
+    "gitHead": "3ba3ea21250c36538ba326ca3a0d7c0b5dbad161",
     "devDependencies": {
         "@pika/node-builder": "^0.2.2",
+        "@pika/types": "^0.2.2",
         "@pika/pack": "^0.1.0"
     }
 }

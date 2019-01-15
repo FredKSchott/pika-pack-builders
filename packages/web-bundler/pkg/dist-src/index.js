@@ -12,7 +12,7 @@ export async function build({
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
   const srcBundle = await rollup('web', {
-    input: [readFromWeb],
+    input: readFromWeb,
     plugins: [rollupNodeResolve({
       preferBuiltins: true
     }), rollupCommonJs({
