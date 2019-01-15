@@ -88,7 +88,7 @@ function _build() {
         const fileAbs = _step.value;
         const fileRel = path.relative(cwd, fileAbs);
         console.log(fileRel, fileRel.replace('/src/', '/dist-deno/'), path.resolve(out, fileRel));
-        const writeToTypeScript = fileAbs.replace('/src/', '/dist-deno/');
+        const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
         mkdirp.sync(path.dirname(writeToTypeScript));
         fs.copyFileSync(fileAbs, writeToTypeScript);
       }

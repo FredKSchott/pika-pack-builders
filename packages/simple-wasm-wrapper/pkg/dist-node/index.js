@@ -53,7 +53,7 @@ export default createWASM;
 `;
 const WEB_WRAPPER = `export function createWASM(deps = {}) {
   if (typeof __webpack_require__ !== "undefined") {
-    return import("../assets/index.wasm");
+    return __webpack_require__("../assets/index.wasm");
   }
   const url = new URL("../assets/index.wasm", import.meta.url);
   const input = window.fetch(url);
