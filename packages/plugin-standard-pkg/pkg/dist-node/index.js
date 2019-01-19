@@ -81,7 +81,6 @@ function _build() {
         });
         mkdirp.sync(path.dirname(writeToSrc));
         fs.writeFileSync(writeToSrc, resultSrc.code);
-        reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
       }
     } catch (err) {
       _didIteratorError = true;
@@ -97,6 +96,8 @@ function _build() {
         }
       }
     }
+
+    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
   });
   return _build.apply(this, arguments);
 }

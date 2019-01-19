@@ -1,5 +1,5 @@
 {
-  "name": "@pika/src-builder",
+  "name": "@pika/plugin-standard-pkg",
   "version": "0.2.7",
   "pika": true,
   "keywords": [

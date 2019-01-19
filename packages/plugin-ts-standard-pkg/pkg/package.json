@@ -1,0 +1,20 @@
+{
+  "name": "@pika/plugin-ts-standard-pkg",
+  "version": "0.2.7",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "execa": "^1.0.0"
+  },
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js"
+}

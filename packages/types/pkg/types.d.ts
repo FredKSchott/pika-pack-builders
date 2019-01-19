@@ -12,10 +12,10 @@ export type BuilderOptions = {
   }
   watch: string | undefined,
   reporter: {
-    info: (msg: string) => string;
-    warning: (msg: string) => string;
-    success: (msg: string) => string;
-    created: (file: string, entrypoint?: string) => string;
+    info: (msg: string) => void;
+    warning: (msg: string) => void;
+    success: (msg: string) => void;
+    created: (file: string, entrypoint?: string) => void;
   },
   isFull: boolean,
   manifest: any, // Manifest

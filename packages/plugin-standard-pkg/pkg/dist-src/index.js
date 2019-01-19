@@ -27,6 +27,7 @@ export async function build({
     });
     mkdirp.sync(path.dirname(writeToSrc));
     fs.writeFileSync(writeToSrc, resultSrc.code);
-    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
   }
+
+  reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
 }
