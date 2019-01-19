@@ -5,7 +5,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "gitHead": "3d1b650abd63e6512c974c4e8d20d8927bbeb5e4",
+    "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
     "devDependencies": {
         "@pika/pack": "^0.1.7"
     }

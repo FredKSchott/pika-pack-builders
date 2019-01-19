@@ -1,6 +1,6 @@
 {
   "name": "@pika/babel-plugin-esm-import-rewrite",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "pika": true,
   "keywords": [
     "pika-pkg"
