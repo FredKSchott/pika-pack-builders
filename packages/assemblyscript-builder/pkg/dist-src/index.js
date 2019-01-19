@@ -31,4 +31,5 @@ export async function build({
       resolve();
     });
   });
+  reporter.created(path.join(out, "assets/index.wasm"));
 }

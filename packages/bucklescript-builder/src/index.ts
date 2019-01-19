@@ -12,7 +12,7 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, rollup}: BuilderOptions): Promise<void> {
+export async function build({cwd, out, rollup, reporter}: BuilderOptions): Promise<void> {
   const writeToSrc = path.join(out, 'dist-src', 'index.js');
   const isReason = fs.existsSync(path.join(cwd, "src/index.re"));
 
@@ -28,4 +28,6 @@ export async function build({cwd, out, rollup}: BuilderOptions): Promise<void> {
     format: 'esm',
     exports: 'named',
   });
+  reporter.created(writeToSrc, 'es2015');
+
 }

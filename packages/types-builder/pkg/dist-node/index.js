@@ -4,9 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var importFrom = _interopDefault(require('import-from'));
-var importGlobal = _interopDefault(require('import-global'));
-var os = _interopDefault(require('os'));
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var mkdirp = _interopDefault(require('mkdirp'));
@@ -48,46 +45,8 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function getPikaGlobalPrefix() {
-  if (process.env.PREFIX) {
-    return process.env.PREFIX;
-  }
-
-  if (process.platform === 'win32' && process.env.LOCALAPPDATA) {
-    const prefix = path.join(process.env.LOCALAPPDATA, 'Pika');
-
-    if (fs.existsSync(prefix)) {
-      return prefix;
-    }
-  }
-
-  const configPrefix = path.join(os.homedir(), '.config/pika');
-
-  if (fs.existsSync(configPrefix)) {
-    return configPrefix;
-  }
-
-  const homePrefix = path.join(os.homedir(), '.pika-config');
-
-  if (fs.existsSync(homePrefix)) {
-    return homePrefix;
-  }
-
-  return null;
-}
-
-function getPikaGlobalDir() {
-  const pikaPrefix = getPikaGlobalPrefix();
-
-  if (!pikaPrefix) {
-    return pikaPrefix;
-  }
-
-  return path.join(path.resolve(pikaPrefix), process.platform === 'win32' ? 'config/global/node_modules' : 'global/node_modules');
-}
-
 function manifest(manifest) {
-  manifest.types = manifest.types || 'dist-types/index.d.ts';
+  manifest.types = manifest.types || "dist-types/index.d.ts";
 }
 function build(_x) {
   return _build.apply(this, arguments);
@@ -98,61 +57,65 @@ function _build() {
     cwd,
     out,
     reporter,
-    isFull,
     manifest
   }) {
-    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-    const writeToTypings = path.join(out, 'dist-types/index.d.ts');
-    const importAsNode = path.join(out, 'dist-node', 'index.js');
+    yield _asyncToGenerator(function* () {
+      const tscBin = path.join(cwd, "node_modules/.bin/tsc");
+      const writeToTypings = path.join(out, "dist-types/index.d.ts");
+      const importAsNode = path.join(out, "dist-node", "index.js");
 
-    if (fs.existsSync(path.join(cwd, 'index.d.ts'))) {
-      mkdirp.sync(path.dirname(writeToTypings));
-      fs.copyFileSync(path.join(cwd, 'index.d.ts'), writeToTypings);
-      return;
-    }
+      if (fs.existsSync(path.join(cwd, "index.d.ts"))) {
+        mkdirp.sync(path.dirname(writeToTypings));
+      reporter.verbose('using type definitions: ./index.d.ts');
+      fs.copyFileSync(path.join(cwd, "index.d.ts"), writeToTypings);
+        return;
+      }
 
-    if (fs.existsSync(path.join(cwd, 'src', 'index.d.ts'))) {
-      mkdirp.sync(path.dirname(writeToTypings));
-      fs.copyFileSync(path.join(cwd, 'src', 'index.d.ts'), writeToTypings);
-      return;
-    }
+      if (fs.existsSync(path.join(cwd, "src", "index.d.ts"))) {
+        mkdirp.sync(path.dirname(writeToTypings));
+      reporter.verbose('using type definitions: ./src/index.d.ts');
+      fs.copyFileSync(path.join(cwd, "src", "index.d.ts"), writeToTypings);
+        return;
+      }
 
-    if (fs.existsSync(tscBin) && fs.existsSync(path.join(cwd, 'tsconfig.json'))) {
-      yield execa(tscBin, ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--declarationDir', path.join(out, 'dist-types/')], {
-        cwd
-      });
-      return;
-    }
+      if (fs.existsSync(tscBin) && fs.existsSync(path.join(cwd, "tsconfig.json"))) {
+      reporter.verbose('generating new type definitions...');
+      yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", path.join(out, "dist-types/")], {
+          cwd
+        });
+        return;
+      }
 
-    const dtTypesDependency = path.join(cwd, 'node_modules', '@types', manifest.name);
-    const dtTypesExist = fs.existsSync(dtTypesDependency);
+      const dtTypesDependency = path.join(cwd, "node_modules", "@types", manifest.name);
+      const dtTypesExist = fs.existsSync(dtTypesDependency);
 
-    if (dtTypesExist) {
-      fs.copyFileSync(dtTypesDependency, writeToTypings);
-      return;
-    } // log: we're auto-generating types now
-    // TODO: check for and import from globally
+      if (dtTypesExist) {
+        fs.copyFileSync(dtTypesDependency, writeToTypings);
+        return;
+      } // log: we're auto-generating types now
 
 
-    const globalPackageDir = getPikaGlobalDir();
-    const tsc = importFrom.silent(cwd, 'typescript') || globalPackageDir && importFrom.silent(globalPackageDir, 'typescript') || importGlobal.silent('typescript');
+      reporter.info('no type definitions found, auto-generating...');
+      const tsc = yield Promise.resolve().then(() => require("typescript"));
 
-    if (tsc && tsc.generateTypesForModule) {
-      const nodeImport = yield Promise.resolve().then(() => require(`${importAsNode}`));
-      const guessedTypes = tsc.generateTypesForModule('AutoGeneratedTypings', nodeImport, {});
-      mkdirp.sync(path.dirname(writeToTypings));
-      fs.writeFileSync(writeToTypings, guessedTypes);
-      return;
-    }
+      if (tsc && tsc.generateTypesForModule) {
+        const nodeImport = yield Promise.resolve().then(() => require(`${importAsNode}`));
+        const guessedTypes = tsc.generateTypesForModule("AutoGeneratedTypings", nodeImport, {});
+        mkdirp.sync(path.dirname(writeToTypings));
+        fs.writeFileSync(writeToTypings, guessedTypes);
+        return;
+      }
 
-    console.error(`
+      console.error(`
 ⚠️  dist-types/: Attempted to generate type definitions, but "typescript" package was not found.
                 Please install either locally or globally and try again.
        $ pika add --dev typescript
 [alt.] $ pika global add typescript
 [alt.] *   Write your own type definition file to "index.d.ts"
 `);
-    throw new Error(`Failed to build: dist-types/`);
+      throw new Error(`Failed to build: dist-types/`);
+    })();
+    reporter.created(path.join(out, "dist-types", "index.d.ts"), 'types');
   });
   return _build.apply(this, arguments);
 }

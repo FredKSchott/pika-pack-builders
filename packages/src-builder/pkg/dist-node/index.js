@@ -61,7 +61,8 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
-    src
+    src,
+    reporter
   }) {
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -80,6 +81,7 @@ function _build() {
         });
         mkdirp.sync(path.dirname(writeToSrc));
         fs.writeFileSync(writeToSrc, resultSrc.code);
+        reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
       }
     } catch (err) {
       _didIteratorError = true;

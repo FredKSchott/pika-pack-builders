@@ -79,6 +79,7 @@ function _build() {
         resolve();
       });
     });
+    reporter.created(path.join(out, "assets/index.wasm"));
   });
   return _build.apply(this, arguments);
 }

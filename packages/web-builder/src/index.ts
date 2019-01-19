@@ -11,7 +11,7 @@ export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
 
-export async function build({out, rollup}: BuilderOptions): Promise<void> {
+export async function build({out, rollup, reporter}: BuilderOptions): Promise<void> {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
 
   const srcBundle = await rollup('web', {
@@ -49,4 +49,5 @@ export async function build({out, rollup}: BuilderOptions): Promise<void> {
     format: 'esm',
     exports: 'named',
   });
+  reporter.created(writeToWeb, 'module');
 }

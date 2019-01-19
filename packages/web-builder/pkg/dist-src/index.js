@@ -8,7 +8,8 @@ export function manifest(manifest) {
 }
 export async function build({
   out,
-  rollup
+  rollup,
+  reporter
 }) {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
   const srcBundle = await rollup('web', {
@@ -38,4 +39,5 @@ export async function build({
     format: 'esm',
     exports: 'named'
   });
+  reporter.created(writeToWeb, 'module');
 }

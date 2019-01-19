@@ -9,7 +9,7 @@ export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
 
-export async function build({out, rollup}: BuilderOptions): Promise<void> {
+export async function build({out, options, rollup, reporter}: BuilderOptions): Promise<void> {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
 
@@ -22,6 +22,7 @@ export async function build({out, rollup}: BuilderOptions): Promise<void> {
       rollupCommonJs({
         include: 'node_modules/**',
         sourceMap: false,
+        namedExports: options.namedExports
       }),
       rollupJson({
         include: 'node_modules/**',
@@ -35,4 +36,5 @@ export async function build({out, rollup}: BuilderOptions): Promise<void> {
     format: 'esm',
     exports: 'named',
   });
+  reporter.created(writeToWeb);
 }

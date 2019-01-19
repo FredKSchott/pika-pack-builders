@@ -60,7 +60,7 @@ function _build() {
     out,
     isFull,
     rollup,
-    manifest
+    reporter
   }) {
     if (!isFull) {
       return;
@@ -96,6 +96,7 @@ function _build() {
       format: 'cjs',
       exports: 'named'
     });
+    reporter.created(writeToNode);
   });
   return _build.apply(this, arguments);
 }

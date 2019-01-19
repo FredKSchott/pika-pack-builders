@@ -12,7 +12,7 @@ export async function build({
   out,
   isFull,
   rollup,
-  manifest
+  reporter
 }) {
   if (!isFull) {
     return;
@@ -48,4 +48,5 @@ export async function build({
     format: 'cjs',
     exports: 'named'
   });
+  reporter.created(writeToNode);
 }

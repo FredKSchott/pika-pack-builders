@@ -55,7 +55,9 @@ function build(_x) {
 function _build() {
   _build = _asyncToGenerator(function* ({
     out,
-    rollup
+    options,
+    rollup,
+    reporter
   }) {
     const readFromWeb = path.join(out, 'dist-web', 'index.js');
     const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
@@ -65,7 +67,8 @@ function _build() {
         preferBuiltins: true
       }), rollupCommonJs({
         include: 'node_modules/**',
-        sourceMap: false
+        sourceMap: false,
+        namedExports: options.namedExports
       }), rollupJson({
         include: 'node_modules/**',
         compact: true
@@ -76,6 +79,7 @@ function _build() {
       format: 'esm',
       exports: 'named'
     });
+    reporter.created(writeToWeb);
   });
   return _build.apply(this, arguments);
 }

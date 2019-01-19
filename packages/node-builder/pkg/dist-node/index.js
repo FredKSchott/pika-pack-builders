@@ -58,7 +58,8 @@ function build(_x) {
 function _build() {
   _build = _asyncToGenerator(function* ({
     out,
-    rollup
+    rollup,
+    reporter
   }) {
     const writeToNode = path.join(out, 'dist-node', 'index.js'); // TODO: KEEP FIXING THIS,
 
@@ -90,6 +91,7 @@ function _build() {
       format: 'cjs',
       exports: 'named'
     });
+    reporter.created(writeToNode, 'main');
   });
   return _build.apply(this, arguments);
 }

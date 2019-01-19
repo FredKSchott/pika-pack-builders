@@ -11,7 +11,7 @@ export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
 
-export async function build({out, rollup}: BuilderOptions): Promise<void> {
+export async function build({out, rollup, reporter}: BuilderOptions): Promise<void> {
   const writeToNode = path.join(out, 'dist-node', 'index.js');
 
   // TODO: KEEP FIXING THIS,
@@ -55,4 +55,5 @@ export async function build({out, rollup}: BuilderOptions): Promise<void> {
     format: 'cjs',
     exports: 'named',
   });
+  reporter.created(writeToNode, 'main');
 }

@@ -18,7 +18,7 @@ export function manifest(newManifest, { options }) {
   return newManifest;
 }
 
-export function build({ out, cwd, options }) {
+export function build({ out, cwd, options, reporter }) {
   const { minNodeVersion, v8CompileCache } = options;
   const binFilename = path.join(out, BIN_FILENAME);
   if (v8CompileCache) {
@@ -78,4 +78,5 @@ if (!cli.autoRun) {
   );
 
   fs.chmodSync(binFilename, "755");
+  reporter.created(path.join(out, BIN_FILENAME), `bin.${options.bin}`);
 }

@@ -7,7 +7,9 @@ export function manifest(manifest) {
 }
 export async function build({
   out,
-  rollup
+  options,
+  rollup,
+  reporter
 }) {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
@@ -17,7 +19,8 @@ export async function build({
       preferBuiltins: true
     }), rollupCommonJs({
       include: 'node_modules/**',
-      sourceMap: false
+      sourceMap: false,
+      namedExports: options.namedExports
     }), rollupJson({
       include: 'node_modules/**',
       compact: true
@@ -28,4 +31,5 @@ export async function build({
     format: 'esm',
     exports: 'named'
   });
+  reporter.created(writeToWeb);
 }

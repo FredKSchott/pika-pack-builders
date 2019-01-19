@@ -13,9 +13,8 @@
   "sideEffects": false,
   "dependencies": {
     "execa": "^1.0.0",
-    "import-from": "^2.1.0",
-    "import-global": "^0.1.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "typescript": "^3.0.0"
   },
   "source": "dist-src/index.js",
   "main": "dist-node/index.js"

@@ -46,14 +46,19 @@ export function manifest(newManifest) {
   return newManifest;
 }
 export async function build({
-  out
+  out,
+  reporter
 }) {
   mkdirp.sync(path.join(out, "dist-src"));
   fs.writeFileSync(path.join(out, "dist-src/index.js"), SRC_WRAPPER, "utf8");
+  reporter.created(path.join(out, "dist-src/index.js"), 'esnext');
   mkdirp.sync(path.join(out, "dist-web"));
   fs.writeFileSync(path.join(out, "dist-web/index.js"), WEB_WRAPPER, "utf8");
+  reporter.created(path.join(out, "dist-web/index.js"), 'module');
   mkdirp.sync(path.join(out, "dist-node"));
   fs.writeFileSync(path.join(out, "dist-node/index.js"), NODE_WRAPPER, "utf8");
+  reporter.created(path.join(out, "dist-node/index.js"), 'main');
   mkdirp.sync(path.join(out, "dist-types"));
   fs.writeFileSync(path.join(out, "dist-types/index.d.ts"), TYPE_DEF, "utf8");
+  reporter.created(path.join(out, "dist-types/index.d.ts"), 'types');
 }

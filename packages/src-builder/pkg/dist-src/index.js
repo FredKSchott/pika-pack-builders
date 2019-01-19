@@ -13,7 +13,8 @@ export function manifest(newManifest) {
 export async function build({
   cwd,
   out,
-  src
+  src,
+  reporter
 }) {
   for (const fileAbs of src.files) {
     const writeToSrc = fileAbs.replace(path.join(cwd, 'src/'), path.join(out, '/dist-src/')).replace('.ts', '.js').replace('.tsx', '.js').replace('.jsx', '.js').replace('.mjs', '.js');
@@ -26,5 +27,6 @@ export async function build({
     });
     mkdirp.sync(path.dirname(writeToSrc));
     fs.writeFileSync(writeToSrc, resultSrc.code);
+    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
   }
 }

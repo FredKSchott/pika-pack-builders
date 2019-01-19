@@ -11,7 +11,12 @@ export type BuilderOptions = {
     files: Array<string>,
   }
   watch: string | undefined,
-  reporter: any, // Reporter
+  reporter: {
+    info: (msg: string) => string;
+    warning: (msg: string) => string;
+    success: (msg: string) => string;
+    created: (file: string, entrypoint?: string) => string;
+  },
   isFull: boolean,
   manifest: any, // Manifest
   rollup: any

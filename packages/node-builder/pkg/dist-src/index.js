@@ -10,7 +10,8 @@ export function manifest(manifest) {
 }
 export async function build({
   out,
-  rollup
+  rollup,
+  reporter
 }) {
   const writeToNode = path.join(out, 'dist-node', 'index.js'); // TODO: KEEP FIXING THIS,
 
@@ -42,4 +43,5 @@ export async function build({
     format: 'cjs',
     exports: 'named'
   });
+  reporter.created(writeToNode, 'main');
 }

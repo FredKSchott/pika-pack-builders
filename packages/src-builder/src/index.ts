@@ -13,7 +13,7 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, src}: BuilderOptions): Promise<void> {
+export async function build({cwd, out, src, reporter}: BuilderOptions): Promise<void> {
   for (const fileAbs of src.files) {
     const writeToSrc = fileAbs
       .replace(path.join(cwd, 'src/'), path.join(out, '/dist-src/'))
@@ -32,5 +32,6 @@ export async function build({cwd, out, src}: BuilderOptions): Promise<void> {
     });
     mkdirp.sync(path.dirname(writeToSrc));
     fs.writeFileSync(writeToSrc, resultSrc.code);
+    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
   }
 }

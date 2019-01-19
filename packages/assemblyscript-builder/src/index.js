@@ -49,4 +49,5 @@ export async function build({ out, cwd, options, reporter }) {
       }
     );
   });
+  reporter.created(path.join(out, "assets/index.wasm"));
 }

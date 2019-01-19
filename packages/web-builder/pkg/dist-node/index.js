@@ -56,7 +56,8 @@ function build(_x) {
 function _build() {
   _build = _asyncToGenerator(function* ({
     out,
-    rollup
+    rollup,
+    reporter
   }) {
     const writeToWeb = path.join(out, 'dist-web', 'index.js');
     const srcBundle = yield rollup('web', {
@@ -86,6 +87,7 @@ function _build() {
       format: 'esm',
       exports: 'named'
     });
+    reporter.created(writeToWeb, 'module');
   });
   return _build.apply(this, arguments);
 }

@@ -61,7 +61,8 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
-    rollup
+    rollup,
+    reporter
   }) {
     const writeToSrc = path.join(out, 'dist-src', 'index.js');
     const isReason = fs.existsSync(path.join(cwd, "src/index.re"));
@@ -74,6 +75,7 @@ function _build() {
       format: 'esm',
       exports: 'named'
     });
+    reporter.created(writeToSrc, 'es2015');
   });
   return _build.apply(this, arguments);
 }

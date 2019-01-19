@@ -10,7 +10,7 @@ import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 
-export async function build({out, isFull, rollup, manifest}: BuilderOptions): Promise<void> {
+export async function build({out, isFull, rollup, reporter}: BuilderOptions): Promise<void> {
   if (!isFull) {
     return;
   }
@@ -59,4 +59,5 @@ export async function build({out, isFull, rollup, manifest}: BuilderOptions): Pr
     format: 'cjs',
     exports: 'named',
   });
+  reporter.created(writeToNode);
 }
