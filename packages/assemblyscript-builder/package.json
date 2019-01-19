@@ -27,5 +27,5 @@
         "build": "pika build",
         "prepublishOnly": "npm run build"
     },
-    "gitHead": "47e9873758549c755112a72697e634f9f474a735"
+    "gitHead": "3d1b650abd63e6512c974c4e8d20d8927bbeb5e4"
 }

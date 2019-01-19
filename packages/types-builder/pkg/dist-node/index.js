@@ -66,21 +66,18 @@ function _build() {
 
       if (fs.existsSync(path.join(cwd, "index.d.ts"))) {
         mkdirp.sync(path.dirname(writeToTypings));
-      reporter.verbose('using type definitions: ./index.d.ts');
-      fs.copyFileSync(path.join(cwd, "index.d.ts"), writeToTypings);
+        fs.copyFileSync(path.join(cwd, "index.d.ts"), writeToTypings);
         return;
       }
 
       if (fs.existsSync(path.join(cwd, "src", "index.d.ts"))) {
         mkdirp.sync(path.dirname(writeToTypings));
-      reporter.verbose('using type definitions: ./src/index.d.ts');
-      fs.copyFileSync(path.join(cwd, "src", "index.d.ts"), writeToTypings);
+        fs.copyFileSync(path.join(cwd, "src", "index.d.ts"), writeToTypings);
         return;
       }
 
       if (fs.existsSync(tscBin) && fs.existsSync(path.join(cwd, "tsconfig.json"))) {
-      reporter.verbose('generating new type definitions...');
-      yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", path.join(out, "dist-types/")], {
+        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", path.join(out, "dist-types/")], {
           cwd
         });
         return;

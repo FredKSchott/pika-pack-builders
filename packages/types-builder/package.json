@@ -30,5 +30,5 @@
         "@pika/types": "^0.2.7",
         "@types/node": "^10.12.18"
     },
-    "gitHead": "47e9873758549c755112a72697e634f9f474a735"
+    "gitHead": "3d1b650abd63e6512c974c4e8d20d8927bbeb5e4"
 }

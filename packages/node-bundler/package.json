@@ -31,7 +31,7 @@
         "rollup-plugin-json": "^3.1.0",
         "rollup-plugin-node-resolve": "^4.0.0"
     },
-    "gitHead": "47e9873758549c755112a72697e634f9f474a735",
+    "gitHead": "3d1b650abd63e6512c974c4e8d20d8927bbeb5e4",
     "devDependencies": {
         "@pika/node-builder": "^0.2.7",
         "@pika/pack": "^0.1.7",
