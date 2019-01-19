@@ -1,6 +1,6 @@
 {
     "name": "@pika/types-builder",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -25,9 +25,9 @@
         "typescript": "^3.0.0"
     },
     "devDependencies": {
-        "@pika/node-builder": "^0.2.3",
+        "@pika/node-builder": "^0.2.4",
         "@pika/pack": "^0.1.0",
-        "@pika/types": "^0.2.3",
+        "@pika/types": "^0.2.4",
         "@types/node": "^10.12.18"
     },
     "gitHead": "47e9873758549c755112a72697e634f9f474a735"
