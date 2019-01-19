@@ -1,8 +1,7 @@
-
+import path from 'path';
 import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
-import path from 'path';
 import {BuilderOptions} from '@pika/types';
 
 export function manifest(manifest) {
