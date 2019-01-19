@@ -1,6 +1,6 @@
 {
     "name": "@pika/bucklescript-builder",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -12,9 +12,9 @@
         "rollup-plugin-bucklescript": "^0.7.0"
     },
     "devDependencies": {
-        "@pika/node-builder": "^0.2.7",
+        "@pika/node-builder": "^0.2.8",
         "@pika/pack": "^0.1.7",
-        "@pika/types": "^0.2.7"
+        "@pika/types": "^0.2.8"
     },
     "distributions": {
         "src": [

@@ -1,6 +1,6 @@
 {
     "name": "@pika/babel-plugin-esm-import-rewrite",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "main": "pkg/dist-node/index.js",
     "publishConfig": {
         "access": "public"
@@ -21,8 +21,8 @@
     },
     "gitHead": "3d1b650abd63e6512c974c4e8d20d8927bbeb5e4",
     "devDependencies": {
-        "@pika/node-builder": "^0.2.7",
+        "@pika/node-builder": "^0.2.8",
         "@pika/pack": "^0.1.7",
-        "@pika/types": "^0.2.7"
+        "@pika/types": "^0.2.8"
     }
 }
