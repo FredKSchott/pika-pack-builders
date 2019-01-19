@@ -32,6 +32,6 @@ export async function build({cwd, out, src, reporter}: BuilderOptions): Promise<
     });
     mkdirp.sync(path.dirname(writeToSrc));
     fs.writeFileSync(writeToSrc, resultSrc.code);
-    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
   }
+  reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
 }
