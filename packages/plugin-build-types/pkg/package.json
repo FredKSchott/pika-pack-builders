@@ -1,0 +1,21 @@
+{
+  "name": "@pika/plugin-build-types",
+  "version": "0.2.8",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "execa": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "typescript": "^3.0.0"
+  },
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js"
+}

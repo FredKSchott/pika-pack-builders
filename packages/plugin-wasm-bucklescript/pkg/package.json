@@ -1,0 +1,19 @@
+{
+  "name": "@pika/plugin-wasm-bucklescript",
+  "version": "0.2.8",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "rollup-plugin-bucklescript": "^0.7.0"
+  },
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js"
+}

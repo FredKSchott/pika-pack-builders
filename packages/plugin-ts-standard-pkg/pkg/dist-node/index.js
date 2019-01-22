@@ -7,6 +7,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var execa = _interopDefault(require('execa'));
+var types = require('@pika/types');
+var standardPkg = require('standard-pkg');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -44,19 +46,64 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function validate({
-  cwd
-}) {
-  const tscBin = path.join(cwd, "node_modules/.bin/tsc");
-  const tsConfig = path.join(cwd, "tsconfig.json");
-  return fs.existsSync(tscBin) && fs.existsSync(tsConfig);
+function beforeBuild(_x) {
+  return _beforeBuild.apply(this, arguments);
 }
+
+function _beforeBuild() {
+  _beforeBuild = _asyncToGenerator(function* ({
+    cwd,
+    reporter
+  }) {
+    const tscBin = path.join(cwd, "node_modules/.bin/tsc");
+
+    if (!fs.existsSync(tscBin)) {
+      throw new types.MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
+    }
+    const tsConfigLoc = path.join(cwd, "tsconfig.json");
+
+    if (!fs.existsSync(tsConfigLoc)) {
+      throw new types.MessageError('"tsconfig.json" manifest not found.');
+    }
+    const tsConfig = JSON.parse(fs.readFileSync(tsConfigLoc, {
+      encoding: 'utf8'
+    }));
+    const _tsConfig$compilerOpt = tsConfig.compilerOptions,
+          target = _tsConfig$compilerOpt.target,
+          mod = _tsConfig$compilerOpt.module;
+
+    if (target !== 'es2018') {
+      reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2018", but found "${target}". You may encounter problems building.`);
+    }
+
+    if (mod !== 'esnext') {
+      reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
+    }
+  });
+  return _beforeBuild.apply(this, arguments);
+}
+
+function afterJob(_x2) {
+  return _afterJob.apply(this, arguments);
+}
+
+function _afterJob() {
+  _afterJob = _asyncToGenerator(function* ({
+    out
+  }) {
+    const linter = new standardPkg.Lint(out);
+    yield linter.init();
+    linter.summary();
+  });
+  return _afterJob.apply(this, arguments);
+}
+
 function manifest(newManifest) {
   newManifest.source = newManifest.source || 'dist-src/index.js';
   newManifest.types = newManifest.types || 'dist-types/index.js';
   return newManifest;
 }
-function build(_x) {
+function build(_x3) {
   return _build.apply(this, arguments);
 }
 
@@ -76,6 +123,7 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.validate = validate;
+exports.beforeBuild = beforeBuild;
+exports.afterJob = afterJob;
 exports.manifest = manifest;
 exports.build = build;

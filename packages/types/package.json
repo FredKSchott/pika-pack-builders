@@ -1,12 +1,20 @@
 {
-    "name": "@pika/types",
-    "version": "0.2.8",
-    "types": "pkg/types.d.ts",
-    "publishConfig": {
-        "access": "public"
-    },
-    "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
-    "devDependencies": {
-        "@pika/pack": "^0.1.7"
-    }
+  "name": "@pika/types",
+  "version": "0.2.8",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js",
+  "types": "dist-types/index.d.ts",
+  "devDependencies": {
+    "@types/node": "^10.12.18"
+  }
 }

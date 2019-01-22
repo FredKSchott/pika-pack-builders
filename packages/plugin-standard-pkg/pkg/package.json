@@ -18,7 +18,8 @@
     "@babel/preset-typescript": "^7.1.0",
     "@pika/babel-plugin-esm-import-rewrite": "^0.2.8",
     "@types/node": "^10.12.18",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "standard-pkg": "^0.2.0"
   },
   "source": "dist-src/index.js",
   "main": "dist-node/index.js"

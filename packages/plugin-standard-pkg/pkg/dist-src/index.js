@@ -6,8 +6,16 @@ import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import'
 import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetTypeScript from '@babel/preset-typescript';
 import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
+import { Lint } from 'standard-pkg';
+export async function afterJob({
+  out
+}) {
+  const linter = new Lint(out);
+  await linter.init();
+  linter.summary();
+}
 export function manifest(newManifest) {
-  newManifest.source = newManifest.source || 'dist-src/index.js';
+  newManifest.esnext = newManifest.esnext || 'dist-src/index.js';
   return newManifest;
 }
 export async function build({

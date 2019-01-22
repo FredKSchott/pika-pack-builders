@@ -12,6 +12,7 @@ var babelPluginDynamicImportSyntax = _interopDefault(require('@babel/plugin-synt
 var babelPluginImportMetaSyntax = _interopDefault(require('@babel/plugin-syntax-import-meta'));
 var babelPresetTypeScript = _interopDefault(require('@babel/preset-typescript'));
 var babelPluginImportRewrite = _interopDefault(require('@pika/babel-plugin-esm-import-rewrite'));
+var standardPkg = require('standard-pkg');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -49,11 +50,26 @@ function _asyncToGenerator(fn) {
   };
 }
 
+function afterJob(_x) {
+  return _afterJob.apply(this, arguments);
+}
+
+function _afterJob() {
+  _afterJob = _asyncToGenerator(function* ({
+    out
+  }) {
+    const linter = new standardPkg.Lint(out);
+    yield linter.init();
+    linter.summary();
+  });
+  return _afterJob.apply(this, arguments);
+}
+
 function manifest(newManifest) {
-  newManifest.source = newManifest.source || 'dist-src/index.js';
+  newManifest.esnext = newManifest.esnext || 'dist-src/index.js';
   return newManifest;
 }
-function build(_x) {
+function build(_x2) {
   return _build.apply(this, arguments);
 }
 
@@ -102,5 +118,6 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
+exports.afterJob = afterJob;
 exports.manifest = manifest;
 exports.build = build;

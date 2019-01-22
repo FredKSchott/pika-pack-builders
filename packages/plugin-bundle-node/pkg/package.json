@@ -1,0 +1,28 @@
+{
+  "name": "@pika/plugin-bundle-node",
+  "version": "0.2.8",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
+    "builtin-modules": "^3.0.0",
+    "rollup-plugin-babel": "^4.3.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  },
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js"
+}

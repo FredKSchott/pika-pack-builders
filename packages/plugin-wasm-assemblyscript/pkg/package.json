@@ -1,0 +1,19 @@
+{
+  "name": "@pika/plugin-wasm-assemblyscript",
+  "version": "0.2.8",
+  "pika": true,
+  "keywords": [
+    "pika-pkg"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "assemblyscript": "github:AssemblyScript/assemblyscript"
+  },
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js"
+}

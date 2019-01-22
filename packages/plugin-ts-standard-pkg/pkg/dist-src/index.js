@@ -1,12 +1,48 @@
 import path from 'path';
 import fs from 'fs';
 import execa from 'execa';
-export function validate({
-  cwd
+import { MessageError } from '@pika/types';
+import { Lint } from 'standard-pkg';
+export async function beforeBuild({
+  cwd,
+  reporter
 }) {
   const tscBin = path.join(cwd, "node_modules/.bin/tsc");
-  const tsConfig = path.join(cwd, "tsconfig.json");
-  return fs.existsSync(tscBin) && fs.existsSync(tsConfig);
+
+  if (!fs.existsSync(tscBin)) {
+    throw new MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
+  }
+
+  ;
+  const tsConfigLoc = path.join(cwd, "tsconfig.json");
+
+  if (!fs.existsSync(tsConfigLoc)) {
+    throw new MessageError('"tsconfig.json" manifest not found.');
+  }
+
+  ;
+  const tsConfig = JSON.parse(fs.readFileSync(tsConfigLoc, {
+    encoding: 'utf8'
+  }));
+  const {
+    target,
+    module: mod
+  } = tsConfig.compilerOptions;
+
+  if (target !== 'es2018') {
+    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2018", but found "${target}". You may encounter problems building.`);
+  }
+
+  if (mod !== 'esnext') {
+    reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
+  }
+}
+export async function afterJob({
+  out
+}) {
+  const linter = new Lint(out);
+  await linter.init();
+  linter.summary();
 }
 export function manifest(newManifest) {
   newManifest.source = newManifest.source || 'dist-src/index.js';
