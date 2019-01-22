@@ -5,11 +5,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "distributions": {
-    "src": [
-      true
-    ],
-    "plugins": [
+  "@pika/pack": {
+    "pipeline": [
+      ["@pika/plugin-ts-standard-pkg"],
       [
         "@pika/plugin-build-node"
       ]
@@ -19,6 +17,7 @@
     "build": "pika build"
   },
   "dependencies": {
+    "@pika/types": "^0.3.4",
     "@babel/core": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
@@ -33,9 +32,10 @@
   },
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
   "devDependencies": {
-    "@pika/pack": "^0.1.7",
+    "@pika/pack": "^0.2.0",
     "@pika/plugin-build-node": "^0.3.4",
-    "@pika/types": "^0.3.4",
-    "@types/node": "^10.12.18"
+    "@pika/plugin-ts-standard-pkg": "^0.3.4",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.0.0"
   }
 }

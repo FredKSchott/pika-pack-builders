@@ -1,10 +1,7 @@
 {
   "name": "@pika/plugin-wasm-bindings",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "pika": true,
-  "keywords": [
-    "pika-pkg"
-  ],
   "files": [
     "dist-*/",
     "assets/",
@@ -14,6 +11,6 @@
   "dependencies": {
     "mkdirp": "^0.5.0"
   },
-  "source": "dist-src/index.js",
+  "esnext": "dist-src/index.js",
   "main": "dist-node/index.js"
 }

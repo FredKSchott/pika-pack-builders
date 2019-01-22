@@ -1,10 +1,7 @@
 {
   "name": "@pika/plugin-build-deno",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "pika": true,
-  "keywords": [
-    "pika-pkg"
-  ],
   "files": [
     "dist-*/",
     "assets/",
@@ -12,8 +9,10 @@
   ],
   "sideEffects": false,
   "dependencies": {
+    "@pika/types": "^0.3.4",
     "mkdirp": "^0.5.1"
   },
   "source": "dist-src/index.js",
+  "types": "dist-types/index.js",
   "main": "dist-node/index.js"
 }

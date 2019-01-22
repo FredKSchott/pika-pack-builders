@@ -1,10 +1,7 @@
 {
   "name": "@pika/babel-plugin-esm-import-rewrite",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "pika": true,
-  "keywords": [
-    "pika-pkg"
-  ],
   "files": [
     "dist-*/",
     "assets/",
@@ -13,5 +10,6 @@
   "sideEffects": false,
   "dependencies": {},
   "source": "dist-src/index.js",
+  "types": "dist-types/index.js",
   "main": "dist-node/index.js"
 }

@@ -52,7 +52,7 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
         ],
       }),
     ],
-    onwarn: (warning, defaultOnWarnHandler) => {
+    onwarn: ((warning, defaultOnWarnHandler) => {
       // Unresolved external imports are expected
       if (
         warning.code === 'UNRESOLVED_IMPORT' &&
@@ -61,7 +61,7 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
         return;
       }
       defaultOnWarnHandler(warning);
-    },
+    }) as any,
   });
 
   await result.write({
