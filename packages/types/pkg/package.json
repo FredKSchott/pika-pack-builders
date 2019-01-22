@@ -1,0 +1,9 @@
+{
+  "name": "@pika/types",
+  "version": "0.3.1",
+  "main": "pkg/dist-node/index.js",
+  "types": "pkg/dist-types/index.d.ts",
+  "devDependencies": {
+    "@types/node": "^10.12.18"
+  }
+}
