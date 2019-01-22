@@ -5,6 +5,7 @@ import path from 'path';
 import fs from 'fs';
 import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
+import {rollup} from 'rollup';
 
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, "dist-src/");
@@ -24,7 +25,8 @@ export function manifest(manifest) {
 export async function build({out, rollup, reporter}: BuilderOptions): Promise<void> {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
 
-  const srcBundle = await rollup('web', {
+  const result = await rollup({
+    input: path.join(out, 'dist-src/index.js'),
     plugins: [
       rollupBabel({
         babelrc: false,
@@ -54,7 +56,7 @@ export async function build({out, rollup, reporter}: BuilderOptions): Promise<vo
     },
   });
 
-  await srcBundle.write({
+  await result.write({
     file: writeToWeb,
     format: 'esm',
     exports: 'named',

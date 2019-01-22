@@ -1,33 +1,34 @@
 {
-    "name": "@pika/plugin-bundle-web",
-    "version": "0.3.2",
-    "main": "pkg/dist-node/index.js",
-    "publishConfig": {
-        "access": "public"
-    },
-    "distributions": {
-        "src": [
-            true
-        ],
-        "plugins": [
-            [
-                "@pika/plugin-build-node"
-            ]
-        ]
-    },
-    "scripts": {
-        "build": "pika build"
-    },
-    "dependencies": {
-        "rollup-plugin-commonjs": "^9.2.0",
-        "rollup-plugin-json": "^3.1.0",
-        "rollup-plugin-node-resolve": "^4.0.0"
-    },
-    "devDependencies": {
-        "@pika/pack": "^0.1.7",
-        "@pika/plugin-build-node": "^0.3.2",
-        "@pika/types": "^0.3.2",
-        "@types/node": "^10.12.18"
-    },
-    "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
+  "name": "@pika/plugin-bundle-web",
+  "version": "0.3.2",
+  "main": "pkg/dist-node/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "distributions": {
+    "src": [
+      true
+    ],
+    "plugins": [
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
+  },
+  "scripts": {
+    "build": "pika build"
+  },
+  "dependencies": {
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup": "^1.1.0"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.1.7",
+    "@pika/plugin-build-node": "^0.3.2",
+    "@pika/types": "^0.3.2",
+    "@types/node": "^10.12.18"
+  },
+  "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
 }

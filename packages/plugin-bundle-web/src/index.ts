@@ -5,6 +5,7 @@ import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
+import {rollup} from 'rollup';
 
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, "dist-src/");
@@ -24,8 +25,7 @@ export function manifest(manifest) {
 export async function build({out, options, rollup, reporter}: BuilderOptions): Promise<void> {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
-
-  const srcBundle = await rollup('web', {
+  const result = await rollup({
     input: readFromWeb,
     plugins: [
       rollupNodeResolve({
@@ -43,7 +43,7 @@ export async function build({out, options, rollup, reporter}: BuilderOptions): P
     ],
   });
 
-  await srcBundle.write({
+  await result.write({
     file: writeToWeb,
     format: 'esm',
     exports: 'named',
