@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-wasm-bucklescript",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"
@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.1.7",
-    "@pika/plugin-build-node": "^0.3.3",
-    "@pika/types": "^0.3.3",
+    "@pika/plugin-build-node": "^0.3.4",
+    "@pika/types": "^0.3.4",
     "@types/node": "^10.12.18"
   },
   "distributions": {
