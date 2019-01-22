@@ -24,7 +24,7 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export async function build({out, rollup, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, reporter}: BuilderOptions): Promise<void> {
   const writeToNode = path.join(out, 'dist-node', 'index.js');
 
   // TODO: KEEP FIXING THIS,

@@ -16,6 +16,7 @@ var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var rollupCommonJs = _interopDefault(require('rollup-plugin-commonjs'));
 var rollupJson = _interopDefault(require('rollup-plugin-json'));
 var rollupNodeResolve = _interopDefault(require('rollup-plugin-node-resolve'));
+var rollup = require('rollup');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -84,15 +85,15 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     out,
     isFull,
-    rollup,
     reporter
   }) {
     if (!isFull) {
       return;
     }
 
-    const writeToNode = path.join(out, 'dist-node', 'index.bundled.js');
-    const srcBundle = yield rollup('node', {
+    const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
+    const result = yield rollup.rollup({
+      input: path.join(out, 'dist-src/index.js'),
       external: builtinModules,
       plugins: [rollupBabel({
         babelrc: false,
@@ -116,12 +117,12 @@ function _build() {
         compact: true
       })]
     });
-    yield srcBundle.write({
-      file: writeToNode,
+    yield result.write({
+      file: writeToNodeBundled,
       format: 'cjs',
       exports: 'named'
     });
-    reporter.created(writeToNode);
+    reporter.created(writeToNodeBundled);
   });
   return _build.apply(this, arguments);
 }

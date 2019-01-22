@@ -7,6 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var rollupBuckleScript = _interopDefault(require('rollup-plugin-bucklescript'));
+var rollup = require('rollup');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -61,16 +62,15 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
-    rollup,
     reporter
   }) {
     const writeToSrc = path.join(out, 'dist-src', 'index.js');
     const isReason = fs.existsSync(path.join(cwd, "src/index.re"));
-    const srcBundle = yield rollup('src', {
+    const result = yield rollup.rollup({
       input: isReason ? 'src/index.re' : 'src/index.ml',
       plugins: [rollupBuckleScript()]
     });
-    yield srcBundle.write({
+    yield result.write({
       file: writeToSrc,
       format: 'esm',
       exports: 'named'

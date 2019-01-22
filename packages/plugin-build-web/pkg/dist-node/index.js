@@ -11,6 +11,7 @@ var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var types = require('@pika/types');
+var rollup = require('rollup');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -81,11 +82,11 @@ function build(_x2) {
 function _build() {
   _build = _asyncToGenerator(function* ({
     out,
-    rollup,
     reporter
   }) {
     const writeToWeb = path.join(out, 'dist-web', 'index.js');
-    const srcBundle = yield rollup('web', {
+    const result = yield rollup.rollup({
+      input: path.join(out, 'dist-src/index.js'),
       plugins: [rollupBabel({
         babelrc: false,
         compact: false,
@@ -107,7 +108,7 @@ function _build() {
         defaultOnWarnHandler(warning);
       }
     });
-    yield srcBundle.write({
+    yield result.write({
       file: writeToWeb,
       format: 'esm',
       exports: 'named'

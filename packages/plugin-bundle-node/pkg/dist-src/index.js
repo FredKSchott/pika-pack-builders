@@ -10,6 +10,7 @@ import rollupBabel from 'rollup-plugin-babel';
 import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
+import { rollup } from 'rollup';
 export async function beforeJob({
   out
 }) {
@@ -28,15 +29,15 @@ export async function beforeJob({
 export async function build({
   out,
   isFull,
-  rollup,
   reporter
 }) {
   if (!isFull) {
     return;
   }
 
-  const writeToNode = path.join(out, 'dist-node', 'index.bundled.js');
-  const srcBundle = await rollup('node', {
+  const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
+  const result = await rollup({
+    input: path.join(out, 'dist-src/index.js'),
     external: builtinModules,
     plugins: [rollupBabel({
       babelrc: false,
@@ -60,10 +61,10 @@ export async function build({
       compact: true
     })]
   });
-  await srcBundle.write({
-    file: writeToNode,
+  await result.write({
+    file: writeToNodeBundled,
     format: 'cjs',
     exports: 'named'
   });
-  reporter.created(writeToNode);
+  reporter.created(writeToNodeBundled);
 }

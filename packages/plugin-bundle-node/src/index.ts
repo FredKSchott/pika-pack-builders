@@ -23,7 +23,7 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export async function build({out, isFull, rollup, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, isFull, reporter}: BuilderOptions): Promise<void> {
   if (!isFull) {
     return;
   }

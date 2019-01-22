@@ -22,7 +22,7 @@ export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
 
-export async function build({out, options, rollup, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, options, reporter}: BuilderOptions): Promise<void> {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
   const result = await rollup({

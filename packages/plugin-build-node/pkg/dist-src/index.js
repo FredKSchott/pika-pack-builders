@@ -7,6 +7,7 @@ import babelPluginDynamicImport from 'babel-plugin-dynamic-import-node-babel-7';
 import builtinModules from 'builtin-modules';
 import rollupBabel from 'rollup-plugin-babel';
 import { MessageError } from '@pika/types';
+import { rollup } from 'rollup';
 export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
@@ -27,12 +28,12 @@ export async function beforeJob({
 }
 export async function build({
   out,
-  rollup,
   reporter
 }) {
   const writeToNode = path.join(out, 'dist-node', 'index.js'); // TODO: KEEP FIXING THIS,
 
-  const srcBundle = await rollup('node', {
+  const result = await rollup({
+    input: path.join(out, 'dist-src/index.js'),
     external: builtinModules,
     plugins: [rollupBabel({
       babelrc: false,
@@ -55,7 +56,7 @@ export async function build({
       defaultOnWarnHandler(warning);
     }
   });
-  await srcBundle.write({
+  await result.write({
     file: writeToNode,
     format: 'cjs',
     exports: 'named'

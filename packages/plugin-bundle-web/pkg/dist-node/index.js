@@ -10,6 +10,7 @@ var rollupNodeResolve = _interopDefault(require('rollup-plugin-node-resolve'));
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var types = require('@pika/types');
+var rollup = require('rollup');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -81,12 +82,11 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     out,
     options,
-    rollup,
     reporter
   }) {
     const readFromWeb = path.join(out, 'dist-web', 'index.js');
     const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
-    const srcBundle = yield rollup('web', {
+    const result = yield rollup.rollup({
       input: readFromWeb,
       plugins: [rollupNodeResolve({
         preferBuiltins: true
@@ -99,7 +99,7 @@ function _build() {
         compact: true
       })]
     });
-    yield srcBundle.write({
+    yield result.write({
       file: writeToWeb,
       format: 'esm',
       exports: 'named'

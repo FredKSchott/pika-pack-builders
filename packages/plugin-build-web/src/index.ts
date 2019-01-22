@@ -22,7 +22,7 @@ export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
 
-export async function build({out, rollup, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, reporter}: BuilderOptions): Promise<void> {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
 
   const result = await rollup({

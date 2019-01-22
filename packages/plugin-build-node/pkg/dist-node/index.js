@@ -13,6 +13,7 @@ var babelPluginDynamicImport = _interopDefault(require('babel-plugin-dynamic-imp
 var builtinModules = _interopDefault(require('builtin-modules'));
 var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var types = require('@pika/types');
+var rollup = require('rollup');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -83,12 +84,12 @@ function build(_x2) {
 function _build() {
   _build = _asyncToGenerator(function* ({
     out,
-    rollup,
     reporter
   }) {
     const writeToNode = path.join(out, 'dist-node', 'index.js'); // TODO: KEEP FIXING THIS,
 
-    const srcBundle = yield rollup('node', {
+    const result = yield rollup.rollup({
+      input: path.join(out, 'dist-src/index.js'),
       external: builtinModules,
       plugins: [rollupBabel({
         babelrc: false,
@@ -111,7 +112,7 @@ function _build() {
         defaultOnWarnHandler(warning);
       }
     });
-    yield srcBundle.write({
+    yield result.write({
       file: writeToNode,
       format: 'cjs',
       exports: 'named'

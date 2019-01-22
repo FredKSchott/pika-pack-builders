@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import rollupBuckleScript from 'rollup-plugin-bucklescript';
+import { rollup } from 'rollup';
 export function validate({
   cwd
 }) {
@@ -13,16 +14,15 @@ export function manifest(newManifest) {
 export async function build({
   cwd,
   out,
-  rollup,
   reporter
 }) {
   const writeToSrc = path.join(out, 'dist-src', 'index.js');
   const isReason = fs.existsSync(path.join(cwd, "src/index.re"));
-  const srcBundle = await rollup('src', {
+  const result = await rollup({
     input: isReason ? 'src/index.re' : 'src/index.ml',
     plugins: [rollupBuckleScript()]
   });
-  await srcBundle.write({
+  await result.write({
     file: writeToSrc,
     format: 'esm',
     exports: 'named'
