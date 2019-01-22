@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-ts-standard-pkg",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.1.7",
-    "@pika/plugin-build-node": "^0.3.2",
-    "@pika/types": "^0.3.2",
+    "@pika/plugin-build-node": "^0.3.3",
+    "@pika/types": "^0.3.3",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },
