@@ -1,14 +1,18 @@
 {
   "name": "@pika/plugin-ts-standard-pkg",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"
   },
   "@pika/pack": {
     "pipeline": [
-      ["./pkg"],
-      ["@pika/plugin-build-node"]
+      [
+        "./pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
     ]
   },
   "scripts": {
@@ -22,10 +26,9 @@
     "typescript": "*"
   },
   "devDependencies": {
-    "@types/node": "^10.12.18",
     "@pika/pack": "^0.2.0",
-    "@pika/plugin-build-node": "^0.3.4",
-    "@pika/types": "^0.3.4",
+    "@pika/plugin-build-node": "^0.3.5",
+    "@pika/types": "^0.3.5",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

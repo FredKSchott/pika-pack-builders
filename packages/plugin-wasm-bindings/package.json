@@ -1,14 +1,18 @@
 {
   "name": "@pika/plugin-wasm-bindings",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"
   },
   "@pika/pack": {
     "pipeline": [
-      ["@pika/plugin-standard-pkg"],
-      ["@pika/plugin-build-node"]
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
     ]
   },
   "scripts": {
@@ -19,8 +23,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.2.0",
-    "@pika/plugin-build-node": "^0.3.4",
-    "@pika/plugin-standard-pkg": "^0.3.4",
+    "@pika/plugin-build-node": "^0.3.5",
+    "@pika/plugin-standard-pkg": "^0.3.5",
     "@types/node": "^10.12.18"
   },
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
