@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import { MessageError } from '@pika/types';
 const BIN_FILENAME = "dist-node/index.bin.js";
 export function beforeBuild({
   options
@@ -11,15 +12,15 @@ export function beforeBuild({
 export async function beforeJob({
   out
 }) {
-  const nodeDirectory = path.join(out, "dist-node/");
+  const nodeDirectory = path.join(out, "dist-node");
 
-  if (fs.existsSync(nodeDirectory)) {
+  if (!fs.existsSync(nodeDirectory)) {
     throw new MessageError('"dist-node/" does not exist, or was not yet created in the pipeline.');
   }
 
   const nodeEntrypoint = path.join(out, "dist-node/index.js");
 
-  if (fs.existsSync(nodeEntrypoint)) {
+  if (!fs.existsSync(nodeEntrypoint)) {
     throw new MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }

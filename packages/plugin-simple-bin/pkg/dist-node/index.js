@@ -6,6 +6,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
+var types = require('@pika/types');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -48,7 +49,7 @@ function beforeBuild({
   options
 }) {
   if (!options.bin) {
-    return new MessageError('option "bin" must be defined. Example: {"bin": "example-cli"}');
+    return new types.MessageError('option "bin" must be defined. Example: {"bin": "example-cli"}');
   }
 }
 function beforeJob(_x) {
@@ -59,16 +60,16 @@ function _beforeJob() {
   _beforeJob = _asyncToGenerator(function* ({
     out
   }) {
-    const nodeDirectory = path.join(out, "dist-node/");
+    const nodeDirectory = path.join(out, "dist-node");
 
-    if (fs.existsSync(nodeDirectory)) {
-      throw new MessageError('"dist-node/" does not exist, or was not yet created in the pipeline.');
+    if (!fs.existsSync(nodeDirectory)) {
+      throw new types.MessageError('"dist-node/" does not exist, or was not yet created in the pipeline.');
     }
 
     const nodeEntrypoint = path.join(out, "dist-node/index.js");
 
-    if (fs.existsSync(nodeEntrypoint)) {
-      throw new MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
+    if (!fs.existsSync(nodeEntrypoint)) {
+      throw new types.MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
     }
   });
   return _beforeJob.apply(this, arguments);
