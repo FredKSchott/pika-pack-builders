@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-bundle-node",
-  "version": "0.3.6",
+  "version": "0.3.5",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"
@@ -35,8 +35,8 @@
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
   "devDependencies": {
     "@pika/pack": "^0.2.0",
-    "@pika/plugin-build-node": "^0.3.6",
-    "@pika/plugin-ts-standard-pkg": "^0.3.6",
+    "@pika/plugin-build-node": "^0.3.5",
+    "@pika/plugin-ts-standard-pkg": "^0.3.5",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   }
