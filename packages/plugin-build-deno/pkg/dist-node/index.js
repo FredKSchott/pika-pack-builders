@@ -87,7 +87,6 @@ function _build() {
       for (var _iterator = src.files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         const fileAbs = _step.value;
         const fileRel = path.relative(cwd, fileAbs);
-        console.log(fileRel, fileRel.replace('/src/', '/dist-deno/'), path.resolve(out, fileRel));
         const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
         mkdirp.sync(path.dirname(writeToTypeScript));
         fs.copyFileSync(fileAbs, writeToTypeScript);

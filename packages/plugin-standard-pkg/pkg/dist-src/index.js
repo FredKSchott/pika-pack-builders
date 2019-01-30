@@ -7,7 +7,8 @@ import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetTypeScript from '@babel/preset-typescript';
 import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
 import { Lint } from 'standard-pkg';
-export async function afterJob({ out }) {
+export async function afterJob({ out, reporter }) {
+    reporter.info('Linting with standard-pkg...');
     const linter = new Lint(out);
     await linter.init();
     linter.summary();

@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-standard-pkg",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "pika": true,
   "files": [
     "dist-*/",
@@ -13,8 +13,8 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-typescript": "^7.1.0",
-    "@pika/types": "^0.3.4",
-    "@pika/babel-plugin-esm-import-rewrite": "^0.3.4",
+    "@pika/babel-plugin-esm-import-rewrite": "^0.3.5",
+    "@pika/types": "^0.3.5",
     "@types/node": "^10.12.18",
     "mkdirp": "^0.5.1",
     "standard-pkg": "^0.2.0"

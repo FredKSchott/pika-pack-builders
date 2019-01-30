@@ -15,7 +15,6 @@ export async function build({ cwd, out, src }) {
     }
     for (const fileAbs of src.files) {
         const fileRel = path.relative(cwd, fileAbs);
-        console.log(fileRel, fileRel.replace('/src/', '/dist-deno/'), path.resolve(out, fileRel));
         const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
         mkdirp.sync(path.dirname(writeToTypeScript));
         fs.copyFileSync(fileAbs, writeToTypeScript);

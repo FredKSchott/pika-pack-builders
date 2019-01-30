@@ -123,8 +123,10 @@ function afterJob(_x2) {
 
 function _afterJob() {
   _afterJob = _asyncToGenerator(function* ({
-    out
+    out,
+    reporter
   }) {
+    reporter.info('Linting with standard-pkg...');
     const linter = new standardPkg.Lint(out);
     yield linter.init();
     linter.summary();

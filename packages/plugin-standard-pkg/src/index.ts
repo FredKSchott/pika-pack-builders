@@ -9,7 +9,8 @@ import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
 import {BuilderOptions} from '@pika/types';
 import {Lint} from 'standard-pkg';
 
-export async function afterJob({out}: BuilderOptions) {
+export async function afterJob({out, reporter}: BuilderOptions) {
+  reporter.info('Linting with standard-pkg...');
   const linter = new Lint(out);
   await linter.init();
   linter.summary();

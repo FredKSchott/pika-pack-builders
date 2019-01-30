@@ -54,7 +54,8 @@ export async function beforeBuild({ cwd, reporter }) {
         reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
     }
 }
-export async function afterJob({ out }) {
+export async function afterJob({ out, reporter }) {
+    reporter.info('Linting with standard-pkg...');
     const linter = new Lint(out);
     await linter.init();
     linter.summary();
