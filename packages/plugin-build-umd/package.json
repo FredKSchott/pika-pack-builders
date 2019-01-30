@@ -1,14 +1,18 @@
 {
   "name": "@pika/plugin-build-umd",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"
   },
   "@pika/pack": {
     "pipeline": [
-      ["@pika/plugin-ts-standard-pkg"],
-      ["@pika/plugin-build-node"]
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
     ]
   },
   "scripts": {
@@ -25,8 +29,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.2.0",
-    "@pika/plugin-build-node": "^0.3.5",
-    "@pika/plugin-ts-standard-pkg": "^0.3.5",
+    "@pika/plugin-build-node": "^0.3.7",
+    "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },
