@@ -13,7 +13,6 @@ export async function beforeBuild({options}: BuilderOptions) {
   }
 }
 
-
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, "dist-src/");
   if (!fs.existsSync(srcDirectory)) {

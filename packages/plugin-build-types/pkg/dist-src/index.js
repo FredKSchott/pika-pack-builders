@@ -10,12 +10,12 @@ export async function build({ cwd, out, reporter, manifest }) {
         const tscBin = path.join(cwd, "node_modules/.bin/tsc");
         const writeToTypings = path.join(out, "dist-types/index.d.ts");
         const importAsNode = path.join(out, "dist-node", "index.js");
-        if (!fs.existsSync(path.join(cwd, "index.d.ts"))) {
+        if (fs.existsSync(path.join(cwd, "index.d.ts"))) {
             mkdirp.sync(path.dirname(writeToTypings));
             fs.copyFileSync(path.join(cwd, "index.d.ts"), writeToTypings);
             return;
         }
-        if (!fs.existsSync(path.join(cwd, "src", "index.d.ts"))) {
+        if (fs.existsSync(path.join(cwd, "src", "index.d.ts"))) {
             mkdirp.sync(path.dirname(writeToTypings));
             fs.copyFileSync(path.join(cwd, "src", "index.d.ts"), writeToTypings);
             return;

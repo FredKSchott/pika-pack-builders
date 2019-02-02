@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-bundle-web",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "pika": true,
   "files": [
     "dist-*/",

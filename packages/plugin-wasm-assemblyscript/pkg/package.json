@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-wasm-assemblyscript",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "pika": true,
   "files": [
     "dist-*/",
