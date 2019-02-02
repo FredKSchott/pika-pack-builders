@@ -18,10 +18,6 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export function manifest(manifest) {
-  manifest.module = manifest.module || 'dist-web/index.js';
-}
-
 export async function build({out, options, reporter}: BuilderOptions): Promise<void> {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
