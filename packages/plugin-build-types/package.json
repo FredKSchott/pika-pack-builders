@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-build-types",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "A @pika/pack plugin:  Adds TypeScript type definitions to your package build.",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {

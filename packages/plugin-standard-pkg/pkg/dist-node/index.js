@@ -72,9 +72,10 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
+    options,
     reporter
   }) {
-    const builder = new standardPkg.Build(path.join(cwd, 'src'));
+    const builder = new standardPkg.Build(path.join(cwd, 'src'), options);
     yield builder.init();
     yield builder.write(path.join(out, '/dist-src/'));
     reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');

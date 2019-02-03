@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-simple-bin",
   "description": "A @pika/pack plugin: Adds a simple CLI wrapper.",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "pika": true,
   "files": [
     "dist-*/",

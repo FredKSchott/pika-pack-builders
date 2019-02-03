@@ -14,8 +14,8 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, reporter}: BuilderOptions): Promise<void> {
-  const builder = new Build(path.join(cwd, 'src'));
+export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
+  const builder = new Build(path.join(cwd, 'src'), options);
   await builder.init();
   await builder.write(path.join(out, '/dist-src/'));
   reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
