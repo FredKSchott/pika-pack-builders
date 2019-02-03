@@ -81,15 +81,19 @@ function _build() {
           cwd
         });
         return;
-      }
-
-      const dtTypesDependency = path.join(cwd, "node_modules", "@types", manifest.name);
-      const dtTypesExist = fs.existsSync(dtTypesDependency);
-
-      if (dtTypesExist) {
-        fs.copyFileSync(dtTypesDependency, writeToTypings);
-        return;
-      } // log: we're auto-generating types now
+      } // !!! Still experimental:
+      // const dtTypesDependency = path.join(
+      //   cwd,
+      //   "node_modules",
+      //   "@types",
+      //   manifest.name
+      // );
+      // const dtTypesExist = fs.existsSync(dtTypesDependency);
+      // if (dtTypesExist) {
+      //   fs.copyFileSync(dtTypesDependency, writeToTypings);
+      //   return;
+      // }
+      // log: we're auto-generating types now
 
 
       reporter.info('no type definitions found, auto-generating...');

@@ -71,9 +71,6 @@ function _beforeJob() {
   return _beforeJob.apply(this, arguments);
 }
 
-function manifest(manifest) {
-  manifest.module = manifest.module || 'dist-web/index.js';
-}
 function build(_x2) {
   return _build.apply(this, arguments);
 }
@@ -110,5 +107,4 @@ function _build() {
 }
 
 exports.beforeJob = beforeJob;
-exports.manifest = manifest;
 exports.build = build;

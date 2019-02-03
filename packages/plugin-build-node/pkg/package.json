@@ -1,5 +1,6 @@
 {
   "name": "@pika/plugin-build-node",
+  "description": "A @pika/pack plugin: Adds a Node.js distribution to your package, built & optimized to run on Node.js.",
   "version": "0.3.7",
   "pika": true,
   "files": [

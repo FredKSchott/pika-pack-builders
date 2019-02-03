@@ -1,5 +1,6 @@
 {
   "name": "@pika/plugin-standard-pkg",
+  "description": "A @pika/pack plugin: Builds your package source as standard, ES2018 JavaScript.",
   "version": "0.3.7",
   "pika": true,
   "files": [
@@ -9,15 +10,9 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-syntax-import-meta": "^7.2.0",
-    "@babel/preset-typescript": "^7.1.0",
-    "@pika/babel-plugin-esm-import-rewrite": "^0.3.7",
     "@pika/types": "^0.3.5",
     "@types/node": "^10.12.18",
-    "mkdirp": "^0.5.1",
-    "standard-pkg": "^0.2.0"
+    "standard-pkg": "^0.4.0"
   },
   "source": "dist-src/index.js",
   "types": "dist-types/index.js",

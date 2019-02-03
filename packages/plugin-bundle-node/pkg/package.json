@@ -1,5 +1,6 @@
 {
   "name": "@pika/plugin-bundle-node",
+  "description": "A @pika/pack plugin: Adds a bundled Node.js distribution to your package.",
   "version": "0.3.7",
   "pika": true,
   "files": [

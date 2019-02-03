@@ -1,13 +1,6 @@
 import path from 'path';
-import fs from 'fs';
-import mkdirp from 'mkdirp';
-import babel from '@babel/core';
-import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
-import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
-import babelPresetTypeScript from '@babel/preset-typescript';
-import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
 import {BuilderOptions} from '@pika/types';
-import {Lint} from 'standard-pkg';
+import {Lint, Build} from 'standard-pkg';
 
 export async function afterJob({out, reporter}: BuilderOptions) {
   reporter.info('Linting with standard-pkg...');
@@ -21,25 +14,9 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, src, reporter}: BuilderOptions): Promise<void> {
-  for (const fileAbs of src.files) {
-    const writeToSrc = fileAbs
-      .replace(path.join(cwd, 'src/'), path.join(out, '/dist-src/'))
-      .replace('.ts', '.js')
-      .replace('.tsx', '.js')
-      .replace('.jsx', '.js')
-      .replace('.mjs', '.js');
-    const resultSrc = await babel.transformFileAsync(fileAbs, {
-      cwd,
-      presets: [[babelPresetTypeScript]],
-      plugins: [
-        [babelPluginImportRewrite, {addExtensions: true}],
-        babelPluginDynamicImportSyntax,
-        babelPluginImportMetaSyntax,
-      ],
-    });
-    mkdirp.sync(path.dirname(writeToSrc));
-    fs.writeFileSync(writeToSrc, resultSrc.code);
-  }
+export async function build({cwd, out, reporter}: BuilderOptions): Promise<void> {
+  const builder = new Build(path.join(cwd, 'src'));
+  await builder.init();
+  await builder.write(path.join(out, '/dist-src/'));
   reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
 }

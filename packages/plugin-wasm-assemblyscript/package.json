@@ -1,6 +1,7 @@
 {
   "name": "@pika/plugin-wasm-assemblyscript",
   "version": "0.3.7",
+  "description": "A @pika/pack plugin: Builds TypeScript as WASM via AssemblyScript.",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"

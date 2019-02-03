@@ -101,30 +101,28 @@ function build({
 
   fs.writeFileSync(binFilename, `#!/usr/bin/env node
 'use strict';
-
 ${minNodeVersion ? `
-var ver = process.versions.node;
-var majorVer = parseInt(ver.split('.')[0], 10);
+const ver = process.versions.node;
+const majorVer = parseInt(ver.split('.')[0], 10);
 
 if (majorVer < ${minNodeVersion}) {
-  console.error('Node version ' + ver + ' is not supported, please use Node.js 6.0 or higher.');
+  console.error('Node version ' + ver + ' is not supported, please use Node.js ${minNodeVersion}.0 or higher.');
   process.exit(1);
-}` : ``}
-
-${v8CompileCache ? `
+}
+` : ``}${v8CompileCache ? `
 try {
   require('./v8-compile-cache.js');
 } catch (err) {
   // We don't have/need this on legacy builds and dev builds
-}` : ``}
-
+}
+` : ``}
 let cli;
 try {
   cli = require('./index.bundled.js');
 } catch (err) {
   // We don't have/need this on legacy builds and dev builds
-  // If an error happens here, throw it, that means no code exists at all.
-  cli = require('./index.js');
+  // If an error happens here, throw it, that means no Node.js distribution exists at all.
+  cli = require('../');
 }
 
 if (cli.autoRun) {

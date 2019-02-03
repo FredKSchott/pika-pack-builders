@@ -5,13 +5,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var path = _interopDefault(require('path'));
-var fs = _interopDefault(require('fs'));
-var mkdirp = _interopDefault(require('mkdirp'));
-var babel = _interopDefault(require('@babel/core'));
-var babelPluginDynamicImportSyntax = _interopDefault(require('@babel/plugin-syntax-dynamic-import'));
-var babelPluginImportMetaSyntax = _interopDefault(require('@babel/plugin-syntax-import-meta'));
-var babelPresetTypeScript = _interopDefault(require('@babel/preset-typescript'));
-var babelPluginImportRewrite = _interopDefault(require('@pika/babel-plugin-esm-import-rewrite'));
 var standardPkg = require('standard-pkg');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -79,42 +72,11 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
-    src,
     reporter
   }) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = src.files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        const fileAbs = _step.value;
-        const writeToSrc = fileAbs.replace(path.join(cwd, 'src/'), path.join(out, '/dist-src/')).replace('.ts', '.js').replace('.tsx', '.js').replace('.jsx', '.js').replace('.mjs', '.js');
-        const resultSrc = yield babel.transformFileAsync(fileAbs, {
-          cwd,
-          presets: [[babelPresetTypeScript]],
-          plugins: [[babelPluginImportRewrite, {
-            addExtensions: true
-          }], babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
-        });
-        mkdirp.sync(path.dirname(writeToSrc));
-        fs.writeFileSync(writeToSrc, resultSrc.code);
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
+    const builder = new standardPkg.Build(path.join(cwd, 'src'));
+    yield builder.init();
+    yield builder.write(path.join(out, '/dist-src/'));
     reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
   });
   return _build.apply(this, arguments);

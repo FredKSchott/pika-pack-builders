@@ -15,9 +15,6 @@ export async function beforeJob({ out }) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
 }
-export function manifest(manifest) {
-    manifest.module = manifest.module || 'dist-web/index.js';
-}
 export async function build({ out, options, reporter }) {
     const readFromWeb = path.join(out, 'dist-web', 'index.js');
     const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');

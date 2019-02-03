@@ -1,6 +1,7 @@
 {
   "name": "@pika/plugin-build-umd",
   "version": "0.3.7",
+  "description": "A @pika/pack plugin: Adds a UMD distribution to your package, built to be flexible & run on legacy browsers & environments.",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"

@@ -1,5 +1,6 @@
 {
   "name": "@pika/plugin-build-types",
+  "description": "A @pika/pack plugin:  Adds TypeScript type definitions to your package build.",
   "version": "0.3.7",
   "pika": true,
   "files": [

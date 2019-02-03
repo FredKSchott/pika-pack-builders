@@ -1,6 +1,7 @@
 {
   "name": "@pika/plugin-bundle-node",
   "version": "0.3.7",
+  "description": "A @pika/pack plugin: Adds a bundled Node.js distribution to your package.",
   "main": "pkg/dist-node/index.js",
   "publishConfig": {
     "access": "public"

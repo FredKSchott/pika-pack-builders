@@ -1,5 +1,6 @@
 {
   "name": "@pika/plugin-build-umd",
+  "description": "A @pika/pack plugin: Adds a UMD distribution to your package, built to be flexible & run on legacy browsers & environments.",
   "version": "0.3.7",
   "pika": true,
   "files": [
