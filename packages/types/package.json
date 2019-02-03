@@ -1,6 +1,6 @@
 {
   "name": "@pika/types",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "pika": true,
   "keywords": [
     "pika-pkg"
