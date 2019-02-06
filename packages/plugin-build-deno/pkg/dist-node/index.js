@@ -6,7 +6,11 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
+var util = _interopDefault(require('util'));
+var glob = _interopDefault(require('glob'));
 var mkdirp = _interopDefault(require('mkdirp'));
+var types = require('@pika/types');
+var execa = _interopDefault(require('execa'));
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -44,7 +48,24 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function manifest(_x, _x2) {
+function beforeBuild(_x) {
+  return _beforeBuild.apply(this, arguments);
+}
+
+function _beforeBuild() {
+  _beforeBuild = _asyncToGenerator(function* ({
+    cwd
+  }) {
+    return execa('deno', ["--version"], {
+      cwd
+    }).catch(err => {
+      throw new types.MessageError('@pika/plugin-build-deno can only handle packages already written for Deno. Exiting because we could not find deno on your machine.');
+    });
+  });
+  return _beforeBuild.apply(this, arguments);
+}
+
+function manifest(_x2, _x3) {
   return _manifest.apply(this, arguments);
 }
 
@@ -63,7 +84,7 @@ function _manifest() {
   return _manifest.apply(this, arguments);
 }
 
-function build(_x3) {
+function build(_x4) {
   return _build.apply(this, arguments);
 }
 
@@ -71,7 +92,7 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
-    src
+    options
   }) {
     const pathToTsconfig = path.join(cwd, 'tsconfig.json');
 
@@ -79,13 +100,24 @@ function _build() {
       return;
     }
 
+    const files = yield util.promisify(glob)(`src/**/*`, {
+      cwd,
+      nodir: true,
+      absolute: true,
+      ignore: (options.exclude || []).map(g => path.join('src', g))
+    });
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = src.files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         const fileAbs = _step.value;
+
+        if (path.extname(fileAbs) !== 'ts' && path.extname(fileAbs) !== 'tsx') {
+          continue;
+        }
+
         const fileRel = path.relative(cwd, fileAbs);
         const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
         mkdirp.sync(path.dirname(writeToTypeScript));
@@ -109,5 +141,6 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
+exports.beforeBuild = beforeBuild;
 exports.manifest = manifest;
 exports.build = build;

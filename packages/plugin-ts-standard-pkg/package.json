@@ -27,7 +27,7 @@
     "typescript": "*"
   },
   "devDependencies": {
-    "@pika/pack": "^0.2.0",
+    "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/types": "^0.3.5",
     "@types/node": "^10.12.18",

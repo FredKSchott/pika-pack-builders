@@ -35,7 +35,7 @@
   },
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
   "devDependencies": {
-    "@pika/pack": "^0.2.0",
+    "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",

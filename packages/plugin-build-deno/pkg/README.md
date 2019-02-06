@@ -3,6 +3,8 @@
 > A [@pika/pack](https://github.com/pikapkg/pack) build plugin.
 > Adds a TypeScript distribution to your package, built to run on [Deno](https://deno.land/).
 
+**Note:** The plugin is currently only smart enough to build a distribution from source that would already run on Deno. Converting npm imports to run on Deno is coming soon.
+
 
 ## Install
 

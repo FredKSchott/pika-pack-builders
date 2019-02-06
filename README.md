@@ -22,7 +22,7 @@ This repo contains the official build plugins for @pika/pack.
 
 #### WASM Builders:
  - `@pika/plugin-wasm-assemblyscript`: Builds WASM from TypeScript using [AssemblyScript](https://github.com/AssemblyScript/assemblyscript).
- - `@pika/plugin-wasm-bucklescript`: Builds WASM from ReasonML/OCAML using [BuckleScript](https://bucklescript.github.io/).
+ - `@pika/plugin-source-bucklescript`: Builds WASM from ReasonML/OCAML using [BuckleScript](https://bucklescript.github.io/).
  - `@pika/plugin-wasm-bindings`: Builds a simple JS wrapper for any WASM build.
 
 #### Advanced Builders:

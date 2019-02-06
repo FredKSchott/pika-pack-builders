@@ -1,5 +1,5 @@
 {
-  "name": "@pika/plugin-wasm-bucklescript",
+  "name": "@pika/plugin-source-bucklescript",
   "version": "0.3.9",
   "description": "A @pika/pack plugin: ",
   "main": "pkg/dist-node/index.js",
@@ -28,7 +28,7 @@
     "rollup-plugin-bucklescript": "^0.7.0"
   },
   "devDependencies": {
-    "@pika/pack": "^0.2.0",
+    "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",

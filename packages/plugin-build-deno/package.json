@@ -24,7 +24,7 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "@pika/pack": "^0.2.0",
+    "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",

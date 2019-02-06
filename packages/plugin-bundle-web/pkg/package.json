@@ -2,13 +2,16 @@
   "name": "@pika/plugin-bundle-web",
   "description": "A @pika/pack plugin: Adds a bundled Web distribution to your package, built & optimized to run in most web browsers (and bundlers).",
   "version": "0.3.9",
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.js",
+  "main": "dist-node/index.js",
   "pika": true,
+  "sideEffects": false,
   "files": [
     "dist-*/",
     "assets/",
     "bin/"
   ],
-  "sideEffects": false,
   "dependencies": {
     "@pika/types": "^0.3.5",
     "rollup": "^1.1.0",
@@ -16,7 +19,14 @@
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-resolve": "^4.0.0"
   },
-  "source": "dist-src/index.js",
-  "types": "dist-types/index.js",
-  "main": "dist-node/index.js"
+  "devDependencies": {
+    "@pika/pack": "^0.3.0",
+    "@pika/plugin-build-node": "^0.3.7",
+    "@pika/plugin-ts-standard-pkg": "^0.3.7",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

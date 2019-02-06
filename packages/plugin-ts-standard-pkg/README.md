@@ -35,7 +35,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 ## Result
 
-Unlike other build plugins, this plugin reads directly from your package `src/` directory. Make sure your code exists in a `src/` directory, with an `index.ts` file as the package entrypoint.
+Unlike other build plugins, this plugin reads directly from your package `src/` directory. Make sure your code exists in a `src/` directory, with an `src/index.ts` file as the package entrypoint.
 
 Other build plugins depend on a standard ES2018 distribution, so include this plugin early in your build pipeline for others to use.
 
