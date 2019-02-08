@@ -9,6 +9,8 @@ import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
+const DEFAULT_MIN_NODE_VERSION = '6';
+
 export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
@@ -40,7 +42,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
             babelPresetEnv,
             {
               modules: false,
-              targets: {node: options.minNodeVersion || '6'},
+              targets: {node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION},
               spec: true,
             },
           ],
