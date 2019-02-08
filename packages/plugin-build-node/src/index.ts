@@ -24,7 +24,7 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export async function build({out, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
   const writeToNode = path.join(out, 'dist-node', 'index.js');
 
   // TODO: KEEP FIXING THIS,
@@ -40,7 +40,7 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
             babelPresetEnv,
             {
               modules: false,
-              targets: {node: '6'},
+              targets: {node: options.minNodeVersion || '6'},
               spec: true,
             },
           ],
