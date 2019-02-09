@@ -9,6 +9,8 @@ import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
+const DEFAULT_MIN_NODE_VERSION = '6';
+
 export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
@@ -24,7 +26,7 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export async function build({out, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
   const writeToNode = path.join(out, 'dist-node', 'index.js');
 
   // TODO: KEEP FIXING THIS,
@@ -40,7 +42,7 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
             babelPresetEnv,
             {
               modules: false,
-              targets: {node: '6'},
+              targets: {node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION},
               spec: true,
             },
           ],
