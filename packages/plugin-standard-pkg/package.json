@@ -3,6 +3,11 @@
   "version": "0.3.9",
   "description": "A @pika/pack plugin: Builds your package source as standard, ES2018 JavaScript.",
   "main": "pkg/dist-node/index.js",
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/pikapkg/builders.git"
+  },
   "publishConfig": {
     "access": "public"
   },
