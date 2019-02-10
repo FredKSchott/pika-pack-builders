@@ -1,7 +1,7 @@
 import nodeFs from 'fs';
 import url from 'url';
 import nodePath from 'path';
-import { validateDynamicImportArguments } from './validate-specifier';
+import { validateDynamicImportArguments } from './validate-specifier.js';
 const BareIdentifierFormat = /^((?:@[^\/]+\/)?[^\/]+)(\/.*)?$/;
 export default function transform({}) {
     function rewriteImport(specifier, { opts, file }) {

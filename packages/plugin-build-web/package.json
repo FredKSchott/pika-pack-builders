@@ -1,8 +1,13 @@
 {
   "name": "@pika/plugin-build-web",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "A @pika/pack plugin:  Adds an ESM distribution to your package, built & optimized to run in most web browsers (and bundlers).",
   "main": "pkg/dist-node/index.js",
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/pikapkg/builders.git"
+  },
   "publishConfig": {
     "access": "public"
   },

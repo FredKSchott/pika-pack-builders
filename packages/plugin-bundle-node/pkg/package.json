@@ -1,9 +1,9 @@
 {
   "name": "@pika/plugin-bundle-node",
   "description": "A @pika/pack plugin: Adds a bundled Node.js distribution to your package.",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "source": "dist-src/index.js",
-  "types": "dist-types/index.js",
+  "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
@@ -12,6 +12,11 @@
     "assets/",
     "bin/"
   ],
+  "homepage": "https://www.pikapkg.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",

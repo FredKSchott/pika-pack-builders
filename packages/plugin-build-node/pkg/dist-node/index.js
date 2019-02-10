@@ -51,6 +51,7 @@ function _asyncToGenerator(fn) {
   };
 }
 
+const DEFAULT_MIN_NODE_VERSION = '6';
 function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
@@ -84,7 +85,8 @@ function build(_x2) {
 function _build() {
   _build = _asyncToGenerator(function* ({
     out,
-    reporter
+    reporter,
+    options
   }) {
     const writeToNode = path.join(out, 'dist-node', 'index.js'); // TODO: KEEP FIXING THIS,
 
@@ -97,7 +99,7 @@ function _build() {
         presets: [[babelPresetEnv, {
           modules: false,
           targets: {
-            node: '6'
+            node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION
           },
           spec: true
         }]],

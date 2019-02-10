@@ -62,7 +62,7 @@ export async function afterJob({ out, reporter }) {
 }
 export function manifest(newManifest) {
     newManifest.source = newManifest.source || 'dist-src/index.js';
-    newManifest.types = newManifest.types || 'dist-types/index.js';
+    newManifest.types = newManifest.types || 'dist-types/index.d.ts';
     return newManifest;
 }
 export async function build({ cwd, out, reporter }) {

@@ -1,9 +1,9 @@
 {
   "name": "@pika/plugin-build-web",
   "description": "A @pika/pack plugin:  Adds an ESM distribution to your package, built & optimized to run in most web browsers (and bundlers).",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "source": "dist-src/index.js",
-  "types": "dist-types/index.js",
+  "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
@@ -12,6 +12,11 @@
     "assets/",
     "bin/"
   ],
+  "homepage": "https://www.pikapkg.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",

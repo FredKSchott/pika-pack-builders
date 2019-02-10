@@ -136,7 +136,7 @@ function _afterJob() {
 
 function manifest(newManifest) {
   newManifest.source = newManifest.source || 'dist-src/index.js';
-  newManifest.types = newManifest.types || 'dist-types/index.js';
+  newManifest.types = newManifest.types || 'dist-types/index.d.ts';
   return newManifest;
 }
 function build(_x3) {

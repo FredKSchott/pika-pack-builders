@@ -8,6 +8,7 @@ import builtinModules from 'builtin-modules';
 import rollupBabel from 'rollup-plugin-babel';
 import { MessageError } from '@pika/types';
 import { rollup } from 'rollup';
+const DEFAULT_MIN_NODE_VERSION = '6';
 export function manifest(manifest) {
     manifest.main = manifest.main || 'dist-node/index.js';
 }
@@ -21,7 +22,7 @@ export async function beforeJob({ out }) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
 }
-export async function build({ out, reporter }) {
+export async function build({ out, reporter, options }) {
     const writeToNode = path.join(out, 'dist-node', 'index.js');
     // TODO: KEEP FIXING THIS,
     const result = await rollup({
@@ -36,7 +37,7 @@ export async function build({ out, reporter }) {
                         babelPresetEnv,
                         {
                             modules: false,
-                            targets: { node: '6' },
+                            targets: { node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION },
                             spec: true,
                         },
                     ],
