@@ -117,7 +117,28 @@ function _beforeBuild() {
   return _beforeBuild.apply(this, arguments);
 }
 
-function afterJob(_x2) {
+function beforeJob(_x2) {
+  return _beforeJob.apply(this, arguments);
+}
+
+function _beforeJob() {
+  _beforeJob = _asyncToGenerator(function* ({
+    cwd
+  }) {
+    const srcDirectory = path.join(cwd, "src/");
+
+    if (!fs.existsSync(srcDirectory)) {
+      throw new types.MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
+    }
+
+    if (!fs.existsSync(path.join(cwd, "src/index.ts")) && !fs.existsSync(path.join(cwd, "src/index.tsx"))) {
+      throw new types.MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
+    }
+  });
+  return _beforeJob.apply(this, arguments);
+}
+
+function afterJob(_x3) {
   return _afterJob.apply(this, arguments);
 }
 
@@ -139,7 +160,7 @@ function manifest(newManifest) {
   newManifest.types = newManifest.types || 'dist-types/index.d.ts';
   return newManifest;
 }
-function build(_x3) {
+function build(_x4) {
   return _build.apply(this, arguments);
 }
 
@@ -160,6 +181,7 @@ function _build() {
 }
 
 exports.beforeBuild = beforeBuild;
+exports.beforeJob = beforeJob;
 exports.afterJob = afterJob;
 exports.manifest = manifest;
 exports.build = build;

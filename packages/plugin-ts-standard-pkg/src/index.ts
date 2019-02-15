@@ -58,6 +58,18 @@ export async function beforeBuild({cwd, reporter}: BuilderOptions) {
   }
 }
 
+export async function beforeJob({cwd}: BuilderOptions) {
+  const srcDirectory = path.join(cwd, "src/");
+  if (!fs.existsSync(srcDirectory)) {
+    throw new MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
+  }
+  if (!fs.existsSync(path.join(cwd, "src/index.ts"))
+    && !fs.existsSync(path.join(cwd, "src/index.tsx"))
+  ) {
+    throw new MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
+  }
+}
+
 export async function afterJob({out, reporter}: BuilderOptions) {
   reporter.info('Linting with standard-pkg...');
   const linter = new Lint(out);

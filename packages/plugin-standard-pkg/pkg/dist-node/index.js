@@ -5,6 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var path = _interopDefault(require('path'));
+var fs = _interopDefault(require('fs'));
+var types = require('@pika/types');
 var standardPkg = require('standard-pkg');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -43,7 +45,28 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function afterJob(_x) {
+function beforeJob(_x) {
+  return _beforeJob.apply(this, arguments);
+}
+
+function _beforeJob() {
+  _beforeJob = _asyncToGenerator(function* ({
+    cwd
+  }) {
+    const srcDirectory = path.join(cwd, "src/");
+
+    if (!fs.existsSync(srcDirectory)) {
+      throw new types.MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
+    }
+
+    if (!fs.existsSync(path.join(cwd, "src/index.js")) && !fs.existsSync(path.join(cwd, "src/index.ts")) && !fs.existsSync(path.join(cwd, "src/index.jsx")) && !fs.existsSync(path.join(cwd, "src/index.tsx"))) {
+      throw new types.MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
+    }
+  });
+  return _beforeJob.apply(this, arguments);
+}
+
+function afterJob(_x2) {
   return _afterJob.apply(this, arguments);
 }
 
@@ -64,7 +87,7 @@ function manifest(newManifest) {
   newManifest.esnext = newManifest.esnext || 'dist-src/index.js';
   return newManifest;
 }
-function build(_x2) {
+function build(_x3) {
   return _build.apply(this, arguments);
 }
 
@@ -83,6 +106,7 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
+exports.beforeJob = beforeJob;
 exports.afterJob = afterJob;
 exports.manifest = manifest;
 exports.build = build;
