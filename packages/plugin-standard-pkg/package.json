@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-standard-pkg",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "description": "A @pika/pack plugin: Builds your package source as standard, ES2018 JavaScript.",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",

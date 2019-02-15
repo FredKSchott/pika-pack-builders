@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-build-deno",
   "description": "A @pika/pack plugin: Adds a TypeScript distribution to your package, built to run on Deno.",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
