@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import esprima from 'esprima';
 import {MessageError} from '@pika/types';
 const BIN_FILENAME = "dist-node/index.bin.js";
 
@@ -19,6 +20,35 @@ export async function beforeJob({out}) {
   const nodeEntrypoint = path.join(out, "dist-node/index.js");
   if (!fs.existsSync(nodeEntrypoint)) {
     throw new MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
+  }
+
+  // Check index.js for valid exports
+  const possibleExports = ['run', 'cli'];
+  const program = fs.readFileSync(nodeEntrypoint, { encoding: 'utf-8' })
+  const parsed = esprima.parse(program);
+  const candidates = parsed.body.filter((stmt) => {
+    // Exports are defined as an ExpressionStatement that are a kind of assignment
+    // in which the left-hand object is exports and the right hand type is an Identifier
+    if(
+      stmt.type === "ExpressionStatement" &&
+      stmt.expression.type === "AssignmentExpression" &&
+      stmt.expression.left.object.name === "exports" &&
+      stmt.expression.right.type === 'Identifier'
+    ) {
+      // And the left-hand property name is either a named export of "run" or "cli"
+      // or the left-hand property value is default
+      if(
+        possibleExports.indexOf(stmt.expression.left.property.name) > -1 ||
+        stmt.expression.left.property.value === 'default'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  if (candidates.length === 0) {
+    throw new MessageError('"dist-node/index.js" must have an export of "run", "cli", or a default export, but it does not.');
   }
 }
 
