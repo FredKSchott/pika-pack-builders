@@ -33,6 +33,11 @@ yarn add @pika/plugin-ts-standard-pkg --dev
 For more information about @pika/pack & help getting started, [check out the main project repo](https://github.com/pikapkg/pack).
 
 
+## Options
+
+This plugin runs `tsc` internally, so it supports all [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) options defined in your project-level config file (like `compilerOptions` & `exclude`).
+
+
 ## Result
 
 Unlike other build plugins, this plugin reads directly from your package `src/` directory. Make sure your code exists in a `src/` directory, with an `src/index.ts` file as the package entrypoint.
