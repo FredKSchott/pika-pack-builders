@@ -20,6 +20,10 @@ export async function beforeJob({out}) {
   if (!fs.existsSync(nodeEntrypoint)) {
     throw new MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
   }
+  const testModuleInterface = await import(nodeEntrypoint);
+  if (!(testModuleInterface.run || testModuleInterface.cli || testModuleInterface.default)) {
+    throw new MessageError('"dist-node/index.js" must export a "run", "cli", or "default" function for the CLI to run.');
+  }
 }
 
 export function manifest(newManifest, { options }) {
