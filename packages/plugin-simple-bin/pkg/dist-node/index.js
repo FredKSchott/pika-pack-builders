@@ -73,9 +73,9 @@ function _beforeJob() {
     }
 
     const testModuleInterface = yield Promise.resolve().then(() => require(`${nodeEntrypoint}`));
-    console.log(testModuleInterface);
+
     if (!(testModuleInterface.run || testModuleInterface.cli || testModuleInterface.default)) {
-      throw new types.MessageError('"dist-node/index.js" must export a "run", "cli", or default function for the CLI to run.');
+      throw new types.MessageError('"dist-node/index.js" must export a "run", "cli", or "default" function for the CLI to run.');
     }
   });
   return _beforeJob.apply(this, arguments);
