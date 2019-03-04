@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-simple-bin",
   "description": "A @pika/pack plugin: Adds a simple CLI wrapper.",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "esnext": "dist-src/index.js",
   "main": "dist-node/index.js",
   "pika": true,

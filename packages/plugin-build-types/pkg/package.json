@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-build-types",
   "description": "A @pika/pack plugin:  Adds TypeScript type definitions to your package build.",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
