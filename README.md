@@ -27,6 +27,7 @@ This repo contains the official build plugins for @pika/pack.
  - [`@pika/plugin-wasm-bindings`](https://github.com/pikapkg/builders/tree/master/packages/plugin-wasm-bindings/): Builds a simple JS wrapper for any WASM build.
 
 #### Advanced Builders:
+ - [`@pika/plugin-copy-assets`](https://github.com/pikapkg/builders/tree/master/packages/plugin-copy-assets/): Copies static assets from your root source directory into the built `pkg/` directory.
  - [`@pika/plugin-bundle-node`](https://github.com/pikapkg/builders/tree/master/packages/plugin-bundle-node/): Creates a Node.js build with all code (including dependencies) bundled into a single file. Useful for CLIs.
  - [`@pika/plugin-bundle-web`](https://github.com/pikapkg/builders/tree/master/packages/plugin-bundle-web/): Creates a ESM build with all code (including dependencies) bundled. Useful for unpkg & serving code directly to browsers.
  - [`@pika/plugin-simple-bin`](https://github.com/pikapkg/builders/tree/master/packages/plugin-simple-bin/):  Generates & configures a CLI wrapper to run your library from the command line.
