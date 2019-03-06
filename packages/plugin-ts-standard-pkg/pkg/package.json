@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-ts-standard-pkg",
   "description": "A @pika/pack plugin: Builds your TypeScript package source as standard, ES2018 JavaScript.",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
@@ -18,6 +18,7 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
+    "@pika/types": "^0.3.5",
     "execa": "^1.0.0",
     "standard-pkg": "^0.2.0"
   },
@@ -27,7 +28,6 @@
   "devDependencies": {
     "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
-    "@pika/types": "^0.3.5",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

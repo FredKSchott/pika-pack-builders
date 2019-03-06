@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-build-node",
   "description": "A @pika/pack plugin: Adds a Node.js distribution to your package, built & optimized to run on Node.js.",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
