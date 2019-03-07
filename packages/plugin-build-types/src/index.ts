@@ -38,6 +38,8 @@ export async function build({
         [
           "-d",
           "--emitDeclarationOnly",
+          "--noEmit",
+          "false",
           "--declarationMap",
           "false",
           "--declarationDir",
