@@ -1,10 +1,11 @@
-# @pika/pack - Official Build Plugins
+# @pika/pack - Build Plugins
 
 This repo contains the official build plugins for @pika/pack.
 
 - **Write your own!** @pika/pack can load local builders by relative path directly from your repo.
 - **Publish & Share your own!** These official builders are just the start. Create a PR to add your community plugin to this list.
 
+## Official Plugins
 
 #### Source Builders:
 
@@ -31,5 +32,14 @@ This repo contains the official build plugins for @pika/pack.
  - [`@pika/plugin-bundle-node`](https://github.com/pikapkg/builders/tree/master/packages/plugin-bundle-node/): Creates a Node.js build with all code (including dependencies) bundled into a single file. Useful for CLIs.
  - [`@pika/plugin-bundle-web`](https://github.com/pikapkg/builders/tree/master/packages/plugin-bundle-web/): Creates a ESM build with all code (including dependencies) bundled. Useful for unpkg & serving code directly to browsers.
  - [`@pika/plugin-simple-bin`](https://github.com/pikapkg/builders/tree/master/packages/plugin-simple-bin/):  Generates & configures a CLI wrapper to run your library from the command line.
-- **Write your own!** @pika/pack can load local builders by relative path directly from your repo.
-- **Publish & Share your own!** These official builders are just the start. Create a PR to add your community plugin to this list.
+ 
+ 
+## Community Plugins
+
+
+#### Community Plugins
+
+- [`@ryaninvents/plugin-bundle-zip-node`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-zip-node): Plugin for @pika/pack to zip built files for Node.js.
+- [`@ryaninvents/plugin-bundle-dependencies`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-dependencies): Plugin for @pika/pack to zip your package's dependencies.
+- [`@ryaninvents/plugin-bundle-nextjs`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-nextjs): Plugin for @pika/pack to package a Next.js app for AWS Lambda.
+- [`pika-plugin-minify`](https://www.npmjs.com/package/pika-plugin-minify): A @pika/pack build plugin. Minifies your index.js files in /pkg/* using terser.
