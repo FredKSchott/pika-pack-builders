@@ -36,7 +36,7 @@ This repo contains the official build plugins for @pika/pack.
  
 ## Community Plugins
 
-- [`@ryaninvents/plugin-bundle-zip-node`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-zip-node): Plugin for @pika/pack to zip built files for Node.js.
-- [`@ryaninvents/plugin-bundle-dependencies`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-dependencies): Plugin for @pika/pack to zip your package's dependencies.
-- [`@ryaninvents/plugin-bundle-nextjs`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-nextjs): Plugin for @pika/pack to package a Next.js app for AWS Lambda.
-- [`pika-plugin-minify`](https://www.npmjs.com/package/pika-plugin-minify): A @pika/pack build plugin. Minifies your index.js files in /pkg/* using terser.
+- [`@ryaninvents/plugin-bundle-zip-node`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-zip-node): zip built files for Node.js.
+- [`@ryaninvents/plugin-bundle-dependencies`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-dependencies): zip your package's dependencies.
+- [`@ryaninvents/plugin-bundle-nextjs`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-nextjs): Package a Next.js app for AWS Lambda.
+- [`pika-plugin-minify`](https://www.npmjs.com/package/pika-plugin-minify): Minifies your index.js files in `/pkg/*` using terser.
