@@ -26,7 +26,7 @@ This repo contains the official build plugins for @pika/pack.
  - [`@pika/plugin-wasm-assemblyscript`](https://github.com/pikapkg/builders/tree/master/packages/plugin-wasm-assemblyscript/): Builds WASM from TypeScript using [AssemblyScript](https://github.com/AssemblyScript/assemblyscript).
  - [`@pika/plugin-wasm-emscripten`](https://github.com/pikapkg/issues/1): Builds WASM from C/C++ using [Emscripten](https://github.com/emscripten-core/emscripten) (Coming Soon).
  - [`@pika/plugin-wasm-bindings`](https://github.com/pikapkg/builders/tree/master/packages/plugin-wasm-bindings/): Builds a simple JS wrapper for any WASM build.
-  - [`@pika/plugin-source-bucklescript`](https://github.com/pikapkg/builders/tree/master/packages/plugin-source-bucklescript/): Compiles JavaScript/TypeScript to ES2018. Supports personalized, top-level `.babelrc` plugins/config.
+  - [`@pika/plugin-source-bucklescript`](https://github.com/pikapkg/builders/tree/master/packages/plugin-source-bucklescript/): Builds ES2018 JavaScript from ReasonML or OCaml via BuckleScript.
 
 #### Advanced Builders:
  - [`@pika/plugin-bundle-node`](https://github.com/pikapkg/builders/tree/master/packages/plugin-bundle-node/): Creates a Node.js build with all code (including dependencies) bundled into a single file. Useful for CLIs.
