@@ -35,11 +35,11 @@ export async function build({cwd, out, options}: BuilderOptions): Promise<void> 
     ignore: (options.exclude || []).map(g => path.join('src', g)),
   });
   for (const fileAbs of files) {
-    if (path.extname(fileAbs) !== 'ts' && path.extname(fileAbs) !== 'tsx') {
+    if (path.extname(fileAbs) !== '.ts' && path.extname(fileAbs) !== '.tsx') {
       continue;
     }
     const fileRel = path.relative(cwd, fileAbs);
-    const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
+    const writeToTypeScript = path.resolve(out, fileRel).replace(`${path.sep}src${path.sep}`, `${path.sep}dist-deno${path.sep}`);
     mkdirp.sync(path.dirname(writeToTypeScript));
     fs.copyFileSync(fileAbs, writeToTypeScript);
   }
