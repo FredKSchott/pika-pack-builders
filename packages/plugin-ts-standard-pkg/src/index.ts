@@ -38,6 +38,18 @@ function formatTscParserErrors(errors: tsc.Diagnostic[]) {
   return parsedConfig.options;
 }
 
+function getTsConfigPath(options: BuilderOptions['options'], cwd: string) {
+  if (!options || !options.tsconfig) {
+    return path.join(cwd, "tsconfig.json");
+  }
+  const tsConfigPath = path.join(cwd, options.tsconfig);
+  if (!fs.existsSync(tsConfigPath)) {
+    throw new MessageError(`"tsconfig" is set, but not found. Make sure "${path.resolve(tsConfigPath)}" is exists.`);
+  }
+
+  return tsConfigPath
+}
+
 
 export async function beforeBuild({cwd, reporter}: BuilderOptions) {
   const tscBin = path.join(cwd, "node_modules/.bin/tsc");
@@ -83,7 +95,7 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, reporter}: BuilderOptions): Promise<void> {
+export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
   const tscBin = path.join(cwd, "node_modules/.bin/tsc");
     await execa(
       tscBin,
@@ -93,6 +105,8 @@ export async function build({cwd, out, reporter}: BuilderOptions): Promise<void>
         "-d",
         "--declarationDir",
         path.join(out, "dist-types/"),
+        "--project",
+        getTsConfigPath(options, cwd),
         "--declarationMap",
         "false",
         "--target",
