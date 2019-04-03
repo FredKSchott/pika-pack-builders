@@ -4,22 +4,19 @@ import mkdirp from "mkdirp";
 import execa from "execa";
 import { BuilderOptions, MessageError } from "@pika/types";
 
+function getTsConfigPath(options, cwd) {
+  return path.resolve(cwd, options.tsconfig || "tsconfig.json");
+}
+
 export function manifest(manifest) {
   manifest.types = manifest.types || "dist-types/index.d.ts";
 }
 
-function getTsConfigPath(options, cwd) {
-    if (!options || !options.tsconfig) {
-        return path.join(cwd, "tsconfig.json");
-    }
-
-    const tsConfigPath = path.join(cwd, options.tsconfig);
-
-    if (!fs.existsSync(tsConfigPath)) {
-        throw new MessageError(`"tsconfig" is set, but not found. Make sure "${path.resolve(tsConfigPath)}" is exists.`);
-    }
-
-    return tsConfigPath;
+export async function beforeBuild({options, cwd}: BuilderOptions) {
+  const tsConfigPath = getTsConfigPath(options, cwd);
+  if (options.tsconfig && !fs.existsSync(tsConfigPath)) {
+      throw new MessageError(`"${tsConfigPath}" file does not exist.`);
+  }
 }
 
 export async function build({
@@ -45,7 +42,6 @@ export async function build({
     }
 
     const tsConfigPath = getTsConfigPath(options, cwd);
-
     if (
       fs.existsSync(tscBin) &&
       fs.existsSync(tsConfigPath)
