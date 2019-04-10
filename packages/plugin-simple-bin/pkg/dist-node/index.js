@@ -126,9 +126,13 @@ let cli;
 try {
   cli = require('./index.bundled.js');
 } catch (err) {
-  // We don't have/need this on legacy builds and dev builds
-  // If an error happens here, throw it, that means no Node.js distribution exists at all.
-  cli = require('../');
+  if (err && err.code === 'MODULE_NOT_FOUND') {
+    // We don't have/need this on legacy builds and dev builds
+    // If an error happens here, throw it, that means no Node.js distribution exists at all.
+    cli = require('../');
+  } else {
+    throw err;
+  }
 }
 
 if (cli.autoRun) {
