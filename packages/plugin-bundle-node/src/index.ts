@@ -53,7 +53,7 @@ export async function build({out, isFull, reporter}: BuilderOptions): Promise<vo
         ],
       }),
       rollupNodeResolve({
-        module: false,
+        mainFields: ['main'],
         preferBuiltins: false,
       }),
       rollupCommonJs({

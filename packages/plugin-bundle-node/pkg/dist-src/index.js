@@ -50,7 +50,7 @@ export async function build({ out, isFull, reporter }) {
                 ],
             }),
             rollupNodeResolve({
-                module: false,
+                mainFields: ['main'],
                 preferBuiltins: false,
             }),
             rollupCommonJs({
