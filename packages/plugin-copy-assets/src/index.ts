@@ -3,7 +3,10 @@ import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
 
-export function manifest(manifest) {}
+export function manifest(manifest, {options}: BuilderOptions) {
+  const files = options.files || ['assets/'];
+  manifest.files = (manifest.files || []).concat(files);
+}
 
 export async function beforeJob({cwd, options}: BuilderOptions) {
   const files = options.files || ['assets/'];
