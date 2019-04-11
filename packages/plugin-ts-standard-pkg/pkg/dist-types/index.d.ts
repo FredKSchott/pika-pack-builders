@@ -3,4 +3,4 @@ export declare function beforeBuild({ cwd, reporter }: BuilderOptions): Promise<
 export declare function beforeJob({ cwd }: BuilderOptions): Promise<void>;
 export declare function afterJob({ out, reporter }: BuilderOptions): Promise<void>;
 export declare function manifest(newManifest: any): any;
-export declare function build({ cwd, out, reporter }: BuilderOptions): Promise<void>;
+export declare function build({ cwd, out, options, reporter }: BuilderOptions): Promise<void>;

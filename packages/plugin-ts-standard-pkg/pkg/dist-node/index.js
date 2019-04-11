@@ -83,6 +83,20 @@ function readCompilerOptions(configPath) {
   return parsedConfig.options;
 }
 
+function getTsConfigPath(options, cwd) {
+  if (!options || !options.tsconfig) {
+    return path.join(cwd, "tsconfig.json");
+  }
+
+  const tsConfigPath = path.join(cwd, options.tsconfig);
+
+  if (!fs.existsSync(tsConfigPath)) {
+    throw new types.MessageError(`"tsconfig" is set, but not found. Make sure "${path.resolve(tsConfigPath)}" is exists.`);
+  }
+
+  return tsConfigPath;
+}
+
 function beforeBuild(_x) {
   return _beforeBuild.apply(this, arguments);
 }
@@ -168,10 +182,11 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
+    options,
     reporter
   }) {
     const tscBin = path.join(cwd, "node_modules/.bin/tsc");
-    yield execa(tscBin, ["--outDir", path.join(out, "dist-src/"), "-d", "--declarationDir", path.join(out, "dist-types/"), "--declarationMap", "false", "--target", "es2018", "--module", "esnext"], {
+    yield execa(tscBin, ["--outDir", path.join(out, "dist-src/"), "-d", "--declarationDir", path.join(out, "dist-types/"), "--project", getTsConfigPath(options, cwd), "--declarationMap", "false", "--target", "es2018", "--module", "esnext"], {
       cwd
     });
     reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');

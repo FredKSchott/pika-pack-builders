@@ -37,6 +37,15 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 This plugin runs `tsc` internally, so it supports all [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) options defined in your project-level config file (like `compilerOptions` & `exclude`).
 
+You can set your path to `tsconfig.json` in options:
+
+```json
+"@pika/pack": {
+  "pipeline": [
+    ["@pika/plugin-ts-standard-pkg", { "tsconfig": "./tsconfig.build.json" }]
+  ]
+}
+```
 
 ## Result
 

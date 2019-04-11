@@ -34,6 +34,16 @@ function readCompilerOptions(configPath) {
     }
     return parsedConfig.options;
 }
+function getTsConfigPath(options, cwd) {
+    if (!options || !options.tsconfig) {
+        return path.join(cwd, "tsconfig.json");
+    }
+    const tsConfigPath = path.join(cwd, options.tsconfig);
+    if (!fs.existsSync(tsConfigPath)) {
+        throw new MessageError(`"tsconfig" is set, but not found. Make sure "${path.resolve(tsConfigPath)}" is exists.`);
+    }
+    return tsConfigPath;
+}
 export async function beforeBuild({ cwd, reporter }) {
     const tscBin = path.join(cwd, "node_modules/.bin/tsc");
     if (!fs.existsSync(tscBin)) {
@@ -75,7 +85,7 @@ export function manifest(newManifest) {
     newManifest.types = newManifest.types || 'dist-types/index.d.ts';
     return newManifest;
 }
-export async function build({ cwd, out, reporter }) {
+export async function build({ cwd, out, options, reporter }) {
     const tscBin = path.join(cwd, "node_modules/.bin/tsc");
     await execa(tscBin, [
         "--outDir",
@@ -83,6 +93,8 @@ export async function build({ cwd, out, reporter }) {
         "-d",
         "--declarationDir",
         path.join(out, "dist-types/"),
+        "--project",
+        getTsConfigPath(options, cwd),
         "--declarationMap",
         "false",
         "--target",
