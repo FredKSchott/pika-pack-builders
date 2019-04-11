@@ -147,5 +147,5 @@ run(process.argv).catch(function (error) {
 
 exports.beforeBuild = beforeBuild;
 exports.beforeJob = beforeJob;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;

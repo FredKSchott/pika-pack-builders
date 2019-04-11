@@ -32,7 +32,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
   // TODO: KEEP FIXING THIS,
   const result = await rollup({
     input: path.join(out, 'dist-src/index.js'),
-    external: builtinModules,
+    external: builtinModules as string[],
     plugins: [
       rollupBabel({
         babelrc: false,

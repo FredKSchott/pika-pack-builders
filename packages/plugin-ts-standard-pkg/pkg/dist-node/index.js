@@ -186,8 +186,8 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
+exports.afterJob = afterJob;
 exports.beforeBuild = beforeBuild;
 exports.beforeJob = beforeJob;
-exports.afterJob = afterJob;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;

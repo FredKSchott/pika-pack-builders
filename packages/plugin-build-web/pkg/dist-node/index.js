@@ -119,5 +119,5 @@ function _build() {
 }
 
 exports.beforeJob = beforeJob;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;

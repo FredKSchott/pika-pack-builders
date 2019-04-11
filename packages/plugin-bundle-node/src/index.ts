@@ -31,7 +31,7 @@ export async function build({out, isFull, reporter}: BuilderOptions): Promise<vo
   const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
   const result = await rollup({
     input: path.join(out, 'dist-src/index.js'),
-    external: builtinModules,
+    external: builtinModules as string[],
     plugins: [
       rollupBabel({
         babelrc: false,

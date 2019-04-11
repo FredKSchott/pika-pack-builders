@@ -84,6 +84,6 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.validate = validate;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;
+exports.validate = validate;

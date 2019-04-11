@@ -142,5 +142,5 @@ function _build() {
 }
 
 exports.beforeBuild = beforeBuild;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;

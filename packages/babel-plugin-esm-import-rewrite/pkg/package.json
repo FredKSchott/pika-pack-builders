@@ -11,10 +11,9 @@
     "assets/",
     "bin/"
   ],
-  "dependencies": {
-    "@pika/pack": "^0.3.6"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@pika/pack": "^0.3.6",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",

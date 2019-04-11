@@ -124,6 +124,6 @@ function _build() {
   return _build.apply(this, arguments);
 }
 
-exports.manifest = manifest;
 exports.beforeJob = beforeJob;
 exports.build = build;
+exports.manifest = manifest;
