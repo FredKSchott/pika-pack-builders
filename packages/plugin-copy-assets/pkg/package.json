@@ -18,10 +18,10 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "copy-concurrently": "^1.0.5"
   },
   "devDependencies": {
-    "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",

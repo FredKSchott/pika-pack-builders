@@ -22,9 +22,10 @@
     ]
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika-pack build"
   },
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "@pika/types": "^0.3.5",
     "execa": "^1.0.0",
     "mkdirp": "^0.5.1",

@@ -84,17 +84,7 @@ function readCompilerOptions(configPath) {
 }
 
 function getTsConfigPath(options, cwd) {
-  if (!options || !options.tsconfig) {
-    return path.join(cwd, "tsconfig.json");
-  }
-
-  const tsConfigPath = path.join(cwd, options.tsconfig);
-
-  if (!fs.existsSync(tsConfigPath)) {
-    throw new types.MessageError(`"tsconfig" is set, but not found. Make sure "${path.resolve(tsConfigPath)}" is exists.`);
-  }
-
-  return tsConfigPath;
+  return path.resolve(cwd, options.tsconfig || "tsconfig.json");
 }
 
 function beforeBuild(_x) {
@@ -104,6 +94,7 @@ function beforeBuild(_x) {
 function _beforeBuild() {
   _beforeBuild = _asyncToGenerator(function* ({
     cwd,
+    options,
     reporter
   }) {
     const tscBin = path.join(cwd, "node_modules/.bin/tsc");
@@ -111,12 +102,12 @@ function _beforeBuild() {
     if (!fs.existsSync(tscBin)) {
       throw new types.MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
     }
-    const tsConfigLoc = path.join(cwd, "tsconfig.json");
+    const tsConfigPath = getTsConfigPath(options, cwd);
 
-    if (!fs.existsSync(tsConfigLoc)) {
+    if (!fs.existsSync(tsConfigPath)) {
       throw new types.MessageError('"tsconfig.json" manifest not found.');
     }
-    const tsConfig = readCompilerOptions(tsConfigLoc);
+    const tsConfig = readCompilerOptions(tsConfigPath);
     const target = tsConfig.target,
           mod = tsConfig.module;
 

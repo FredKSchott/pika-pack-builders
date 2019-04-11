@@ -2,10 +2,20 @@ import path from "path";
 import fs from "fs";
 import mkdirp from "mkdirp";
 import execa from "execa";
+import { MessageError } from "@pika/types";
+function getTsConfigPath(options, cwd) {
+    return path.resolve(cwd, options.tsconfig || "tsconfig.json");
+}
 export function manifest(manifest) {
     manifest.types = manifest.types || "dist-types/index.d.ts";
 }
-export async function build({ cwd, out, reporter, manifest }) {
+export async function beforeBuild({ options, cwd }) {
+    const tsConfigPath = getTsConfigPath(options, cwd);
+    if (options.tsconfig && !fs.existsSync(tsConfigPath)) {
+        throw new MessageError(`"${tsConfigPath}" file does not exist.`);
+    }
+}
+export async function build({ cwd, out, options, reporter }) {
     await (async () => {
         const tscBin = path.join(cwd, "node_modules/.bin/tsc");
         const writeToTypings = path.join(out, "dist-types/index.d.ts");
@@ -20,14 +30,17 @@ export async function build({ cwd, out, reporter, manifest }) {
             fs.copyFileSync(path.join(cwd, "src", "index.d.ts"), writeToTypings);
             return;
         }
+        const tsConfigPath = getTsConfigPath(options, cwd);
         if (fs.existsSync(tscBin) &&
-            fs.existsSync(path.join(cwd, "tsconfig.json"))) {
+            fs.existsSync(tsConfigPath)) {
             await execa(tscBin, [
                 "-d",
                 "--emitDeclarationOnly",
                 "--declarationMap",
                 "false",
                 "--declarationDir",
+                "--project",
+                tsConfigPath,
                 path.join(out, "dist-types/")
             ], { cwd });
             return;

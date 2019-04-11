@@ -22,10 +22,11 @@
     ]
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika-pack build"
   },
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "@pika/types": "^0.3.5"
   },
   "devDependencies": {

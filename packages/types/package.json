@@ -15,6 +15,10 @@
   "main": "dist-node/index.js",
   "types": "dist-types/index.d.ts",
   "devDependencies": {
+    "@pika/pack": "^0.3.6",
     "@types/node": "^10.12.18"
+  },
+  "dependencies": {
+    "@pika/pack": "^0.3.6"
   }
 }

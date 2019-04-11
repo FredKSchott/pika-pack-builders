@@ -22,12 +22,13 @@
     ]
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika-pack build"
   },
   "peerDependencies": {
     "bs-platform": "^4.0.0"
   },
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "@pika/types": "^0.3.5",
     "rollup": "^1.1.0",
     "rollup-plugin-bucklescript": "^0.7.0"

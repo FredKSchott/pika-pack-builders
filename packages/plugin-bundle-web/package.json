@@ -22,9 +22,10 @@
     ]
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika-pack build"
   },
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "@pika/types": "^0.3.5",
     "rollup": "^1.1.0",
     "rollup-plugin-commonjs": "^9.2.0",

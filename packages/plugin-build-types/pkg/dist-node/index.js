@@ -8,6 +8,7 @@ var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var mkdirp = _interopDefault(require('mkdirp'));
 var execa = _interopDefault(require('execa'));
+var types = require('@pika/types');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -45,10 +46,32 @@ function _asyncToGenerator(fn) {
   };
 }
 
+function getTsConfigPath(options, cwd) {
+  return path.resolve(cwd, options.tsconfig || "tsconfig.json");
+}
+
 function manifest(manifest) {
   manifest.types = manifest.types || "dist-types/index.d.ts";
 }
-function build(_x) {
+function beforeBuild(_x) {
+  return _beforeBuild.apply(this, arguments);
+}
+
+function _beforeBuild() {
+  _beforeBuild = _asyncToGenerator(function* ({
+    options,
+    cwd
+  }) {
+    const tsConfigPath = getTsConfigPath(options, cwd);
+
+    if (options.tsconfig && !fs.existsSync(tsConfigPath)) {
+      throw new types.MessageError(`"${tsConfigPath}" file does not exist.`);
+    }
+  });
+  return _beforeBuild.apply(this, arguments);
+}
+
+function build(_x2) {
   return _build.apply(this, arguments);
 }
 
@@ -56,8 +79,8 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     cwd,
     out,
-    reporter,
-    manifest
+    options,
+    reporter
   }) {
     yield _asyncToGenerator(function* () {
       const tscBin = path.join(cwd, "node_modules/.bin/tsc");
@@ -76,8 +99,10 @@ function _build() {
         return;
       }
 
-      if (fs.existsSync(tscBin) && fs.existsSync(path.join(cwd, "tsconfig.json"))) {
-        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", path.join(out, "dist-types/")], {
+      const tsConfigPath = getTsConfigPath(options, cwd);
+
+      if (fs.existsSync(tscBin) && fs.existsSync(tsConfigPath)) {
+        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", "--project", tsConfigPath, path.join(out, "dist-types/")], {
           cwd
         });
         return;
@@ -122,4 +147,5 @@ function _build() {
 }
 
 exports.manifest = manifest;
+exports.beforeBuild = beforeBuild;
 exports.build = build;

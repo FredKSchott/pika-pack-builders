@@ -18,13 +18,13 @@ yarn add @pika/plugin-ts-standard-pkg --dev
 
 ## Usage
 
-```json
+```js
 {
   "name": "example-package-json",
   "version": "1.0.0",
   "@pika/pack": {
     "pipeline": [
-      ["@pika/plugin-ts-standard-pkg"]
+      ["@pika/plugin-ts-standard-pkg", { /* options: see below */ }]
     ]
   }
 }
@@ -37,15 +37,8 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 This plugin runs `tsc` internally, so it supports all [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) options defined in your project-level config file (like `compilerOptions` & `exclude`).
 
-You can set your path to `tsconfig.json` in options:
+- `"tsconfig"`: Optional, the relative path to the `tsconfig.json` config file to use. Defaults to the top-level project TypeScript config file, if one exists.
 
-```json
-"@pika/pack": {
-  "pipeline": [
-    ["@pika/plugin-ts-standard-pkg", { "tsconfig": "./tsconfig.build.json" }]
-  ]
-}
-```
 
 ## Result
 

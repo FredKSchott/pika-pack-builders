@@ -35,27 +35,20 @@ function readCompilerOptions(configPath) {
     return parsedConfig.options;
 }
 function getTsConfigPath(options, cwd) {
-    if (!options || !options.tsconfig) {
-        return path.join(cwd, "tsconfig.json");
-    }
-    const tsConfigPath = path.join(cwd, options.tsconfig);
-    if (!fs.existsSync(tsConfigPath)) {
-        throw new MessageError(`"tsconfig" is set, but not found. Make sure "${path.resolve(tsConfigPath)}" is exists.`);
-    }
-    return tsConfigPath;
+    return path.resolve(cwd, options.tsconfig || "tsconfig.json");
 }
-export async function beforeBuild({ cwd, reporter }) {
+export async function beforeBuild({ cwd, options, reporter }) {
     const tscBin = path.join(cwd, "node_modules/.bin/tsc");
     if (!fs.existsSync(tscBin)) {
         throw new MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
     }
     ;
-    const tsConfigLoc = path.join(cwd, "tsconfig.json");
-    if (!fs.existsSync(tsConfigLoc)) {
+    const tsConfigPath = getTsConfigPath(options, cwd);
+    if (!fs.existsSync(tsConfigPath)) {
         throw new MessageError('"tsconfig.json" manifest not found.');
     }
     ;
-    const tsConfig = readCompilerOptions(tsConfigLoc);
+    const tsConfig = readCompilerOptions(tsConfigPath);
     const { target, module: mod } = tsConfig;
     if (target !== tsc.ScriptTarget.ES2018) {
         reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2018", but found "${target}". You may encounter problems building.`);

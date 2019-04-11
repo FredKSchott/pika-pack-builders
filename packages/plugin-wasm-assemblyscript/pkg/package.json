@@ -17,10 +17,10 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "assemblyscript": "github:AssemblyScript/assemblyscript"
   },
   "devDependencies": {
-    "@pika/pack": "^0.3.0",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18"

@@ -22,9 +22,10 @@
     ]
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika-pack build"
   },
   "dependencies": {
+    "@pika/pack": "^0.3.6",
     "assemblyscript": "github:AssemblyScript/assemblyscript"
   },
   "devDependencies": {
