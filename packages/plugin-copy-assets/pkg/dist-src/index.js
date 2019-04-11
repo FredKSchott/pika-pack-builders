@@ -2,7 +2,10 @@ import copy from 'copy-concurrently';
 import path from 'path';
 import fs from 'fs';
 import { MessageError } from '@pika/types';
-export function manifest(manifest) { }
+export function manifest(manifest, { options }) {
+    const files = options.files || ['assets/'];
+    manifest.files = (manifest.files || []).concat(files);
+}
 export async function beforeJob({ cwd, options }) {
     const files = options.files || ['assets/'];
     for (const fileRel of files) {

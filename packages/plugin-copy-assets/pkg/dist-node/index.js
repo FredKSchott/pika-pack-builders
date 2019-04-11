@@ -45,7 +45,12 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function manifest(manifest) {}
+function manifest(manifest, {
+  options
+}) {
+  const files = options.files || ['assets/'];
+  manifest.files = (manifest.files || []).concat(files);
+}
 function beforeJob(_x) {
   return _beforeJob.apply(this, arguments);
 }
