@@ -11,6 +11,7 @@ import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import { rollup } from 'rollup';
+const DEFAULT_MIN_NODE_VERSION = '6';
 export async function beforeJob({ out }) {
     const srcDirectory = path.join(out, "dist-src/");
     if (!fs.existsSync(srcDirectory)) {
@@ -21,7 +22,7 @@ export async function beforeJob({ out }) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
 }
-export async function build({ out, isFull, reporter }) {
+export async function build({ out, isFull, reporter, options }) {
     if (!isFull) {
         return;
     }
@@ -38,7 +39,7 @@ export async function build({ out, isFull, reporter }) {
                         babelPresetEnv,
                         {
                             modules: false,
-                            targets: { node: '6' },
+                            targets: { node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION },
                             spec: true,
                         },
                     ],
@@ -50,7 +51,7 @@ export async function build({ out, isFull, reporter }) {
                 ],
             }),
             rollupNodeResolve({
-                module: false,
+                mainFields: ['main'],
                 preferBuiltins: false,
             }),
             rollupCommonJs({

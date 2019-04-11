@@ -54,6 +54,7 @@ function _asyncToGenerator(fn) {
   };
 }
 
+const DEFAULT_MIN_NODE_VERSION = '6';
 function beforeJob(_x) {
   return _beforeJob.apply(this, arguments);
 }
@@ -85,7 +86,8 @@ function _build() {
   _build = _asyncToGenerator(function* ({
     out,
     isFull,
-    reporter
+    reporter,
+    options
   }) {
     if (!isFull) {
       return;
@@ -101,13 +103,13 @@ function _build() {
         presets: [[babelPresetEnv, {
           modules: false,
           targets: {
-            node: '6'
+            node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION
           },
           spec: true
         }]],
         plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
       }), rollupNodeResolve({
-        module: false,
+        mainFields: ['main'],
         preferBuiltins: false
       }), rollupCommonJs({
         include: 'node_modules/**',
