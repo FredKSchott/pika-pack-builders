@@ -109,7 +109,7 @@ function _build() {
         }]],
         plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
       }), rollupNodeResolve({
-        module: false,
+        mainFields: ['main'],
         preferBuiltins: false
       }), rollupCommonJs({
         include: 'node_modules/**',
