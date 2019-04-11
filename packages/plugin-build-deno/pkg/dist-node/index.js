@@ -114,12 +114,12 @@ function _build() {
       for (var _iterator = files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         const fileAbs = _step.value;
 
-        if (path.extname(fileAbs) !== 'ts' && path.extname(fileAbs) !== 'tsx') {
+        if (path.extname(fileAbs) !== '.ts' && path.extname(fileAbs) !== '.tsx') {
           continue;
         }
 
         const fileRel = path.relative(cwd, fileAbs);
-        const writeToTypeScript = path.resolve(out, fileRel).replace('/src/', '/dist-deno/');
+        const writeToTypeScript = path.resolve(out, fileRel).replace(`${path.sep}src${path.sep}`, `${path.sep}dist-deno${path.sep}`);
         mkdirp.sync(path.dirname(writeToTypeScript));
         fs.copyFileSync(fileAbs, writeToTypeScript);
       }
