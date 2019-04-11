@@ -12,6 +12,8 @@ import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import {rollup} from 'rollup';
 
+const DEFAULT_MIN_NODE_VERSION = '6';
+
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, "dist-src/");
   if (!fs.existsSync(srcDirectory)) {
@@ -23,7 +25,7 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export async function build({out, isFull, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, isFull, reporter, options}: BuilderOptions): Promise<void> {
   if (!isFull) {
     return;
   }
@@ -41,7 +43,7 @@ export async function build({out, isFull, reporter}: BuilderOptions): Promise<vo
             babelPresetEnv,
             {
               modules: false,
-              targets: {node: '6'},
+              targets: {node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION},
               spec: true,
             },
           ],
