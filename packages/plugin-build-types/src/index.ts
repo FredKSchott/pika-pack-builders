@@ -53,9 +53,9 @@ export async function build({
           "--emitDeclarationOnly",
           "--declarationMap",
           "false",
-          "--declarationDir",
           "--project",
           tsConfigPath,
+          "--declarationDir",
           path.join(out, "dist-types/")
         ],
         { cwd }
