@@ -102,7 +102,7 @@ function _build() {
       const tsConfigPath = getTsConfigPath(options, cwd);
 
       if (fs.existsSync(tscBin) && fs.existsSync(tsConfigPath)) {
-        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--declarationDir", "--project", tsConfigPath, path.join(out, "dist-types/")], {
+        yield execa(tscBin, ["-d", "--emitDeclarationOnly", "--declarationMap", "false", "--project", tsConfigPath, "--declarationDir", path.join(out, "dist-types/")], {
           cwd
         });
         return;
