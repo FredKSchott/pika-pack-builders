@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-source-bucklescript",
   "description": "A @pika/pack plugin: ",
-  "version": "0.3.14",
+  "version": "0.3.16",
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
