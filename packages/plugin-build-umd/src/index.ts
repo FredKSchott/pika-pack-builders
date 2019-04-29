@@ -11,6 +11,11 @@ export async function beforeBuild({options}: BuilderOptions) {
   if (!options.name) {
     throw new MessageError('A "name" option is required for UMD builds.');
   }
+  if (options.externals && options.externals.constructor.name !== 'Object') {
+    throw new MessageError(
+      'The "externals" option for UMD builds must be an object.'
+    );
+  }
 }
 
 export async function beforeJob({out}: BuilderOptions) {
@@ -33,6 +38,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
 
   const result = await rollup({
     input: path.join(out, 'dist-src/index.js'),
+    external: Object.keys(options.externals || {}),
     plugins: [
       rollupBabel({
         babelrc: false,
@@ -74,6 +80,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
     format: 'umd',
     exports: 'named',
     name: options.name,
+    globals: options.externals
   });
   reporter.created(writeToUmd, 'umd:main');
 }
