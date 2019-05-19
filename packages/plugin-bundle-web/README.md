@@ -16,7 +16,7 @@ yarn add @pika/plugin-bundle-web --dev
 
 ## Usage
 
-```json
+```js
 {
   "name": "example-package-json",
   "version": "1.0.0",
@@ -24,13 +24,17 @@ yarn add @pika/plugin-bundle-web --dev
     "pipeline": [
       ["@pika/plugin-standard-pkg"],
       ["@pika/plugin-build-web"],
-      ["@pika/plugin-bundle-web"]
+      ["@pika/plugin-bundle-web", { /* options (optional) */ }]
     ]
   }
 }
 ```
 
 For more information about @pika/pack & help getting started, [check out the main project repo](https://github.com/pikapkg/pack).
+
+## Options
+
+- `"browser"` (Default: `false`): If true, this plugin will respect the "browser" field in bundled dependencies over the usual "main" Node-specific entrypoint. This may be required for some dependencies, but may cause problems with others. YMMV.
 
 
 ## Result
