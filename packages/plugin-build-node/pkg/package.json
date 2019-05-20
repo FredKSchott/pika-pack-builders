@@ -2,16 +2,15 @@
   "name": "@pika/plugin-build-node",
   "description": "A @pika/pack plugin: Adds a Node.js distribution to your package, built & optimized to run on Node.js.",
   "version": "0.3.16",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
-  "files": [
-    "dist-*/",
-    "assets/",
-    "bin/"
-  ],
   "homepage": "https://www.pikapkg.com/",
   "repository": {
     "type": "git",

@@ -2,16 +2,15 @@
   "name": "@pika/plugin-ts-standard-pkg",
   "description": "A @pika/pack plugin: Builds your TypeScript package source as standard, ES2018 JavaScript.",
   "version": "0.3.16",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
-  "files": [
-    "dist-*/",
-    "assets/",
-    "bin/"
-  ],
   "homepage": "https://www.pikapkg.com/",
   "repository": {
     "type": "git",

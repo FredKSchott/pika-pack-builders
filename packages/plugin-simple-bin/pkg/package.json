@@ -2,15 +2,14 @@
   "name": "@pika/plugin-simple-bin",
   "description": "A @pika/pack plugin: Adds a simple CLI wrapper.",
   "version": "0.3.16",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
   "esnext": "dist-src/index.js",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
-  "files": [
-    "dist-*/",
-    "assets/",
-    "bin/"
-  ],
   "homepage": "https://www.pikapkg.com/",
   "repository": {
     "type": "git",

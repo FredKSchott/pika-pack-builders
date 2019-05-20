@@ -53,8 +53,8 @@ export async function beforeBuild({cwd, options, reporter}: BuilderOptions) {
   };
   const tsConfig = readCompilerOptions(tsConfigPath);
   const {target, module: mod} = tsConfig;
-  if (target !== tsc.ScriptTarget.ES2018) {
-    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2018", but found "${target}". You may encounter problems building.`);
+  if (target !== tsc.ScriptTarget.ES2019) {
+    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${target}". You may encounter problems building.`);
   }
   if (mod !== tsc.ModuleKind.ESNext) {
     reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
@@ -101,7 +101,7 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
         "--declarationMap",
         "false",
         "--target",
-        "es2018",
+        "es2019",
         "--module",
         "esnext",
       ],

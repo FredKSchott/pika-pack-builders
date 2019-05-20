@@ -2,15 +2,14 @@
   "name": "@pika/plugin-wasm-bindings",
   "description": "A @pika/pack plugin: adds simple JavaScript bindings that work with any WASM file.",
   "version": "0.3.16",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
   "esnext": "dist-src/index.js",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
-  "files": [
-    "dist-*/",
-    "assets/",
-    "bin/"
-  ],
   "homepage": "https://www.pikapkg.com/",
   "repository": {
     "type": "git",

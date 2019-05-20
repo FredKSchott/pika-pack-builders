@@ -86,7 +86,8 @@ function _build() {
     const result = yield rollup.rollup({
       input: readFromWeb,
       plugins: [rollupNodeResolve({
-        preferBuiltins: true
+        preferBuiltins: true,
+        browser: !!options.browser
       }), rollupCommonJs({
         include: 'node_modules/**',
         sourceMap: false,

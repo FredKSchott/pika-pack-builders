@@ -23,6 +23,7 @@ export async function build({ out, options, reporter }) {
         plugins: [
             rollupNodeResolve({
                 preferBuiltins: true,
+                browser: !!options.browser
             }),
             rollupCommonJs({
                 include: 'node_modules/**',

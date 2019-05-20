@@ -42,7 +42,6 @@ export async function build({ out, reporter, options }) {
                                 // Recommended in: https://jamie.build/last-2-versions
                                 browsers: [
                                     ">0.25%",
-                                    "not ie 11",
                                     "not op_mini all"
                                 ],
                             },

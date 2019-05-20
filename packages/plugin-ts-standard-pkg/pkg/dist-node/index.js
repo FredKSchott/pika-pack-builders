@@ -111,8 +111,8 @@ function _beforeBuild() {
     const target = tsConfig.target,
           mod = tsConfig.module;
 
-    if (target !== tsc.ScriptTarget.ES2018) {
-      reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2018", but found "${target}". You may encounter problems building.`);
+    if (target !== tsc.ScriptTarget.ES2019) {
+      reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${target}". You may encounter problems building.`);
     }
 
     if (mod !== tsc.ModuleKind.ESNext) {
@@ -177,7 +177,7 @@ function _build() {
     reporter
   }) {
     const tscBin = path.join(cwd, "node_modules/.bin/tsc");
-    yield execa(tscBin, ["--outDir", path.join(out, "dist-src/"), "-d", "--declarationDir", path.join(out, "dist-types/"), "--project", getTsConfigPath(options, cwd), "--declarationMap", "false", "--target", "es2018", "--module", "esnext"], {
+    yield execa(tscBin, ["--outDir", path.join(out, "dist-src/"), "-d", "--declarationDir", path.join(out, "dist-types/"), "--project", getTsConfigPath(options, cwd), "--declarationMap", "false", "--target", "es2019", "--module", "esnext"], {
       cwd
     });
     reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');

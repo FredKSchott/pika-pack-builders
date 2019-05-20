@@ -2,16 +2,15 @@
   "name": "@pika/plugin-bundle-web",
   "description": "A @pika/pack plugin: Adds a bundled Web distribution to your package, built & optimized to run in most web browsers (and bundlers).",
   "version": "0.3.16",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "pika": true,
   "sideEffects": false,
-  "files": [
-    "dist-*/",
-    "assets/",
-    "bin/"
-  ],
   "homepage": "https://www.pikapkg.com/",
   "repository": {
     "type": "git",
