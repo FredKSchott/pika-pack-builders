@@ -1,0 +1,43 @@
+{
+  "name": "@pika/plugin-build-web-complete",
+  "version": "0.3.16",
+  "description": "A @pika/pack plugin: Adds an ESM distribution to your package for every published ES spec (ES2019, ES2018, etc.)",
+  "main": "pkg/dist-node/index.js",
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
+  },
+  "scripts": {
+    "build": "pika-pack build"
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "~7.4.4",
+    "@pika/types": "^0.3.5",
+    "@types/node": "^10.12.18",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.0"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.3.6",
+    "@pika/plugin-build-node": "^0.3.7",
+    "@pika/plugin-ts-standard-pkg": "^0.3.7",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.0.0"
+  },
+  "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
+}
