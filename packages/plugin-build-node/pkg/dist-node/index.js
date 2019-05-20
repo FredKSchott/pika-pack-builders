@@ -51,7 +51,7 @@ function _asyncToGenerator(fn) {
   };
 }
 
-const DEFAULT_MIN_NODE_VERSION = '6';
+const DEFAULT_MIN_NODE_VERSION = '8';
 function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
