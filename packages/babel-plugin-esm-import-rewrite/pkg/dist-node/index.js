@@ -8,44 +8,6 @@ var nodeFs = _interopDefault(require('fs'));
 var url = _interopDefault(require('url'));
 var nodePath = _interopDefault(require('path'));
 
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
-
 function getLineCol(node) {
   const loc = node.loc.start; //   return chalk.dim(`[${loc.line}:${loc.column}]`);
 
@@ -57,8 +19,7 @@ function validateDynamicImportArguments(path) {
     return new Set([`${getLineCol(path.node)} "\`import()\` only accepts 1 argument, but got ${path.parent.arguments.length}`]);
   }
 
-  const _path$parent$argument = _slicedToArray(path.parent.arguments, 1),
-        argNode = _path$parent$argument[0];
+  const [argNode] = path.parent.arguments;
 
   if (argNode.type !== 'StringLiteral') {
     return new Set([`${getLineCol(path.node)} Pika expects strings as \`import()\` arguments. Treating this as an absolute file path.`]);
@@ -73,8 +34,10 @@ function transform({}) {
     opts,
     file
   }) {
-    const deps = opts.deps,
-          addExtensions = opts.addExtensions;
+    const {
+      deps,
+      addExtensions
+    } = opts;
 
     try {
       url.parse(specifier);
@@ -158,9 +121,7 @@ function transform({}) {
           return;
         }
 
-        const _path$parent$argument = _slicedToArray(path.parent.arguments, 1),
-              importPath = _path$parent$argument[0];
-
+        const [importPath] = path.parent.arguments;
         const rewrittenSpecifier = rewriteImport(importPath.value, {
           opts,
           file

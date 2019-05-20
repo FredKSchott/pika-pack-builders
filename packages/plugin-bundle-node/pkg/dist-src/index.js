@@ -13,11 +13,11 @@ import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import { rollup } from 'rollup';
 const DEFAULT_MIN_NODE_VERSION = '6';
 export async function beforeJob({ out }) {
-    const srcDirectory = path.join(out, "dist-src/");
+    const srcDirectory = path.join(out, 'dist-src/');
     if (!fs.existsSync(srcDirectory)) {
         throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
     }
-    const srcEntrypoint = path.join(out, "dist-src/index.js");
+    const srcEntrypoint = path.join(out, 'dist-src/index.js');
     if (!fs.existsSync(srcEntrypoint)) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
@@ -44,11 +44,7 @@ export async function build({ out, isFull, reporter, options }) {
                         },
                     ],
                 ],
-                plugins: [
-                    babelPluginDynamicImport,
-                    babelPluginDynamicImportSyntax,
-                    babelPluginImportMetaSyntax,
-                ],
+                plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
             }),
             rollupNodeResolve({
                 mainFields: ['main'],

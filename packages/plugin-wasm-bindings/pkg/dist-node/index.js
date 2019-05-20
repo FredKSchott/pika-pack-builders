@@ -8,42 +8,6 @@ var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var mkdirp = _interopDefault(require('mkdirp'));
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 const SRC_WRAPPER = `export function createWASM(deps = {}) {
   const url = new URL("../assets/index.wasm", import.meta.url);
   const input = window.fetch(url);
@@ -88,29 +52,22 @@ function manifest(newManifest) {
   newManifest["types"] = "dist-types/index.js";
   return newManifest;
 }
-function build(_x) {
-  return _build.apply(this, arguments);
-}
-
-function _build() {
-  _build = _asyncToGenerator(function* ({
-    out,
-    reporter
-  }) {
-    mkdirp.sync(path.join(out, "dist-src"));
-    fs.writeFileSync(path.join(out, "dist-src/index.js"), SRC_WRAPPER, "utf8");
-    reporter.created(path.join(out, "dist-src/index.js"), 'esnext');
-    mkdirp.sync(path.join(out, "dist-web"));
-    fs.writeFileSync(path.join(out, "dist-web/index.js"), WEB_WRAPPER, "utf8");
-    reporter.created(path.join(out, "dist-web/index.js"), 'module');
-    mkdirp.sync(path.join(out, "dist-node"));
-    fs.writeFileSync(path.join(out, "dist-node/index.js"), NODE_WRAPPER, "utf8");
-    reporter.created(path.join(out, "dist-node/index.js"), 'main');
-    mkdirp.sync(path.join(out, "dist-types"));
-    fs.writeFileSync(path.join(out, "dist-types/index.d.ts"), TYPE_DEF, "utf8");
-    reporter.created(path.join(out, "dist-types/index.d.ts"), 'types');
-  });
-  return _build.apply(this, arguments);
+async function build({
+  out,
+  reporter
+}) {
+  mkdirp.sync(path.join(out, "dist-src"));
+  fs.writeFileSync(path.join(out, "dist-src/index.js"), SRC_WRAPPER, "utf8");
+  reporter.created(path.join(out, "dist-src/index.js"), 'esnext');
+  mkdirp.sync(path.join(out, "dist-web"));
+  fs.writeFileSync(path.join(out, "dist-web/index.js"), WEB_WRAPPER, "utf8");
+  reporter.created(path.join(out, "dist-web/index.js"), 'module');
+  mkdirp.sync(path.join(out, "dist-node"));
+  fs.writeFileSync(path.join(out, "dist-node/index.js"), NODE_WRAPPER, "utf8");
+  reporter.created(path.join(out, "dist-node/index.js"), 'main');
+  mkdirp.sync(path.join(out, "dist-types"));
+  fs.writeFileSync(path.join(out, "dist-types/index.d.ts"), TYPE_DEF, "utf8");
+  reporter.created(path.join(out, "dist-types/index.d.ts"), 'types');
 }
 
 exports.build = build;

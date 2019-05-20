@@ -11,42 +11,6 @@ var types = require('@pika/types');
 var standardPkg = require('standard-pkg');
 var tsc = require('typescript');
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 function formatTscParserErrors(errors) {
   return errors.map(s => JSON.stringify(s, null, 4)).join('\n');
 }
@@ -84,106 +48,79 @@ function readCompilerOptions(configPath) {
 }
 
 function getTsConfigPath(options, cwd) {
-  return path.resolve(cwd, options.tsconfig || "tsconfig.json");
+  return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
 
-function beforeBuild(_x) {
-  return _beforeBuild.apply(this, arguments);
+async function beforeBuild({
+  cwd,
+  options,
+  reporter
+}) {
+  const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
+
+  if (!fs.existsSync(tscBin)) {
+    throw new types.MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
+  }
+
+  const tsConfigPath = getTsConfigPath(options, cwd);
+
+  if (!fs.existsSync(tsConfigPath)) {
+    throw new types.MessageError('"tsconfig.json" manifest not found.');
+  }
+
+  const tsConfig = readCompilerOptions(tsConfigPath);
+  const {
+    target,
+    module: mod
+  } = tsConfig;
+
+  if (target !== tsc.ScriptTarget.ES2019) {
+    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${target}". You may encounter problems building.`);
+  }
+
+  if (mod !== tsc.ModuleKind.ESNext) {
+    reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
+  }
 }
+async function beforeJob({
+  cwd
+}) {
+  const srcDirectory = path.join(cwd, 'src/');
 
-function _beforeBuild() {
-  _beforeBuild = _asyncToGenerator(function* ({
-    cwd,
-    options,
-    reporter
-  }) {
-    const tscBin = path.join(cwd, "node_modules/.bin/tsc");
+  if (!fs.existsSync(srcDirectory)) {
+    throw new types.MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
+  }
 
-    if (!fs.existsSync(tscBin)) {
-      throw new types.MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
-    }
-    const tsConfigPath = getTsConfigPath(options, cwd);
-
-    if (!fs.existsSync(tsConfigPath)) {
-      throw new types.MessageError('"tsconfig.json" manifest not found.');
-    }
-    const tsConfig = readCompilerOptions(tsConfigPath);
-    const target = tsConfig.target,
-          mod = tsConfig.module;
-
-    if (target !== tsc.ScriptTarget.ES2019) {
-      reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${target}". You may encounter problems building.`);
-    }
-
-    if (mod !== tsc.ModuleKind.ESNext) {
-      reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
-    }
-  });
-  return _beforeBuild.apply(this, arguments);
+  if (!fs.existsSync(path.join(cwd, 'src/index.ts')) && !fs.existsSync(path.join(cwd, 'src/index.tsx'))) {
+    throw new types.MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
+  }
 }
-
-function beforeJob(_x2) {
-  return _beforeJob.apply(this, arguments);
+async function afterJob({
+  out,
+  reporter
+}) {
+  reporter.info('Linting with standard-pkg...');
+  const linter = new standardPkg.Lint(out);
+  await linter.init();
+  linter.summary();
 }
-
-function _beforeJob() {
-  _beforeJob = _asyncToGenerator(function* ({
-    cwd
-  }) {
-    const srcDirectory = path.join(cwd, "src/");
-
-    if (!fs.existsSync(srcDirectory)) {
-      throw new types.MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
-    }
-
-    if (!fs.existsSync(path.join(cwd, "src/index.ts")) && !fs.existsSync(path.join(cwd, "src/index.tsx"))) {
-      throw new types.MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
-    }
-  });
-  return _beforeJob.apply(this, arguments);
-}
-
-function afterJob(_x3) {
-  return _afterJob.apply(this, arguments);
-}
-
-function _afterJob() {
-  _afterJob = _asyncToGenerator(function* ({
-    out,
-    reporter
-  }) {
-    reporter.info('Linting with standard-pkg...');
-    const linter = new standardPkg.Lint(out);
-    yield linter.init();
-    linter.summary();
-  });
-  return _afterJob.apply(this, arguments);
-}
-
 function manifest(newManifest) {
   newManifest.source = newManifest.source || 'dist-src/index.js';
   newManifest.types = newManifest.types || 'dist-types/index.d.ts';
   return newManifest;
 }
-function build(_x4) {
-  return _build.apply(this, arguments);
-}
-
-function _build() {
-  _build = _asyncToGenerator(function* ({
-    cwd,
-    out,
-    options,
-    reporter
-  }) {
-    const tscBin = path.join(cwd, "node_modules/.bin/tsc");
-    yield execa(tscBin, ["--outDir", path.join(out, "dist-src/"), "-d", "--declarationDir", path.join(out, "dist-types/"), "--project", getTsConfigPath(options, cwd), "--declarationMap", "false", "--target", "es2019", "--module", "esnext"], {
-      cwd
-    });
-    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
-    reporter.created(path.join(out, "dist-types", "index.d.ts"), 'types');
+async function build({
+  cwd,
+  out,
+  options,
+  reporter
+}) {
+  const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
+  await execa(tscBin, ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--declarationMap', 'false', '--target', 'es2019', '--module', 'esnext'], {
+    cwd
   });
-  return _build.apply(this, arguments);
+  reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
+  reporter.created(path.join(out, 'dist-types', 'index.d.ts'), 'types');
 }
 
 exports.afterJob = afterJob;

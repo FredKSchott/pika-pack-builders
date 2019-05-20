@@ -35,19 +35,17 @@ function readCompilerOptions(configPath) {
     return parsedConfig.options;
 }
 function getTsConfigPath(options, cwd) {
-    return path.resolve(cwd, options.tsconfig || "tsconfig.json");
+    return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
 export async function beforeBuild({ cwd, options, reporter }) {
-    const tscBin = path.join(cwd, "node_modules/.bin/tsc");
+    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
     if (!fs.existsSync(tscBin)) {
         throw new MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
     }
-    ;
     const tsConfigPath = getTsConfigPath(options, cwd);
     if (!fs.existsSync(tsConfigPath)) {
         throw new MessageError('"tsconfig.json" manifest not found.');
     }
-    ;
     const tsConfig = readCompilerOptions(tsConfigPath);
     const { target, module: mod } = tsConfig;
     if (target !== tsc.ScriptTarget.ES2019) {
@@ -58,12 +56,11 @@ export async function beforeBuild({ cwd, options, reporter }) {
     }
 }
 export async function beforeJob({ cwd }) {
-    const srcDirectory = path.join(cwd, "src/");
+    const srcDirectory = path.join(cwd, 'src/');
     if (!fs.existsSync(srcDirectory)) {
         throw new MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
     }
-    if (!fs.existsSync(path.join(cwd, "src/index.ts"))
-        && !fs.existsSync(path.join(cwd, "src/index.tsx"))) {
+    if (!fs.existsSync(path.join(cwd, 'src/index.ts')) && !fs.existsSync(path.join(cwd, 'src/index.tsx'))) {
         throw new MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
     }
 }
@@ -79,22 +76,22 @@ export function manifest(newManifest) {
     return newManifest;
 }
 export async function build({ cwd, out, options, reporter }) {
-    const tscBin = path.join(cwd, "node_modules/.bin/tsc");
+    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
     await execa(tscBin, [
-        "--outDir",
-        path.join(out, "dist-src/"),
-        "-d",
-        "--declarationDir",
-        path.join(out, "dist-types/"),
-        "--project",
+        '--outDir',
+        path.join(out, 'dist-src/'),
+        '-d',
+        '--declarationDir',
+        path.join(out, 'dist-types/'),
+        '--project',
         getTsConfigPath(options, cwd),
-        "--declarationMap",
-        "false",
-        "--target",
-        "es2019",
-        "--module",
-        "esnext",
+        '--declarationMap',
+        'false',
+        '--target',
+        'es2019',
+        '--module',
+        'esnext',
     ], { cwd });
-    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
-    reporter.created(path.join(out, "dist-types", "index.d.ts"), 'types');
+    reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
+    reporter.created(path.join(out, 'dist-types', 'index.d.ts'), 'types');
 }

@@ -9,7 +9,7 @@
     "nuke": "lerna exec \"rm -f package-lock.json npm-shrinkwrap.json\" && lerna clean --yes && lerna bootstrap && lerna exec --stream -- \"test -f package-lock.json || npm install --package-lock-only\""
   },
   "devDependencies": {
-    "lerna": "^3.14.1",
+    "lerna": "~3.13.4",
     "prettier": "^1.17.1"
   },
   "dependencies": {}

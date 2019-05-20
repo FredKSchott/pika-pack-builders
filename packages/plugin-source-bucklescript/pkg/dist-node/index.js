@@ -9,75 +9,32 @@ var fs = _interopDefault(require('fs'));
 var rollupBuckleScript = _interopDefault(require('rollup-plugin-bucklescript'));
 var rollup = require('rollup');
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 function validate({
   cwd
 }) {
-  return fs.existsSync(path.join(cwd, "src/index.re")) || fs.existsSync(path.join(cwd, "src/index.ml"));
+  return fs.existsSync(path.join(cwd, 'src/index.re')) || fs.existsSync(path.join(cwd, 'src/index.ml'));
 }
 function manifest(newManifest) {
   newManifest.es2015 = newManifest.es2015 || 'dist-src/index.js';
   return newManifest;
 }
-function build(_x) {
-  return _build.apply(this, arguments);
-}
-
-function _build() {
-  _build = _asyncToGenerator(function* ({
-    cwd,
-    out,
-    reporter
-  }) {
-    const writeToSrc = path.join(out, 'dist-src', 'index.js');
-    const isReason = fs.existsSync(path.join(cwd, "src/index.re"));
-    const result = yield rollup.rollup({
-      input: isReason ? 'src/index.re' : 'src/index.ml',
-      plugins: [rollupBuckleScript()]
-    });
-    yield result.write({
-      file: writeToSrc,
-      format: 'esm',
-      exports: 'named'
-    });
-    reporter.created(writeToSrc, 'es2015');
+async function build({
+  cwd,
+  out,
+  reporter
+}) {
+  const writeToSrc = path.join(out, 'dist-src', 'index.js');
+  const isReason = fs.existsSync(path.join(cwd, 'src/index.re'));
+  const result = await rollup.rollup({
+    input: isReason ? 'src/index.re' : 'src/index.ml',
+    plugins: [rollupBuckleScript()]
   });
-  return _build.apply(this, arguments);
+  await result.write({
+    file: writeToSrc,
+    format: 'esm',
+    exports: 'named'
+  });
+  reporter.created(writeToSrc, 'es2015');
 }
 
 exports.build = build;
