@@ -4,10 +4,13 @@
   "scripts": {
     "version": "lerna exec npm version",
     "build": "lerna run build",
+    "format": "prettier --write packages/*/src/**/*.ts",
     "publish": "lerna publish from-package --contents pkg",
     "nuke": "lerna exec \"rm -f package-lock.json npm-shrinkwrap.json\" && lerna clean --yes && lerna bootstrap && lerna exec --stream -- \"test -f package-lock.json || npm install --package-lock-only\""
   },
   "devDependencies": {
-    "lerna": "^3.10.5"
-  }
+    "lerna": "^3.14.1",
+    "prettier": "^1.17.1"
+  },
+  "dependencies": {}
 }
