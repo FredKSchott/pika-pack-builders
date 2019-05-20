@@ -9,7 +9,7 @@ import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
-const DEFAULT_MIN_NODE_VERSION = '6';
+const DEFAULT_MIN_NODE_VERSION = '8';
 
 export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
