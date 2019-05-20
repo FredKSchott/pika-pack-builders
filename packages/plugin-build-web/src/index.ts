@@ -8,11 +8,11 @@ import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
 export async function beforeJob({out}: BuilderOptions) {
-  const srcDirectory = path.join(out, "dist-src/");
+  const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
     throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
   }
-  const srcEntrypoint = path.join(out, "dist-src/index.js");
+  const srcEntrypoint = path.join(out, 'dist-src/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
     throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
   }

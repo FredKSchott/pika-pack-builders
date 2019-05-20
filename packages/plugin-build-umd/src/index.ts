@@ -14,18 +14,18 @@ export async function beforeBuild({options}: BuilderOptions) {
 }
 
 export async function beforeJob({out}: BuilderOptions) {
-  const srcDirectory = path.join(out, "dist-src/");
+  const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
     throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
   }
-  const srcEntrypoint = path.join(out, "dist-src/index.js");
+  const srcEntrypoint = path.join(out, 'dist-src/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
     throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }
 
 export function manifest(manifest) {
-  manifest["umd:main"] = 'dist-umd/index.js';
+  manifest['umd:main'] = 'dist-umd/index.js';
 }
 
 export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
@@ -43,12 +43,9 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
             {
               modules: false,
               spec: true,
-              targets:  {
+              targets: {
                 // Recommended in: https://jamie.build/last-2-versions
-                browsers: [
-                ">0.25%",
-                "not op_mini all"
-                ],
+                browsers: ['>0.25%', 'not op_mini all'],
               },
             },
           ],

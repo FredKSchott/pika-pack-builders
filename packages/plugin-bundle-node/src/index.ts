@@ -1,7 +1,7 @@
 import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
 import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetEnv from '@babel/preset-env';
-import { BuilderOptions, MessageError } from '@pika/types';
+import {BuilderOptions, MessageError} from '@pika/types';
 import babelPluginDynamicImport from 'babel-plugin-dynamic-import-node-babel-7';
 import builtinModules from 'builtin-modules';
 import * as fs from 'fs';
@@ -15,11 +15,11 @@ import {rollup} from 'rollup';
 const DEFAULT_MIN_NODE_VERSION = '6';
 
 export async function beforeJob({out}: BuilderOptions) {
-  const srcDirectory = path.join(out, "dist-src/");
+  const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
     throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
   }
-  const srcEntrypoint = path.join(out, "dist-src/index.js");
+  const srcEntrypoint = path.join(out, 'dist-src/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
     throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
   }
@@ -48,11 +48,7 @@ export async function build({out, isFull, reporter, options}: BuilderOptions): P
             },
           ],
         ],
-        plugins: [
-          babelPluginDynamicImport,
-          babelPluginDynamicImportSyntax,
-          babelPluginImportMetaSyntax,
-        ],
+        plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
       }),
       rollupNodeResolve({
         mainFields: ['main'],

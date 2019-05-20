@@ -26,5 +26,4 @@ export async function build({out, cwd, reporter, options}: BuilderOptions): Prom
     reporter.info(`copying ${fileRel}...`);
     await copy(fileLoc, writeToLoc);
   }
-
 }

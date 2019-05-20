@@ -6,8 +6,7 @@ import {validateDynamicImportArguments} from './validate-specifier.js';
 const BareIdentifierFormat = /^((?:@[^\/]+\/)?[^\/]+)(\/.*)?$/;
 
 export default function transform({}): any {
-
-  function rewriteImport(specifier,  {opts, file}) {
+  function rewriteImport(specifier, {opts, file}) {
     const {deps, addExtensions} = opts;
     try {
       url.parse(specifier);

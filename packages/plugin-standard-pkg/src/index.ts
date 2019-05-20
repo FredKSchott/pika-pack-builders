@@ -4,16 +4,19 @@ import {BuilderOptions, MessageError} from '@pika/types';
 import {Lint, Build} from 'standard-pkg';
 
 export async function beforeJob({cwd}: BuilderOptions) {
-  const srcDirectory = path.join(cwd, "src/");
+  const srcDirectory = path.join(cwd, 'src/');
   if (!fs.existsSync(srcDirectory)) {
     throw new MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
   }
-  if (!fs.existsSync(path.join(cwd, "src/index.js"))
-    && !fs.existsSync(path.join(cwd, "src/index.ts"))
-    && !fs.existsSync(path.join(cwd, "src/index.jsx"))
-    && !fs.existsSync(path.join(cwd, "src/index.tsx"))
+  if (
+    !fs.existsSync(path.join(cwd, 'src/index.js')) &&
+    !fs.existsSync(path.join(cwd, 'src/index.ts')) &&
+    !fs.existsSync(path.join(cwd, 'src/index.jsx')) &&
+    !fs.existsSync(path.join(cwd, 'src/index.tsx'))
   ) {
-    throw new MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
+    throw new MessageError(
+      '@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".',
+    );
   }
 }
 
@@ -33,5 +36,5 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
   const builder = new Build(path.join(cwd, 'src'), options);
   await builder.init();
   await builder.write(path.join(out, '/dist-src/'));
-  reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
+  reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
 }
