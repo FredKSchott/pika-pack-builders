@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-build-types",
-  "version": "0.3.16",
+  "version": "0.4.0",
   "description": "A @pika/pack plugin: Adds TypeScript type definitions to your package build.",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",
@@ -26,15 +26,15 @@
   },
   "dependencies": {
     "@pika/pack": "^0.3.6",
-    "@pika/types": "^0.3.5",
+    "@pika/types": "^0.4.0",
     "execa": "^1.0.0",
     "mkdirp": "^0.5.1",
     "typescript": "^3.0.0"
   },
   "devDependencies": {
     "@pika/pack": "^0.3.0",
-    "@pika/plugin-build-node": "^0.3.7",
-    "@pika/plugin-ts-standard-pkg": "^0.3.7",
+    "@pika/plugin-build-node": "^0.4.0",
+    "@pika/plugin-ts-standard-pkg": "^0.4.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-bundle-types",
-  "version": "0.3.16",
+  "version": "0.4.0",
   "description": "A @pika/pack plugin: Bundle & tree-shake all TypeScript definitions into a single file.",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",
@@ -26,15 +26,13 @@
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.1.5",
-    "@pika/types": "^0.3.5",
+    "@pika/types": "^0.4.0",
     "rimraf": "^2.6.3"
-  },
-  "peerDependencies": {
   },
   "devDependencies": {
     "@pika/pack": "^0.3.6",
-    "@pika/plugin-ts-standard-pkg": "^0.3.7",
-    "@pika/plugin-build-node": "^0.3.7",
+    "@pika/plugin-build-node": "^0.4.0",
+    "@pika/plugin-ts-standard-pkg": "^0.4.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },
