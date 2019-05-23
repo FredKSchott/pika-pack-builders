@@ -37,7 +37,6 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
             {
               modules: false,
               targets: {esmodules: true},
-              spec: true,
             },
           ],
         ],
