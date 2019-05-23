@@ -36,7 +36,6 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
             babelPresetEnv,
             {
               modules: false,
-              spec: true,
             },
           ],
         ],
