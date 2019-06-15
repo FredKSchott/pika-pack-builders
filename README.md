@@ -41,3 +41,4 @@ This repo contains the official build plugins for @pika/pack.
 - [`@ryaninvents/plugin-bundle-nextjs`](https://www.npmjs.com/package/@ryaninvents/plugin-bundle-nextjs): Package a Next.js app for AWS Lambda.
 - [`pika-plugin-minify`](https://www.npmjs.com/package/pika-plugin-minify): Minifies your index.js files in `/pkg/*` using terser.
 - [`pika-plugin-unpkg-field`](https://www.npmjs.com/package/pika-plugin-unpkg-field): sets the `"unpkg"` field in `pkg/package.json`.
+- [`pika-plugin-pkg-node`](https://www.npmjs.com/package/pika-plugin-pkg-node): Package a Node.js app into an executable.
