@@ -12,7 +12,7 @@ import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import {rollup} from 'rollup';
 
-const DEFAULT_MIN_NODE_VERSION = '6';
+const DEFAULT_MIN_NODE_VERSION = '8';
 
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-src/');
