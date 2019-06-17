@@ -25,14 +25,13 @@
     "build": "pika-pack build"
   },
   "dependencies": {
-    "@pika/pack": "^0.3.6",
     "@pika/types": "^0.4.0",
     "execa": "^1.0.0",
     "mkdirp": "^0.5.1",
     "typescript": "^3.0.0"
   },
   "devDependencies": {
-    "@pika/pack": "^0.3.0",
+    "@pika/pack": "^0.3.6",
     "@pika/plugin-build-node": "^0.4.0",
     "@pika/plugin-ts-standard-pkg": "^0.4.0",
     "@types/node": "^10.12.18",
