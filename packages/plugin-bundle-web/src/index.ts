@@ -7,13 +7,13 @@ import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
 export async function beforeJob({out}: BuilderOptions) {
-  const srcDirectory = path.join(out, 'dist-src/');
+  const srcDirectory = path.join(out, 'dist-web/');
   if (!fs.existsSync(srcDirectory)) {
-    throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
+    throw new MessageError('"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-dev" to precede in pipeline.');
   }
-  const srcEntrypoint = path.join(out, 'dist-src/index.js');
+  const srcEntrypoint = path.join(out, 'dist-web/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
-    throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
+    throw new MessageError('"dist-web/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }
 
