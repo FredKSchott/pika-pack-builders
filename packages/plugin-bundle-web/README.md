@@ -23,7 +23,7 @@ yarn add @pika/plugin-bundle-web --dev
   "@pika/pack": {
     "pipeline": [
       ["@pika/plugin-standard-pkg"],
-      ["@pika/plugin-build-web"],
+      ["@pika/plugin-build-web"], // Required to precede in pipeline
       ["@pika/plugin-bundle-web", { /* options (optional) */ }]
     ]
   }
