@@ -40,6 +40,8 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 - `"minify"` (Default: `true`): Specify if bundle should be minifed using [`terser`](https://github.com/terser-js/terser) or not. Can also be [`terser` options object](https://github.com/terser-js/terser#minify-options) to further tweak minification.
 
+- `"unpkg"` (Default: `true`): If false, does not add `unpkg` field to manifest. The `unpkg` field is the prefered input when loading directly from [unpkg](https://unpkg.com/)
+
 ## Result
 
 1. Adds a web bundled distribution to your built package: `dist-web/index.bundled.js`
@@ -47,5 +49,6 @@ For more information about @pika/pack & help getting started, [check out the mai
   1. Transpiled to run on all browsers where ES Module syntax is supported.
   1. All dependencies inlined into this file.
   1. Minified using terser (Can optionally be skipped)
+  1. Adds bundle to `package.json` `unpkg` field. (Can optionally be skipped)
 
 Note that this does not add or modify the "module" entrypoint to your package.json. Bundles should continue to use the "module" entrypoint, while this build can be loaded directly in the browser (from a CDN like UNPKG).
