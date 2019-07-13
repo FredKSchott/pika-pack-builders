@@ -1,6 +1,7 @@
 import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
+import {terser as rollupTerser} from 'rollup-plugin-terser';
 import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
@@ -36,6 +37,13 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
         include: 'node_modules/**',
         compact: true,
       }) as any,
+      options.minify !== false
+        ? rollupTerser(
+          typeof options.minify === 'object'
+            ? options.minify
+            : undefined
+        )
+        : undefined,
     ],
   });
 
