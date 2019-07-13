@@ -36,6 +36,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 - `"browser"` (Default: `false`): If true, this plugin will respect the "browser" field in bundled dependencies over the usual "main" Node-specific entrypoint. This may be required for some dependencies, but may cause problems with others. YMMV.
 
+- `"namedExports"` (Default: `undefined`): Ecplicitly specify unresolvable named exports (See [`rollup-plugin-commonjs`](https://github.com/rollup/rollup-plugin-commonjs/tree/v9.2.0#custom-named-exports) for more information).
 
 ## Result
 
