@@ -102,8 +102,6 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
       path.join(out, 'dist-types/'),
       '--project',
       getTsConfigPath(options, cwd),
-      '--declarationMap',
-      'false',
       '--target',
       'es2019',
       '--module',
