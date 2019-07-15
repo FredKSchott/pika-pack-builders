@@ -43,4 +43,4 @@ For more information about @pika/pack & help getting started, [check out the mai
   - If your package is written in TypeScript: Types are automatically generated from your source.
   - If your package already includes custom-written type definitions: These files are automatically copied into your package build.
   - Otherwise: Automatically generate definitions from your JavaScript source. *(Note that this currently requires that you include `@pika/plugin-build-node` or some other Node.js build earlier in the pipeline.)*
-1. Adds a "types" entrypoint to your built `package.json` manifest.
+2. Adds a "types" entrypoint to your built `package.json` manifest.
