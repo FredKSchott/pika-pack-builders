@@ -82,9 +82,8 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
     console.error(`
 ⚠️  dist-types/: Attempted to generate type definitions, but "typescript" package was not found.
                 Please install either locally or globally and try again.
-       $ pika add --dev typescript
-[alt.] $ pika global add typescript
-[alt.] *   Write your own type definition file to "index.d.ts"
+       $ npm install --save-dev typescript
+  [alt.] Wite your own type definition file to "index.d.ts" to skip automatic type generation.
 `);
     throw new Error(`Failed to build: dist-types/`);
   })();
