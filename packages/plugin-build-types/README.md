@@ -1,7 +1,9 @@
 # @pika/plugin-build-types
 
 > A [@pika/pack](https://github.com/pikapkg/pack) build plugin.
-> Adds TypeScript type definitions to your package build.
+> Automatically adds TypeScript type definitions to your package build. 
+
+*Note: This plugin is not needed if you are already writing TypeScript and using the [ts-standard-pkg](/packages/plugin-ts-standard-pkg) plugin.*
 
 
 ## Install
