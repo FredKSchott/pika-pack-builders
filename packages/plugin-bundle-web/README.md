@@ -35,14 +35,10 @@ For more information about @pika/pack & help getting started, [check out the mai
 ## Options
 
 - `"browser"` (Default: `false`): If true, this plugin will respect the "browser" field in bundled dependencies over the usual "main" Node-specific entrypoint. This may be required for some dependencies, but may cause problems with others. YMMV.
+- `"namedExports"` (Default: `undefined`): Ecplicitly specify unresolvable named exports (See [`rollup-plugin-commonjs`](https://github.com/rollup/rollup-plugin-commonjs/tree/v9.2.0#custom-named-exports) for more information).
+- `"minify"` (Default: `true`): Specify if bundle should be minifed using [`terser`](https://github.com/terser-js/terser) or not. Can also be [`terser` options object](https://github.com/terser-js/terser#minify-options) to further tweak minification.
 - `"targets"` (Default: `{"esmodules": true}`): The browsers supported/targeted by the build. Defaults to support all browsers that support ES Module (ESM) syntax.
 - `"entrypoint"`: If provided, will add a package.json entrypoint for your bundled build. Example: setting `{"entrypoint: "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js" in your final package, perfect for hosting on [UNPKG](https://unpkg.com/).
-
-- `"namedExports"` (Default: `undefined`): Ecplicitly specify unresolvable named exports (See [`rollup-plugin-commonjs`](https://github.com/rollup/rollup-plugin-commonjs/tree/v9.2.0#custom-named-exports) for more information).
-
-- `"minify"` (Default: `true`): Specify if bundle should be minifed using [`terser`](https://github.com/terser-js/terser) or not. Can also be [`terser` options object](https://github.com/terser-js/terser#minify-options) to further tweak minification.
-
-- `"unpkg"` (Default: `true`): If false, does not add `unpkg` field to manifest. The `unpkg` field is the prefered input when loading directly from [unpkg](https://unpkg.com/)
 
 ## Result
 
