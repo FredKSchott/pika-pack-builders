@@ -5,7 +5,7 @@ This repo contains the official build plugins for @pika/pack.
 - **Write your own plugin!** @pika/pack can load local builders by relative path directly from your repo. Check out an existing builder for ideas and then feel free to use one as a starter template for your own.
 - **Publish & Share your plugin!** These official builders are just the start. Create a PR to add your community plugin to this list!
 
-<!-- ignore me -->
+<!-- ignore me x2 -->
 
 ## Official Plugins
 
