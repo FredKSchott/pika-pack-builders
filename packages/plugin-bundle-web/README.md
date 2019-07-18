@@ -35,12 +35,14 @@ For more information about @pika/pack & help getting started, [check out the mai
 ## Options
 
 - `"browser"` (Default: `false`): If true, this plugin will respect the "browser" field in bundled dependencies over the usual "main" Node-specific entrypoint. This may be required for some dependencies, but may cause problems with others. YMMV.
+- `"targets"` (Default: `{"esmodules": true}`): The browsers supported/targetted by the build. Defaults to support all browsers that support ES Module (ESM) syntax.
+- `"entrypoint"`: If provided, will add a package.json entrypoint for your bundled build. Example: setting `{"entrypoint: "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js" in your final package, perfect for hosting on [UNPKG](https://unpkg.com/).
 
 
 ## Result
 
 1. Adds a web bundled distribution to your built package: `dist-web/index.bundled.js`
-  1. ES Module (ESM) Syntax
+  1. ES Module (ESM) syntax
   1. Transpiled to run on all browsers where ES Module syntax is supported.
   1. All dependencies inlined into this file.
 
