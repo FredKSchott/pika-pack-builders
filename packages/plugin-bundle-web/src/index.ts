@@ -79,9 +79,3 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
   });
   reporter.created(writeToWeb);
 }
-
-export function manifest(manifest: any, {options}: BuilderOptions) {
-  if(options.unpkg !== false){
-    manifest.unpkg = 'dist-web/index.bundled.js';
-  }
-}
