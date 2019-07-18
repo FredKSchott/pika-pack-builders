@@ -2,6 +2,11 @@ import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import {terser as rollupTerser} from 'rollup-plugin-terser';
+import rollupBabel from 'rollup-plugin-babel';
+import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
+import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
+import babelPresetEnv from '@babel/preset-env';
+
 import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
@@ -15,6 +20,12 @@ export async function beforeJob({out}: BuilderOptions) {
   const srcEntrypoint = path.join(out, 'dist-web/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
     throw new MessageError('"dist-web/index.js" is the expected standard entrypoint, but it does not exist.');
+  }
+}
+
+export function manifest(manifest, {options}: BuilderOptions) {
+  if (options.entrypoint) {
+    manifest[options.entrypoint] = 'dist-web/index.bundled.js';
   }
 }
 
@@ -37,6 +48,20 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
         include: 'node_modules/**',
         compact: true,
       }) as any,
+      rollupBabel({
+        babelrc: false,
+        compact: false,
+        presets: [
+          [
+            babelPresetEnv,
+            {
+              modules: false,
+              targets: options.targets || {esmodules: true},
+            },
+          ],
+        ],
+        plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
+      }),
       options.minify !== false
         ? rollupTerser(
           typeof options.minify === 'object'

@@ -1,7 +1,7 @@
 # @pika/plugin-build-web
 
 > A [@pika/pack](https://github.com/pikapkg/pack) build plugin.
-> Adds an ESM distribution to your package, built & optimized to run in most web browsers (and bundlers).
+> Adds an ESM distribution to your package optimized for web bundlers and tooling. For a standalone build meant to run directly in the browser, check out [plugin-bundle-web](/packages/plugin-bundle-web).
 
 
 ## Install
@@ -34,7 +34,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 ## Result
 
-1. Adds a web distribution to your built package: `dist-web/index.js`
-  1. ES Module (ESM) Syntax
-  1. Transpiled to run on all browsers where ES Module syntax is supported.
+1. Adds a web distribution to your built package: `dist-web/index.js` Targets Modern (ES2019) syntax optimized for bundlers & web tooling.
 1. Adds a "module" entrypoint to your built `package.json` manifest.
+
+Packages that use this plugin will work on the Pika CDN. To support running directly from UNPKG, check out [plugin-bundle-web](/packages/plugin-bundle-web).

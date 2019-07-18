@@ -42,3 +42,7 @@ This repo contains the official build plugins for @pika/pack.
 - [`pika-plugin-minify`](https://www.npmjs.com/package/pika-plugin-minify): Minifies your index.js files in `/pkg/*` using terser.
 - [`pika-plugin-unpkg-field`](https://www.npmjs.com/package/pika-plugin-unpkg-field): sets the `"unpkg"` field in `pkg/package.json`.
 - [`pika-plugin-pkg-node`](https://www.npmjs.com/package/pika-plugin-pkg-node): Package a Node.js app into an executable.
+- [`pika-plugin-merge-properties`](https://github.com/jabuco/pika-plugin-merge-properties): Merge selected existing package.json properties into built package.json
+- [`pika-plugin-add-properties`](https://github.com/jabuco/pika-plugin-add-properties): Add custom values to built package.json
+
+
