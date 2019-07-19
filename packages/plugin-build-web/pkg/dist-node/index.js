@@ -4,12 +4,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var babelPluginDynamicImportSyntax = _interopDefault(require('@babel/plugin-syntax-dynamic-import'));
-var babelPluginImportMetaSyntax = _interopDefault(require('@babel/plugin-syntax-import-meta'));
-var babelPresetEnv = _interopDefault(require('@babel/preset-env'));
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
-var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
@@ -38,18 +34,7 @@ async function build({
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
   const result = await rollup.rollup({
     input: path.join(out, 'dist-src/index.js'),
-    plugins: [rollupBabel({
-      babelrc: false,
-      compact: false,
-      presets: [[babelPresetEnv, {
-        modules: false,
-        targets: {
-          esmodules: true
-        },
-        spec: true
-      }]],
-      plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
-    })],
+    plugins: [],
     onwarn: (warning, defaultOnWarnHandler) => {
       // // Unresolved external imports are expected
       if (warning.code === 'UNRESOLVED_IMPORT' && !(warning.source.startsWith('./') || warning.source.startsWith('../'))) {

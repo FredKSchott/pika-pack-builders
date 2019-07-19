@@ -18,7 +18,7 @@ var rollupJson = _interopDefault(require('rollup-plugin-json'));
 var rollupNodeResolve = _interopDefault(require('rollup-plugin-node-resolve'));
 var rollup = require('rollup');
 
-const DEFAULT_MIN_NODE_VERSION = '6';
+const DEFAULT_MIN_NODE_VERSION = '8';
 async function beforeJob({
   out
 }) {
@@ -36,14 +36,9 @@ async function beforeJob({
 }
 async function build({
   out,
-  isFull,
   reporter,
   options
 }) {
-  if (!isFull) {
-    return;
-  }
-
   const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
   const result = await rollup.rollup({
     input: path.join(out, 'dist-src/index.js'),

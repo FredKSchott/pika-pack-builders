@@ -9,18 +9,7 @@ var fs = _interopDefault(require('fs'));
 var util = _interopDefault(require('util'));
 var glob = _interopDefault(require('glob'));
 var mkdirp = _interopDefault(require('mkdirp'));
-var types = require('@pika/types');
-var execa = _interopDefault(require('execa'));
 
-async function beforeBuild({
-  cwd
-}) {
-  return execa('deno', ['--version'], {
-    cwd
-  }).catch(err => {
-    throw new types.MessageError('@pika/plugin-build-deno can only handle packages already written for Deno. Exiting because we could not find deno on your machine.');
-  });
-}
 async function manifest(manifest, {
   cwd
 }) {
@@ -62,6 +51,5 @@ async function build({
   }
 }
 
-exports.beforeBuild = beforeBuild;
 exports.build = build;
 exports.manifest = manifest;

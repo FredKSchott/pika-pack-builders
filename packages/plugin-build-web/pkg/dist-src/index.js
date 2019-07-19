@@ -1,9 +1,5 @@
-import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
-import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
-import babelPresetEnv from '@babel/preset-env';
 import path from 'path';
 import fs from 'fs';
-import rollupBabel from 'rollup-plugin-babel';
 import { MessageError } from '@pika/types';
 import { rollup } from 'rollup';
 export async function beforeJob({ out }) {
@@ -23,23 +19,7 @@ export async function build({ out, reporter }) {
     const writeToWeb = path.join(out, 'dist-web', 'index.js');
     const result = await rollup({
         input: path.join(out, 'dist-src/index.js'),
-        plugins: [
-            rollupBabel({
-                babelrc: false,
-                compact: false,
-                presets: [
-                    [
-                        babelPresetEnv,
-                        {
-                            modules: false,
-                            targets: { esmodules: true },
-                            spec: true,
-                        },
-                    ],
-                ],
-                plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
-            }),
-        ],
+        plugins: [],
         onwarn: ((warning, defaultOnWarnHandler) => {
             // // Unresolved external imports are expected
             if (warning.code === 'UNRESOLVED_IMPORT' &&

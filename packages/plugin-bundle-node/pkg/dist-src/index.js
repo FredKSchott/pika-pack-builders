@@ -11,7 +11,7 @@ import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import { rollup } from 'rollup';
-const DEFAULT_MIN_NODE_VERSION = '6';
+const DEFAULT_MIN_NODE_VERSION = '8';
 export async function beforeJob({ out }) {
     const srcDirectory = path.join(out, 'dist-src/');
     if (!fs.existsSync(srcDirectory)) {
@@ -22,10 +22,7 @@ export async function beforeJob({ out }) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
 }
-export async function build({ out, isFull, reporter, options }) {
-    if (!isFull) {
-        return;
-    }
+export async function build({ out, reporter, options }) {
     const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
     const result = await rollup({
         input: path.join(out, 'dist-src/index.js'),

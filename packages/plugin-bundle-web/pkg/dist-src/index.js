@@ -1,23 +1,33 @@
 import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
+import { terser as rollupTerser } from 'rollup-plugin-terser';
+import rollupBabel from 'rollup-plugin-babel';
+import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
+import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
+import babelPresetEnv from '@babel/preset-env';
 import path from 'path';
 import fs from 'fs';
 import { MessageError } from '@pika/types';
 import { rollup } from 'rollup';
 export async function beforeJob({ out }) {
-    const srcDirectory = path.join(out, 'dist-src/');
+    const srcDirectory = path.join(out, 'dist-web/');
     if (!fs.existsSync(srcDirectory)) {
-        throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
+        throw new MessageError('"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-dev" to precede in pipeline.');
     }
-    const srcEntrypoint = path.join(out, 'dist-src/index.js');
+    const srcEntrypoint = path.join(out, 'dist-web/index.js');
     if (!fs.existsSync(srcEntrypoint)) {
-        throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
+        throw new MessageError('"dist-web/index.js" is the expected standard entrypoint, but it does not exist.');
+    }
+}
+export function manifest(manifest, { options }) {
+    if (options.entrypoint) {
+        manifest[options.entrypoint] = 'dist-web/index.bundled.js';
     }
 }
 export async function build({ out, options, reporter }) {
     const readFromWeb = path.join(out, 'dist-web', 'index.js');
-    const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
+    const writeToWeb = path.join(out, 'dist-web');
     const result = await rollup({
         input: readFromWeb,
         plugins: [
@@ -34,10 +44,30 @@ export async function build({ out, options, reporter }) {
                 include: 'node_modules/**',
                 compact: true,
             }),
+            rollupBabel({
+                babelrc: false,
+                compact: false,
+                presets: [
+                    [
+                        babelPresetEnv,
+                        {
+                            modules: false,
+                            targets: options.targets || { esmodules: true },
+                        },
+                    ],
+                ],
+                plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
+            }),
+            options.minify !== false
+                ? rollupTerser(typeof options.minify === 'object'
+                    ? options.minify
+                    : undefined)
+                : undefined,
         ],
     });
     await result.write({
-        file: writeToWeb,
+        dir: writeToWeb,
+        entryFileNames: '[name].bundled.js',
         format: 'esm',
         exports: 'named',
     });
