@@ -28,6 +28,7 @@ export function manifest(manifest, { options }) {
 export async function build({ out, options, reporter }) {
     const readFromWeb = path.join(out, 'dist-web', 'index.js');
     const writeToWeb = path.join(out, 'dist-web');
+    const writeToWebBundled = path.join(writeToWeb, 'index.bundled.js');
     const result = await rollup({
         input: readFromWeb,
         plugins: [
@@ -68,8 +69,9 @@ export async function build({ out, options, reporter }) {
     await result.write({
         dir: writeToWeb,
         entryFileNames: '[name].bundled.js',
+        chunkFileNames: '[name]-[hash].bundled.js',
         format: 'esm',
         exports: 'named',
     });
-    reporter.created(writeToWeb);
+    reporter.created(writeToWebBundled);
 }

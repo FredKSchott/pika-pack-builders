@@ -26,7 +26,8 @@ export async function beforeJob({out}: BuilderOptions) {
 }
 
 export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
-  const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
+  const writeToNode = path.join(out, 'dist-node');
+  const writeToNodeBundled = path.join(writeToNode, 'index.bundled.js');
   const result = await rollup({
     input: path.join(out, 'dist-src/index.js'),
     external: builtinModules as string[],
@@ -51,18 +52,18 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
         preferBuiltins: false,
       }),
       rollupCommonJs({
-        include: 'node_modules/**',
         sourceMap: false,
       }),
       rollupJson({
-        include: 'node_modules/**',
         compact: true,
       }),
     ],
   });
 
   await result.write({
-    file: writeToNodeBundled,
+    dir: writeToNode,
+    entryFileNames: '[name].bundled.js',
+    chunkFileNames: '[name]-[hash].bundled.js',
     format: 'cjs',
     exports: 'named',
   });

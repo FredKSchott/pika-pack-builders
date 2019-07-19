@@ -39,7 +39,8 @@ async function build({
   reporter,
   options
 }) {
-  const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
+  const writeToNode = path.join(out, 'dist-node');
+  const writeToNodeBundled = path.join(writeToNode, 'index.bundled.js');
   const result = await rollup.rollup({
     input: path.join(out, 'dist-src/index.js'),
     external: builtinModules,
@@ -58,15 +59,15 @@ async function build({
       mainFields: ['main'],
       preferBuiltins: false
     }), rollupCommonJs({
-      include: 'node_modules/**',
       sourceMap: false
     }), rollupJson({
-      include: 'node_modules/**',
       compact: true
     })]
   });
   await result.write({
-    file: writeToNodeBundled,
+    dir: writeToNode,
+    entryFileNames: '[name].bundled.js',
+    chunkFileNames: '[name]-[hash].bundled.js',
     format: 'cjs',
     exports: 'named'
   });

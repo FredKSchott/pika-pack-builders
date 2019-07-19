@@ -46,6 +46,7 @@ async function build({
 }) {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
   const writeToWeb = path.join(out, 'dist-web');
+  const writeToWebBundled = path.join(writeToWeb, 'index.bundled.js');
   const result = await rollup.rollup({
     input: readFromWeb,
     plugins: [rollupNodeResolve({
@@ -73,10 +74,11 @@ async function build({
   await result.write({
     dir: writeToWeb,
     entryFileNames: '[name].bundled.js',
+    chunkFileNames: '[name]-[hash].bundled.js',
     format: 'esm',
     exports: 'named'
   });
-  reporter.created(writeToWeb);
+  reporter.created(writeToWebBundled);
 }
 
 exports.beforeJob = beforeJob;
