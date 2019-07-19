@@ -31,7 +31,7 @@ export function manifest(manifest, {options}: BuilderOptions) {
 
 export async function build({out, options, reporter}: BuilderOptions): Promise<void> {
   const readFromWeb = path.join(out, 'dist-web', 'index.js');
-  const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
+  const writeToWeb = path.join(out, 'dist-web');
   const result = await rollup({
     input: readFromWeb,
     plugins: [
@@ -73,7 +73,8 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
   });
 
   await result.write({
-    file: writeToWeb,
+    dir: writeToWeb,
+    entryFileNames: '[name].bundled.js',
     format: 'esm',
     exports: 'named',
   });
