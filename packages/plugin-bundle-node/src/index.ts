@@ -25,11 +25,7 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export async function build({out, isFull, reporter, options}: BuilderOptions): Promise<void> {
-  if (!isFull) {
-    return;
-  }
-
+export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
   const writeToNodeBundled = path.join(out, 'dist-node', 'index.bundled.js');
   const result = await rollup({
     input: path.join(out, 'dist-src/index.js'),
