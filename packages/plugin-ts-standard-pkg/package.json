@@ -26,14 +26,14 @@
   },
   "dependencies": {
     "@pika/types": "^0.4.0",
-    "execa": "^1.0.0",
-    "standard-pkg": "^0.2.0"
+    "execa": "^2.0.0",
+    "standard-pkg": "^0.4.0"
   },
   "peerDependencies": {
     "typescript": "*"
   },
   "devDependencies": {
-    "@pika/pack": "^0.3.6",
+    "@pika/pack": "^0.4.0",
     "@pika/plugin-build-node": "^0.4.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
