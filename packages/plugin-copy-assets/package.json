@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-copy-assets",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A @pika/pack plugin: Copies static assets into your built package directory.",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",
@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.4.0",
-    "@pika/plugin-build-node": "^0.4.0",
-    "@pika/plugin-ts-standard-pkg": "^0.4.0",
+    "@pika/plugin-build-node": "^0.5.0",
+    "@pika/plugin-ts-standard-pkg": "^0.5.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

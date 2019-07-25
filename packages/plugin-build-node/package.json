@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-build-node",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A @pika/pack plugin: Adds a Node.js distribution to your package, built & optimized to run on Node.js.",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",
@@ -29,7 +29,6 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
-    "@pika/types": "^0.4.0",
     "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
     "builtin-modules": "^3.0.0",
     "rollup": "^1.1.0",
@@ -38,7 +37,8 @@
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
   "devDependencies": {
     "@pika/pack": "^0.4.0",
-    "@pika/plugin-ts-standard-pkg": "^0.4.0",
+    "@pika/plugin-ts-standard-pkg": "^0.5.0",
+    "@pika/types": "^0.5.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   }
