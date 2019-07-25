@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "version": "lerna exec npm version",
+    "version": "lerna version",
     "build": "lerna run build",
     "format": "prettier --write packages/*/src/**/*.ts",
     "publish": "lerna publish from-package --contents pkg",
