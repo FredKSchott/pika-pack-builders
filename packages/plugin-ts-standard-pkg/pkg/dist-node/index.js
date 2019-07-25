@@ -100,7 +100,7 @@ async function afterJob({
   reporter
 }) {
   reporter.info('Linting with standard-pkg...');
-  const linter = new standardPkg.Lint(out);
+  const linter = new standardPkg.Lint(path.join(out, 'dist-src'));
   await linter.init();
   linter.summary();
 }

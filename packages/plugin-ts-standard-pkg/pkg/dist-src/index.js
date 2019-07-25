@@ -66,7 +66,7 @@ export async function beforeJob({ cwd }) {
 }
 export async function afterJob({ out, reporter }) {
     reporter.info('Linting with standard-pkg...');
-    const linter = new Lint(out);
+    const linter = new Lint(path.join(out, 'dist-src'));
     await linter.init();
     linter.summary();
 }
