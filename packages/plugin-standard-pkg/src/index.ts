@@ -22,7 +22,7 @@ export async function beforeJob({cwd}: BuilderOptions) {
 
 export async function afterJob({out, reporter}: BuilderOptions) {
   reporter.info('Linting with standard-pkg...');
-  const linter = new Lint(out);
+  const linter = new Lint(path.join(out, 'dist-src'));
   await linter.init();
   linter.summary();
 }
