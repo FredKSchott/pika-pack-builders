@@ -7,12 +7,6 @@ import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
-export async function beforeBuild({options}: BuilderOptions) {
-  if (!options.name) {
-    throw new MessageError('A "name" option is required for UMD builds.');
-  }
-}
-
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
@@ -29,6 +23,7 @@ export function manifest(manifest) {
 }
 
 export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
+  const umdExportName = options.name || manifest.name;
   const writeToUmd = path.join(out, 'dist-umd', 'index.js');
 
   const result = await rollup({
@@ -69,7 +64,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
     file: writeToUmd,
     format: 'umd',
     exports: 'named',
-    name: options.name,
+    name: umdExportName,
     sourcemap: options.sourcemap,
   });
   reporter.created(writeToUmd, 'umd:main');
