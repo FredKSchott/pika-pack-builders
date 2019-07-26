@@ -70,6 +70,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
     format: 'umd',
     exports: 'named',
     name: options.name,
+    sourcemap: options.sourcemap,
   });
   reporter.created(writeToUmd, 'umd:main');
 }

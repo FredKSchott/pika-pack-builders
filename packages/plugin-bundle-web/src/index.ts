@@ -79,6 +79,7 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
     chunkFileNames: '[name]-[hash].bundled.js',
     format: 'esm',
     exports: 'named',
+    sourcemap: options.sourcemap,
   });
   reporter.created(writeToWebBundled);
 }

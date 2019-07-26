@@ -18,7 +18,7 @@ export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
 
-export async function build({out, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, options, reporter}: BuilderOptions): Promise<void> {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
 
   const result = await rollup({
@@ -40,6 +40,7 @@ export async function build({out, reporter}: BuilderOptions): Promise<void> {
     file: writeToWeb,
     format: 'esm',
     exports: 'named',
+    sourcemap: options.sourcemap,
   });
   reporter.created(writeToWeb, 'module');
 }

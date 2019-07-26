@@ -66,6 +66,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
     file: writeToNode,
     format: 'cjs',
     exports: 'named',
+    sourcemap: options.sourcemap,
   });
   reporter.created(writeToNode, 'main');
 }
