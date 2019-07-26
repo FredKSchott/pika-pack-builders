@@ -65,7 +65,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
     format: 'umd',
     exports: 'named',
     name: umdExportName,
-    sourcemap: options.sourcemap,
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
   });
   reporter.created(writeToUmd, 'umd:main');
 }

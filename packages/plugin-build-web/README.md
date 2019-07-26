@@ -33,7 +33,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 ## Options
 
-- `"sourcemap"` (Default: `"false"`): Adds a [source map](https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for this build.
+- `"sourcemap"` (Default: `"true"`): Adds a [source map](https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for this build.
 
 
 ## Result

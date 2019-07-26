@@ -40,7 +40,7 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
     file: writeToWeb,
     format: 'esm',
     exports: 'named',
-    sourcemap: options.sourcemap,
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
   });
   reporter.created(writeToWeb, 'module');
 }
