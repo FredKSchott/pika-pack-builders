@@ -48,6 +48,6 @@ For more information about @pika/pack & help getting started, [check out the mai
   1. Transpiled to run on all browsers where ES Module syntax is supported.
   1. All dependencies inlined into this file.
   1. Minified using terser (Can optionally be skipped)
-  1. Adds bundle to `package.json` `unpkg` field. (Can optionally be skipped)
+  1. (if specified) Adds the file to your specified "entrypoint".
 
 Note that this does not add or modify the "module" entrypoint to your package.json. Bundles should continue to use the "module" entrypoint, while this build can be loaded directly in the browser (from a CDN like UNPKG).
