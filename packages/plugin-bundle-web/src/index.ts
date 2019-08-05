@@ -15,7 +15,9 @@ import {rollup} from 'rollup';
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-web/');
   if (!fs.existsSync(srcDirectory)) {
-    throw new MessageError('"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-dev" to precede in pipeline.');
+    throw new MessageError(
+      '"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-dev" to precede in pipeline.',
+    );
   }
   const srcEntrypoint = path.join(out, 'dist-web/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
@@ -64,11 +66,7 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
         plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
       }),
       options.minify !== false
-        ? rollupTerser(
-          typeof options.minify === 'object'
-            ? options.minify
-            : undefined
-        )
+        ? rollupTerser(typeof options.minify === 'object' ? options.minify : undefined)
         : undefined,
     ],
   });

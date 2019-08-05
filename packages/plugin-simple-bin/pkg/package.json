@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-simple-bin",
   "description": "A @pika/pack plugin: Adds a simple CLI wrapper.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "files": [
     "dist-*/",
     "bin/"
@@ -16,9 +16,9 @@
   "dependencies": {},
   "devDependencies": {
     "@pika/pack": "^0.4.0",
-    "@pika/plugin-build-node": "^0.5.1",
-    "@pika/plugin-standard-pkg": "^0.5.1",
-    "@pika/types": "^0.5.1",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/plugin-standard-pkg": "^0.6.0",
+    "@pika/types": "^0.6.0",
     "@types/node": "^10.12.18"
   },
   "publishConfig": {

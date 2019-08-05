@@ -69,7 +69,7 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
     // }
 
     reporter.info('no type definitions found, auto-generating...');
-    const tsc = await import('typescript') as any;
+    const tsc = (await import('typescript')) as any;
     if (!tsc.generateTypesForModule) {
       console.error(`
   ⚠️  dist-types/: Attempted to generate type definitions, but "typescript@^3.5.0" no longer supports this.

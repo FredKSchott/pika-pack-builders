@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-ts-standard-pkg",
   "description": "A @pika/pack plugin: Builds your TypeScript package source as standard, ES2018 JavaScript.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "files": [
     "dist-*/",
     "bin/"
@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.4.0",
-    "@pika/plugin-build-node": "^0.5.1",
-    "@pika/types": "^0.5.1",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/types": "^0.6.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },
