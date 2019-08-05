@@ -39,7 +39,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 - `"namedExports"` (Default: `undefined`): Ecplicitly specify unresolvable named exports (See [`rollup-plugin-commonjs`](https://github.com/rollup/rollup-plugin-commonjs/tree/v9.2.0#custom-named-exports) for more information).
 - `"minify"` (Default: `true`): Specify if bundle should be minifed using [`terser`](https://github.com/terser-js/terser) or not. Can also be [`terser` options object](https://github.com/terser-js/terser#minify-options) to further tweak minification.
 - `"targets"` (Default: `{"esmodules": true}`): The browsers supported/targeted by the build. Defaults to support all browsers that support ES Module (ESM) syntax.
-- `"entrypoint"`: If provided, will add a package.json entrypoint for your bundled build. Example: setting `{"entrypoint: "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js" in your final package, perfect for hosting on [UNPKG](https://unpkg.com/).
+- `"entrypoint"`: If provided, will add a package.json entrypoint for your bundled build. Example: setting `{"entrypoint: "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js" in your final package, perfect for hosting on [UNPKG](https://unpkg.com/). It can also be array of multiple entrypoints.
 
 ## Result
 
