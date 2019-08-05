@@ -4,7 +4,7 @@ export declare type BuilderOptions = {
     options: any;
     src: {
         loc: string;
-        entrypoint: string | string[],
+        entrypoint: string | string[];
         options: any;
         files: Array<string>;
     };
