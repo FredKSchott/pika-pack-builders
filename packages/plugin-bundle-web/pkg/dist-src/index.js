@@ -60,9 +60,7 @@ export async function build({ out, options, reporter }) {
                 plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
             }),
             options.minify !== false
-                ? rollupTerser(typeof options.minify === 'object'
-                    ? options.minify
-                    : undefined)
+                ? rollupTerser(typeof options.minify === 'object' ? options.minify : undefined)
                 : undefined,
         ],
     });

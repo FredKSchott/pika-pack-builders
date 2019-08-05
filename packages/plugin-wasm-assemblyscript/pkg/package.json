@@ -17,7 +17,7 @@
     "assemblyscript": "github:AssemblyScript/assemblyscript"
   },
   "devDependencies": {
-    "@pika/pack": "^0.4.0",
+    "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.6.0",
     "@pika/plugin-standard-pkg": "^0.6.0",
     "@types/node": "^10.12.18"

@@ -57,7 +57,7 @@ export async function build({ cwd, out, options, reporter }) {
         //   return;
         // }
         reporter.info('no type definitions found, auto-generating...');
-        const tsc = await import('typescript');
+        const tsc = (await import('typescript'));
         if (!tsc.generateTypesForModule) {
             console.error(`
   ⚠️  dist-types/: Attempted to generate type definitions, but "typescript@^3.5.0" no longer supports this.
