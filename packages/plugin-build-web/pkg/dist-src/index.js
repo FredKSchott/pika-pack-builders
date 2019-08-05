@@ -15,7 +15,7 @@ export async function beforeJob({ out }) {
 export function manifest(manifest) {
     manifest.module = manifest.module || 'dist-web/index.js';
 }
-export async function build({ out, reporter }) {
+export async function build({ out, options, reporter }) {
     const writeToWeb = path.join(out, 'dist-web', 'index.js');
     const result = await rollup({
         input: path.join(out, 'dist-src/index.js'),
@@ -33,6 +33,7 @@ export async function build({ out, reporter }) {
         file: writeToWeb,
         format: 'esm',
         exports: 'named',
+        sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
     });
     reporter.created(writeToWeb, 'module');
 }

@@ -6,11 +6,6 @@ import fs from 'fs';
 import rollupBabel from 'rollup-plugin-babel';
 import { MessageError } from '@pika/types';
 import { rollup } from 'rollup';
-export async function beforeBuild({ options }) {
-    if (!options.name) {
-        throw new MessageError('A "name" option is required for UMD builds.');
-    }
-}
 export async function beforeJob({ out }) {
     const srcDirectory = path.join(out, 'dist-src/');
     if (!fs.existsSync(srcDirectory)) {
@@ -25,6 +20,7 @@ export function manifest(manifest) {
     manifest['umd:main'] = 'dist-umd/index.js';
 }
 export async function build({ out, reporter, options }) {
+    const umdExportName = options.name || manifest.name;
     const writeToUmd = path.join(out, 'dist-umd', 'index.js');
     const result = await rollup({
         input: path.join(out, 'dist-src/index.js'),
@@ -61,7 +57,8 @@ export async function build({ out, reporter, options }) {
         file: writeToUmd,
         format: 'umd',
         exports: 'named',
-        name: options.name,
+        name: umdExportName,
+        sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
     });
     reporter.created(writeToUmd, 'umd:main');
 }

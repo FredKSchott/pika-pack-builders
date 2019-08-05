@@ -68,7 +68,8 @@ async function build({
   await result.write({
     file: writeToNode,
     format: 'cjs',
-    exports: 'named'
+    exports: 'named',
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap
   });
   reporter.created(writeToNode, 'main');
 }

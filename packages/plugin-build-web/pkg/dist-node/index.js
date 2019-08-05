@@ -29,6 +29,7 @@ function manifest(manifest) {
 }
 async function build({
   out,
+  options,
   reporter
 }) {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
@@ -47,7 +48,8 @@ async function build({
   await result.write({
     file: writeToWeb,
     format: 'esm',
-    exports: 'named'
+    exports: 'named',
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap
   });
   reporter.created(writeToWeb, 'module');
 }
@@ -55,3 +57,4 @@ async function build({
 exports.beforeJob = beforeJob;
 exports.build = build;
 exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

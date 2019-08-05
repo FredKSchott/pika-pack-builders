@@ -76,7 +76,8 @@ async function build({
     entryFileNames: '[name].bundled.js',
     chunkFileNames: '[name]-[hash].bundled.js',
     format: 'esm',
-    exports: 'named'
+    exports: 'named',
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap
   });
   reporter.created(writeToWebBundled);
 }
@@ -84,3 +85,4 @@ async function build({
 exports.beforeJob = beforeJob;
 exports.build = build;
 exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

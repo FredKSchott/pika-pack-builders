@@ -62,6 +62,7 @@ export async function build({ out, reporter, options }) {
         chunkFileNames: '[name]-[hash].bundled.js',
         format: 'cjs',
         exports: 'named',
+        sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
     });
     reporter.created(writeToNodeBundled);
 }

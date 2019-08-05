@@ -13,13 +13,6 @@ var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
-async function beforeBuild({
-  options
-}) {
-  if (!options.name) {
-    throw new types.MessageError('A "name" option is required for UMD builds.');
-  }
-}
 async function beforeJob({
   out
 }) {
@@ -43,6 +36,7 @@ async function build({
   reporter,
   options
 }) {
+  const umdExportName = options.name || manifest.name;
   const writeToUmd = path.join(out, 'dist-umd', 'index.js');
   const result = await rollup.rollup({
     input: path.join(out, 'dist-src/index.js'),
@@ -72,12 +66,13 @@ async function build({
     file: writeToUmd,
     format: 'umd',
     exports: 'named',
-    name: options.name
+    name: umdExportName,
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap
   });
   reporter.created(writeToUmd, 'umd:main');
 }
 
-exports.beforeBuild = beforeBuild;
 exports.beforeJob = beforeJob;
 exports.build = build;
 exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

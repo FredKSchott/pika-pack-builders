@@ -137,3 +137,4 @@ function transform({}) {
 }
 
 exports.default = transform;
+//# sourceMappingURL=index.js.map

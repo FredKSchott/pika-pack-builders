@@ -27,7 +27,7 @@ async function afterJob({
   reporter
 }) {
   reporter.info('Linting with standard-pkg...');
-  const linter = new standardPkg.Lint(out);
+  const linter = new standardPkg.Lint(path.join(out, 'dist-src'));
   await linter.init();
   linter.summary();
 }
@@ -51,3 +51,4 @@ exports.afterJob = afterJob;
 exports.beforeJob = beforeJob;
 exports.build = build;
 exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

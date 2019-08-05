@@ -94,3 +94,4 @@ async function build({
 exports.beforeBuild = beforeBuild;
 exports.build = build;
 exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

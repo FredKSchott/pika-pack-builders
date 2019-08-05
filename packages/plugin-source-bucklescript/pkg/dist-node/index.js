@@ -40,3 +40,4 @@ async function build({
 exports.build = build;
 exports.manifest = manifest;
 exports.validate = validate;
+//# sourceMappingURL=index.js.map

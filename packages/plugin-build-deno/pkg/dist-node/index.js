@@ -53,3 +53,4 @@ async function build({
 
 exports.build = build;
 exports.manifest = manifest;
+//# sourceMappingURL=index.js.map
