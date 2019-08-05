@@ -27,7 +27,13 @@ export async function beforeJob({out}: BuilderOptions) {
 
 export function manifest(manifest, {options}: BuilderOptions) {
   if (options.entrypoint) {
-    manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+    if (options.entrypoint instanceof Array) {
+      options.entrypoint.forEach((entrypoint) => {
+        manifest[entrypoint] = 'dist-web/index.bundled.js';
+      })
+    } else {
+      manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+    }
   }
 }
 
