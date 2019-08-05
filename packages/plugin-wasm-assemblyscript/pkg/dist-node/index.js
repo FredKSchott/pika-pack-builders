@@ -8,42 +8,6 @@ var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var asc = _interopDefault(require('assemblyscript/cli/asc'));
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 function validate({
   cwd
 }) {
@@ -52,38 +16,32 @@ function validate({
 function manifest(newManifest) {
   return newManifest;
 }
-function build(_x) {
-  return _build.apply(this, arguments);
-}
+async function build({
+  out,
+  cwd,
+  options,
+  reporter
+}) {
+  const relativeOutWasm = path.relative(cwd, path.join(out, "assets/index.wasm"));
+  const relativeOutTypes = path.relative(cwd, path.join(out, "assets/index.d.ts"));
+  await new Promise((resolve, reject) => {
+    asc.main(["src/index.ts", "--binaryFile", relativeOutWasm, "-d", relativeOutTypes, "--optimize", "--sourceMap", // Optional:
+    "--use", " Math=JSMath", "-O3", "--importMemory", ...(options.args || [])], {
+      stdout: reporter.stdout,
+      stderr: reporter.stderr
+    }, err => {
+      if (err) {
+        reject(err);
+        return;
+      }
 
-function _build() {
-  _build = _asyncToGenerator(function* ({
-    out,
-    cwd,
-    options,
-    reporter
-  }) {
-    const relativeOutWasm = path.relative(cwd, path.join(out, "assets/index.wasm"));
-    const relativeOutTypes = path.relative(cwd, path.join(out, "assets/index.d.ts"));
-    yield new Promise((resolve, reject) => {
-      asc.main(["src/index.ts", "--binaryFile", relativeOutWasm, "-d", relativeOutTypes, "--optimize", "--sourceMap", // Optional:
-      "--use", " Math=JSMath", "-O3", "--importMemory", ...(options.args || [])], {
-        stdout: reporter.stdout,
-        stderr: reporter.stderr
-      }, err => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        resolve();
-      });
+      resolve();
     });
-    reporter.created(path.join(out, "assets/index.wasm"));
   });
-  return _build.apply(this, arguments);
+  reporter.created(path.join(out, "assets/index.wasm"));
 }
 
-exports.validate = validate;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;
+exports.validate = validate;
+//# sourceMappingURL=index.js.map

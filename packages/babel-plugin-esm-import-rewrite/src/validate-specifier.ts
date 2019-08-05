@@ -1,6 +1,6 @@
 function getLineCol(node: any): string {
   const loc = node.loc.start;
-//   return chalk.dim(`[${loc.line}:${loc.column}]`);
+  //   return chalk.dim(`[${loc.line}:${loc.column}]`);
   return `[${loc.line}:${loc.column}]`;
 }
 

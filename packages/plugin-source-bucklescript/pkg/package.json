@@ -1,0 +1,37 @@
+{
+  "name": "@pika/plugin-source-bucklescript",
+  "description": "A @pika/pack plugin: ",
+  "version": "0.6.0",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
+  "pika": true,
+  "sideEffects": false,
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
+  "dependencies": {
+    "rollup": "^1.1.0",
+    "rollup-plugin-bucklescript": "^0.7.0"
+  },
+  "peerDependencies": {
+    "bs-platform": "^4.0.0"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/plugin-ts-standard-pkg": "^0.6.0",
+    "@pika/types": "^0.6.0",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
+  "main": "dist-node/index.js"
+}

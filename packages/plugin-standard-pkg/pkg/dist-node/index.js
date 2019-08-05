@@ -6,118 +6,49 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
-var mkdirp = _interopDefault(require('mkdirp'));
-var babel = _interopDefault(require('@babel/core'));
-var babelPluginDynamicImportSyntax = _interopDefault(require('@babel/plugin-syntax-dynamic-import'));
-var babelPluginImportMetaSyntax = _interopDefault(require('@babel/plugin-syntax-import-meta'));
-var babelPresetTypeScript = _interopDefault(require('@babel/preset-typescript'));
-var babelPluginImportRewrite = _interopDefault(require('@pika/babel-plugin-esm-import-rewrite'));
+var types = require('@pika/types');
 var standardPkg = require('standard-pkg');
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
+async function beforeJob({
+  cwd
+}) {
+  const srcDirectory = path.join(cwd, 'src/');
+
+  if (!fs.existsSync(srcDirectory)) {
+    throw new types.MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
   }
 
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
+  if (!fs.existsSync(path.join(cwd, 'src/index.js')) && !fs.existsSync(path.join(cwd, 'src/index.ts')) && !fs.existsSync(path.join(cwd, 'src/index.jsx')) && !fs.existsSync(path.join(cwd, 'src/index.tsx'))) {
+    throw new types.MessageError('@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".');
   }
 }
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
+async function afterJob({
+  out,
+  reporter
+}) {
+  reporter.info('Linting with standard-pkg...');
+  const linter = new standardPkg.Lint(path.join(out, 'dist-src'));
+  await linter.init();
+  linter.summary();
 }
-
-function afterJob(_x) {
-  return _afterJob.apply(this, arguments);
-}
-
-function _afterJob() {
-  _afterJob = _asyncToGenerator(function* ({
-    out
-  }) {
-    const linter = new standardPkg.Lint(out);
-    yield linter.init();
-    linter.summary();
-  });
-  return _afterJob.apply(this, arguments);
-}
-
 function manifest(newManifest) {
   newManifest.esnext = newManifest.esnext || 'dist-src/index.js';
   return newManifest;
 }
-function build(_x2) {
-  return _build.apply(this, arguments);
-}
-
-function _build() {
-  _build = _asyncToGenerator(function* ({
-    cwd,
-    out,
-    src,
-    reporter
-  }) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = src.files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        const fileAbs = _step.value;
-        const writeToSrc = fileAbs.replace(path.join(cwd, 'src/'), path.join(out, '/dist-src/')).replace('.ts', '.js').replace('.tsx', '.js').replace('.jsx', '.js').replace('.mjs', '.js');
-        const resultSrc = yield babel.transformFileAsync(fileAbs, {
-          cwd,
-          presets: [[babelPresetTypeScript]],
-          plugins: [[babelPluginImportRewrite, {
-            addExtensions: true
-          }], babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
-        });
-        mkdirp.sync(path.dirname(writeToSrc));
-        fs.writeFileSync(writeToSrc, resultSrc.code);
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
-    reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
-  });
-  return _build.apply(this, arguments);
+async function build({
+  cwd,
+  out,
+  options,
+  reporter
+}) {
+  const builder = new standardPkg.Build(path.join(cwd, 'src'), options);
+  await builder.init();
+  await builder.write(path.join(out, '/dist-src/'));
+  reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
 }
 
 exports.afterJob = afterJob;
-exports.manifest = manifest;
+exports.beforeJob = beforeJob;
 exports.build = build;
+exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

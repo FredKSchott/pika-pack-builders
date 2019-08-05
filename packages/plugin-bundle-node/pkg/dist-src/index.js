@@ -10,60 +10,59 @@ import rollupBabel from 'rollup-plugin-babel';
 import rollupCommonJs from 'rollup-plugin-commonjs';
 import rollupJson from 'rollup-plugin-json';
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
-export async function beforeJob({
-  out
-}) {
-  const srcDirectory = path.join(out, "dist-src/");
-
-  if (!fs.existsSync(srcDirectory)) {
-    throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
-  }
-
-  const srcEntrypoint = path.join(out, "dist-src/index.js");
-
-  if (!fs.existsSync(srcEntrypoint)) {
-    throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
-  }
+import { rollup } from 'rollup';
+const DEFAULT_MIN_NODE_VERSION = '8';
+export async function beforeJob({ out }) {
+    const srcDirectory = path.join(out, 'dist-src/');
+    if (!fs.existsSync(srcDirectory)) {
+        throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
+    }
+    const srcEntrypoint = path.join(out, 'dist-src/index.js');
+    if (!fs.existsSync(srcEntrypoint)) {
+        throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
+    }
 }
-export async function build({
-  out,
-  isFull,
-  rollup,
-  reporter
-}) {
-  if (!isFull) {
-    return;
-  }
-
-  const writeToNode = path.join(out, 'dist-node', 'index.bundled.js');
-  const srcBundle = await rollup('node', {
-    external: builtinModules,
-    plugins: [rollupBabel({
-      babelrc: false,
-      compact: false,
-      presets: [[babelPresetEnv, {
-        modules: false,
-        targets: {
-          node: '6'
-        },
-        spec: true
-      }]],
-      plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
-    }), rollupNodeResolve({
-      module: false,
-      preferBuiltins: false
-    }), rollupCommonJs({
-      include: 'node_modules/**',
-      sourceMap: false
-    }), rollupJson({
-      include: 'node_modules/**',
-      compact: true
-    })]
-  });
-  await srcBundle.write({
-    file: writeToNode,
-    format: 'cjs',
-    exports: 'named'
-  });
-  reporter.created(writeToNode);
+export async function build({ out, reporter, options }) {
+    const writeToNode = path.join(out, 'dist-node');
+    const writeToNodeBundled = path.join(writeToNode, 'index.bundled.js');
+    const result = await rollup({
+        input: path.join(out, 'dist-src/index.js'),
+        external: builtinModules,
+        plugins: [
+            rollupBabel({
+                babelrc: false,
+                compact: false,
+                presets: [
+                    [
+                        babelPresetEnv,
+                        {
+                            modules: false,
+                            targets: { node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION },
+                            spec: true,
+                        },
+                    ],
+                ],
+                plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
+            }),
+            rollupNodeResolve({
+                mainFields: ['main'],
+                preferBuiltins: false,
+            }),
+            rollupCommonJs({
+                sourceMap: false,
+            }),
+            rollupJson({
+                compact: true,
+            }),
+        ],
+    });
+    await result.write({
+        dir: writeToNode,
+        entryFileNames: '[name].bundled.js',
+        chunkFileNames: '[name]-[hash].bundled.js',
+        format: 'cjs',
+        exports: 'named',
+        sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
+    });
+    reporter.created(writeToNodeBundled);
 }

@@ -1,8 +1,16 @@
 {
   "name": "@pika/types",
-  "version": "0.3.1",
-  "main": "pkg/dist-node/index.js",
-  "types": "pkg/dist-types/index.d.ts",
+  "version": "0.6.0",
+  "pika": true,
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "sideEffects": false,
+  "source": "dist-src/index.js",
+  "main": "dist-node/index.js",
+  "types": "dist-types/index.d.ts",
   "devDependencies": {
     "@types/node": "^10.12.18"
   }

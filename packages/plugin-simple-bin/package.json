@@ -1,30 +1,35 @@
 {
-    "name": "@pika/plugin-simple-bin",
-    "version": "0.3.2",
-    "main": "pkg/dist-node/index.js",
-    "publishConfig": {
-        "access": "public"
-    },
-    "distributions": {
-        "src": [
-            true
-        ],
-        "plugins": [
-            [
-                "@pika/plugin-build-node"
-            ]
-        ]
-    },
-    "scripts": {
-        "build": "pika build"
-    },
-    "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
-    "devDependencies": {
-        "@pika/pack": "^0.1.7",
-        "@pika/plugin-build-node": "^0.3.2",
-        "@types/node": "^10.12.18"
-    },
-    "dependencies": {
-        "@pika/types": "^0.3.2"
-    }
+  "name": "@pika/plugin-simple-bin",
+  "version": "0.6.0",
+  "description": "A @pika/pack plugin: Adds a simple CLI wrapper.",
+  "main": "pkg/dist-node/index.js",
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
+  },
+  "scripts": {
+    "build": "pika-pack build"
+  },
+  "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/plugin-standard-pkg": "^0.6.0",
+    "@pika/types": "^0.6.0",
+    "@types/node": "^10.12.18"
+  }
 }

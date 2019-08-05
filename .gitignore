@@ -1,4 +1,8 @@
 /packages/*/node_modules
+/packages/*/pkg
+!/packages/plugin-standard-pkg/pkg
+!/packages/plugin-ts-standard-pkg/pkg
+!/packages/plugin-build-node/pkg
 /node_modules
 lerna-debug.log
 todo/

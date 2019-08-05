@@ -7,28 +7,32 @@ import babelPluginDynamicImport from 'babel-plugin-dynamic-import-node-babel-7';
 import builtinModules from 'builtin-modules';
 import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
+import {rollup} from 'rollup';
+
+const DEFAULT_MIN_NODE_VERSION = '8';
 
 export function manifest(manifest) {
   manifest.main = manifest.main || 'dist-node/index.js';
 }
 
 export async function beforeJob({out}: BuilderOptions) {
-  const srcDirectory = path.join(out, "dist-src/");
+  const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
     throw new MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
   }
-  const srcEntrypoint = path.join(out, "dist-src/index.js");
+  const srcEntrypoint = path.join(out, 'dist-src/index.js');
   if (!fs.existsSync(srcEntrypoint)) {
     throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }
 
-export async function build({out, rollup, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, reporter, options}: BuilderOptions): Promise<void> {
   const writeToNode = path.join(out, 'dist-node', 'index.js');
 
   // TODO: KEEP FIXING THIS,
-  const srcBundle = await rollup('node', {
-    external: builtinModules,
+  const result = await rollup({
+    input: path.join(out, 'dist-src/index.js'),
+    external: builtinModules as string[],
     plugins: [
       rollupBabel({
         babelrc: false,
@@ -38,19 +42,15 @@ export async function build({out, rollup, reporter}: BuilderOptions): Promise<vo
             babelPresetEnv,
             {
               modules: false,
-              targets: {node: '6'},
+              targets: {node: options.minNodeVersion || DEFAULT_MIN_NODE_VERSION},
               spec: true,
             },
           ],
         ],
-        plugins: [
-          babelPluginDynamicImport,
-          babelPluginDynamicImportSyntax,
-          babelPluginImportMetaSyntax,
-        ],
+        plugins: [babelPluginDynamicImport, babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
       }),
     ],
-    onwarn: (warning, defaultOnWarnHandler) => {
+    onwarn: ((warning, defaultOnWarnHandler) => {
       // Unresolved external imports are expected
       if (
         warning.code === 'UNRESOLVED_IMPORT' &&
@@ -59,13 +59,14 @@ export async function build({out, rollup, reporter}: BuilderOptions): Promise<vo
         return;
       }
       defaultOnWarnHandler(warning);
-    },
+    }) as any,
   });
 
-  await srcBundle.write({
+  await result.write({
     file: writeToNode,
     format: 'cjs',
     exports: 'named',
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
   });
   reporter.created(writeToNode, 'main');
 }

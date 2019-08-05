@@ -1,16 +1,28 @@
 import path from 'path';
 import fs from 'fs';
-import mkdirp from 'mkdirp';
-import babel from '@babel/core';
-import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
-import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
-import babelPresetTypeScript from '@babel/preset-typescript';
-import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
-import {BuilderOptions} from '@pika/types';
-import {Lint} from 'standard-pkg';
+import {BuilderOptions, MessageError} from '@pika/types';
+import {Lint, Build} from 'standard-pkg';
 
-export async function afterJob({out}: BuilderOptions) {
-  const linter = new Lint(out);
+export async function beforeJob({cwd}: BuilderOptions) {
+  const srcDirectory = path.join(cwd, 'src/');
+  if (!fs.existsSync(srcDirectory)) {
+    throw new MessageError('@pika/pack expects a standard package format, where package source must live in "src/".');
+  }
+  if (
+    !fs.existsSync(path.join(cwd, 'src/index.js')) &&
+    !fs.existsSync(path.join(cwd, 'src/index.ts')) &&
+    !fs.existsSync(path.join(cwd, 'src/index.jsx')) &&
+    !fs.existsSync(path.join(cwd, 'src/index.tsx'))
+  ) {
+    throw new MessageError(
+      '@pika/pack expects a standard package format, where the package entrypoint must live at "src/index".',
+    );
+  }
+}
+
+export async function afterJob({out, reporter}: BuilderOptions) {
+  reporter.info('Linting with standard-pkg...');
+  const linter = new Lint(path.join(out, 'dist-src'));
   await linter.init();
   linter.summary();
 }
@@ -20,25 +32,9 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, src, reporter}: BuilderOptions): Promise<void> {
-  for (const fileAbs of src.files) {
-    const writeToSrc = fileAbs
-      .replace(path.join(cwd, 'src/'), path.join(out, '/dist-src/'))
-      .replace('.ts', '.js')
-      .replace('.tsx', '.js')
-      .replace('.jsx', '.js')
-      .replace('.mjs', '.js');
-    const resultSrc = await babel.transformFileAsync(fileAbs, {
-      cwd,
-      presets: [[babelPresetTypeScript]],
-      plugins: [
-        [babelPluginImportRewrite, {addExtensions: true}],
-        babelPluginDynamicImportSyntax,
-        babelPluginImportMetaSyntax,
-      ],
-    });
-    mkdirp.sync(path.dirname(writeToSrc));
-    fs.writeFileSync(writeToSrc, resultSrc.code);
-  }
-  reporter.created(path.join(out, "dist-src", "index.js"), 'esnext');
+export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
+  const builder = new Build(path.join(cwd, 'src'), options);
+  await builder.init();
+  await builder.write(path.join(out, '/dist-src/'));
+  reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
 }

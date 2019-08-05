@@ -1,19 +1,30 @@
 {
   "name": "@pika/plugin-wasm-assemblyscript",
-  "version": "0.2.8",
-  "pika": true,
-  "keywords": [
-    "pika-pkg"
-  ],
+  "description": "A @pika/pack plugin: Builds TypeScript as WASM via AssemblyScript.",
+  "version": "0.6.0",
   "files": [
     "dist-*/",
-    "assets/",
     "bin/"
   ],
+  "pika": true,
   "sideEffects": false,
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
   "dependencies": {
     "assemblyscript": "github:AssemblyScript/assemblyscript"
   },
-  "source": "dist-src/index.js",
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/plugin-standard-pkg": "^0.6.0",
+    "@types/node": "^10.12.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "esnext": "dist-src/index.js",
   "main": "dist-node/index.js"
 }

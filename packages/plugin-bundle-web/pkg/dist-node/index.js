@@ -7,108 +7,82 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var rollupCommonJs = _interopDefault(require('rollup-plugin-commonjs'));
 var rollupJson = _interopDefault(require('rollup-plugin-json'));
 var rollupNodeResolve = _interopDefault(require('rollup-plugin-node-resolve'));
+var rollupPluginTerser = require('rollup-plugin-terser');
+var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
+var babelPluginDynamicImportSyntax = _interopDefault(require('@babel/plugin-syntax-dynamic-import'));
+var babelPluginImportMetaSyntax = _interopDefault(require('@babel/plugin-syntax-import-meta'));
+var babelPresetEnv = _interopDefault(require('@babel/preset-env'));
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var types = require('@pika/types');
+var rollup = require('rollup');
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
+async function beforeJob({
+  out
+}) {
+  const srcDirectory = path.join(out, 'dist-web/');
+
+  if (!fs.existsSync(srcDirectory)) {
+    throw new types.MessageError('"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-dev" to precede in pipeline.');
   }
 
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
+  const srcEntrypoint = path.join(out, 'dist-web/index.js');
+
+  if (!fs.existsSync(srcEntrypoint)) {
+    throw new types.MessageError('"dist-web/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
+function manifest(manifest, {
+  options
+}) {
+  if (options.entrypoint) {
+    manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+  }
 }
-
-function beforeJob(_x) {
-  return _beforeJob.apply(this, arguments);
-}
-
-function _beforeJob() {
-  _beforeJob = _asyncToGenerator(function* ({
-    out
-  }) {
-    const srcDirectory = path.join(out, "dist-src/");
-
-    if (!fs.existsSync(srcDirectory)) {
-      throw new types.MessageError('"dist-src/" does not exist, or was not yet created in the pipeline.');
-    }
-
-    const srcEntrypoint = path.join(out, "dist-src/index.js");
-
-    if (!fs.existsSync(srcEntrypoint)) {
-      throw new types.MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
-    }
+async function build({
+  out,
+  options,
+  reporter
+}) {
+  const readFromWeb = path.join(out, 'dist-web', 'index.js');
+  const writeToWeb = path.join(out, 'dist-web');
+  const writeToWebBundled = path.join(writeToWeb, 'index.bundled.js');
+  const result = await rollup.rollup({
+    input: readFromWeb,
+    plugins: [rollupNodeResolve({
+      preferBuiltins: true,
+      browser: !!options.browser
+    }), rollupCommonJs({
+      include: 'node_modules/**',
+      sourceMap: false,
+      namedExports: options.namedExports
+    }), rollupJson({
+      include: 'node_modules/**',
+      compact: true
+    }), rollupBabel({
+      babelrc: false,
+      compact: false,
+      presets: [[babelPresetEnv, {
+        modules: false,
+        targets: options.targets || {
+          esmodules: true
+        }
+      }]],
+      plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
+    }), options.minify !== false ? rollupPluginTerser.terser(typeof options.minify === 'object' ? options.minify : undefined) : undefined]
   });
-  return _beforeJob.apply(this, arguments);
-}
-
-function manifest(manifest) {
-  manifest.module = manifest.module || 'dist-web/index.js';
-}
-function build(_x2) {
-  return _build.apply(this, arguments);
-}
-
-function _build() {
-  _build = _asyncToGenerator(function* ({
-    out,
-    options,
-    rollup,
-    reporter
-  }) {
-    const readFromWeb = path.join(out, 'dist-web', 'index.js');
-    const writeToWeb = path.join(out, 'dist-web', 'index.bundled.js');
-    const srcBundle = yield rollup('web', {
-      input: readFromWeb,
-      plugins: [rollupNodeResolve({
-        preferBuiltins: true
-      }), rollupCommonJs({
-        include: 'node_modules/**',
-        sourceMap: false,
-        namedExports: options.namedExports
-      }), rollupJson({
-        include: 'node_modules/**',
-        compact: true
-      })]
-    });
-    yield srcBundle.write({
-      file: writeToWeb,
-      format: 'esm',
-      exports: 'named'
-    });
-    reporter.created(writeToWeb);
+  await result.write({
+    dir: writeToWeb,
+    entryFileNames: '[name].bundled.js',
+    chunkFileNames: '[name]-[hash].bundled.js',
+    format: 'esm',
+    exports: 'named',
+    sourcemap: options.sourcemap === undefined ? true : options.sourcemap
   });
-  return _build.apply(this, arguments);
+  reporter.created(writeToWebBundled);
 }
 
 exports.beforeJob = beforeJob;
-exports.manifest = manifest;
 exports.build = build;
+exports.manifest = manifest;
+//# sourceMappingURL=index.js.map

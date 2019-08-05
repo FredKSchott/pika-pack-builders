@@ -1,37 +1,42 @@
 {
-    "name": "@pika/plugin-ts-standard-pkg",
-    "version": "0.3.2",
-    "main": "pkg/dist-node/index.js",
-    "publishConfig": {
-        "access": "public"
-    },
-    "distributions": {
-        "src": [
-            true
-        ],
-        "plugins": [
-            [
-                "@pika/plugin-build-node"
-            ]
-        ]
-    },
-    "scripts": {
-        "build": "pika build"
-    },
-    "dependencies": {
-        "@types/node": "^10.12.18",
-        "execa": "^1.0.0",
-        "standard-pkg": "^0.2.0"
-    },
-    "peerDependencies": {
-        "typescript": "*"
-    },
-    "devDependencies": {
-        "@pika/pack": "^0.1.7",
-        "@pika/plugin-build-node": "^0.3.2",
-        "@pika/types": "^0.3.2",
-        "@types/node": "^10.12.18",
-        "typescript": "^3.0.0"
-    },
-    "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
+  "name": "@pika/plugin-ts-standard-pkg",
+  "version": "0.6.0",
+  "description": "A @pika/pack plugin: Builds your TypeScript package source as standard, ES2018 JavaScript.",
+  "main": "pkg/dist-node/index.js",
+  "homepage": "https://www.pikapkg.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikapkg/builders.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "./pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
+  },
+  "scripts": {
+    "build": "pika-pack build"
+  },
+  "dependencies": {
+    "execa": "^2.0.0",
+    "standard-pkg": "^0.4.0"
+  },
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/types": "^0.6.0",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.0.0"
+  },
+  "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
 }

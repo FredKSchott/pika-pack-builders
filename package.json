@@ -2,9 +2,15 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "nuke": "rm -rf package-lock.json node_modules && npm install && lerna exec \"rm -f package-lock.json npm-shrinkwrap.json\" && lerna clean --yes && lerna bootstrap && lerna exec --stream -- \"test -f package-lock.json || npm install --package-lock-only\""
+    "version": "lerna version",
+    "build": "lerna run build",
+    "format": "prettier --write packages/*/src/**/*.ts",
+    "publish": "lerna publish from-package --contents pkg",
+    "nuke": "lerna exec \"rm -f package-lock.json npm-shrinkwrap.json\" && lerna clean --yes && lerna bootstrap && lerna exec --stream -- \"test -f package-lock.json || npm install --package-lock-only\""
   },
   "devDependencies": {
-    "lerna": "^3.10.5"
-  }
+    "lerna": "^3.16.4",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {}
 }
