@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
+import rollupBabel from 'rollup-plugin-babel';
 
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-src/');
@@ -18,12 +19,16 @@ export function manifest(manifest) {
   manifest.module = manifest.module || 'dist-web/index.js';
 }
 
-export async function build({out, options, reporter}: BuilderOptions): Promise<void> {
+export async function build({out, cwd, options, reporter}: BuilderOptions): Promise<void> {
   const writeToWeb = path.join(out, 'dist-web', 'index.js');
 
   const result = await rollup({
-    input: path.join(out, 'dist-src/index.js'),
-    plugins: [],
+    input: options.input || path.join(cwd, `src/index.js`),
+    plugins: [
+      rollupBabel({
+        exclude: 'node_modules/**',
+      }),
+    ],
     onwarn: ((warning, defaultOnWarnHandler) => {
       // // Unresolved external imports are expected
       if (
