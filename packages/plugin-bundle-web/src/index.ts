@@ -73,7 +73,7 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
       }),
       options.minify !== false
         ? rollupTerser(typeof options.minify === 'object' ? options.minify : undefined)
-        : undefined,
+        : {},
     ],
   });
 
