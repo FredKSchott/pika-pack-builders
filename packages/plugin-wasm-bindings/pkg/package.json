@@ -2,6 +2,7 @@
   "name": "@pika/plugin-wasm-bindings",
   "description": "A @pika/pack plugin: adds simple JavaScript bindings that work with any WASM file.",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"

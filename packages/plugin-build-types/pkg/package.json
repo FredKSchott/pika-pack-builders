@@ -2,6 +2,7 @@
   "name": "@pika/plugin-build-types",
   "description": "A @pika/pack plugin: Adds TypeScript type definitions to your package build.",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"
