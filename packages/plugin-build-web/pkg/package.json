@@ -2,6 +2,7 @@
   "name": "@pika/plugin-build-web",
   "description": "A @pika/pack plugin:  Adds an ESM distribution to your package, built & optimized to run in most web browsers (and bundlers).",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"

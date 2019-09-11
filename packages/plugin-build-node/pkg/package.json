@@ -2,6 +2,7 @@
   "name": "@pika/plugin-build-node",
   "description": "A @pika/pack plugin: Adds a Node.js distribution to your package, built & optimized to run on Node.js.",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"

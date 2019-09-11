@@ -2,6 +2,7 @@
   "name": "@pika/plugin-bundle-types",
   "version": "0.6.0",
   "description": "A @pika/pack plugin: Bundle & tree-shake all TypeScript definitions into a single file.",
+  "license": "MIT",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",
   "repository": {

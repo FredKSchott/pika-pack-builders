@@ -2,6 +2,7 @@
   "name": "@pika/plugin-ts-standard-pkg",
   "description": "A @pika/pack plugin: Builds your TypeScript package source as standard, ES2018 JavaScript.",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"

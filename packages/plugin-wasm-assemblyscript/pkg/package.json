@@ -2,6 +2,7 @@
   "name": "@pika/plugin-wasm-assemblyscript",
   "description": "A @pika/pack plugin: Builds TypeScript as WASM via AssemblyScript.",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"

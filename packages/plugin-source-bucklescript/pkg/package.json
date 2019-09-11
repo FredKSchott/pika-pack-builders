@@ -2,6 +2,7 @@
   "name": "@pika/plugin-source-bucklescript",
   "description": "A @pika/pack plugin: ",
   "version": "0.6.0",
+  "license": "MIT",
   "files": [
     "dist-*/",
     "bin/"

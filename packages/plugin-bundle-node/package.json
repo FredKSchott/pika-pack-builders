@@ -2,6 +2,7 @@
   "name": "@pika/plugin-bundle-node",
   "version": "0.6.0",
   "description": "A @pika/pack plugin: Adds a bundled Node.js distribution to your package.",
+  "license": "MIT",
   "main": "pkg/dist-node/index.js",
   "homepage": "https://www.pikapkg.com",
   "repository": {
