@@ -106,6 +106,8 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
       'es2019',
       '--module',
       'esnext',
+      '--noEmit',
+      'false',
     ],
     {cwd},
   );
