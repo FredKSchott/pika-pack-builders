@@ -28,9 +28,9 @@ export async function beforeJob({out}: BuilderOptions) {
 export function manifest(manifest, {options}: BuilderOptions) {
   if (options.entrypoint) {
     if (options.entrypoint instanceof Array) {
-      options.entrypoint.forEach((entrypoint) => {
+      options.entrypoint.forEach(entrypoint => {
         manifest[entrypoint] = 'dist-web/index.bundled.js';
-      })
+      });
     } else {
       manifest[options.entrypoint] = 'dist-web/index.bundled.js';
     }
@@ -71,9 +71,7 @@ export async function build({out, options, reporter}: BuilderOptions): Promise<v
         ],
         plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax],
       }),
-      options.minify !== false
-        ? rollupTerser(typeof options.minify === 'object' ? options.minify : undefined)
-        : undefined,
+      options.minify !== false ? rollupTerser(typeof options.minify === 'object' ? options.minify : undefined) : {},
     ],
   });
 
