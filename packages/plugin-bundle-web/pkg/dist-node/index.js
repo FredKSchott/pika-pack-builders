@@ -36,7 +36,13 @@ function manifest(manifest, {
   options
 }) {
   if (options.entrypoint) {
-    manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+    if (options.entrypoint instanceof Array) {
+      options.entrypoint.forEach(entrypoint => {
+        manifest[entrypoint] = 'dist-web/index.bundled.js';
+      });
+    } else {
+      manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+    }
   }
 }
 async function build({
@@ -69,7 +75,7 @@ async function build({
         }
       }]],
       plugins: [babelPluginDynamicImportSyntax, babelPluginImportMetaSyntax]
-    }), options.minify !== false ? rollupPluginTerser.terser(typeof options.minify === 'object' ? options.minify : undefined) : undefined]
+    }), options.minify !== false ? rollupPluginTerser.terser(typeof options.minify === 'object' ? options.minify : undefined) : {}]
   });
   await result.write({
     dir: writeToWeb,

@@ -116,7 +116,7 @@ async function build({
   reporter
 }) {
   const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-  await execa(tscBin, ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext'], {
+  await execa(tscBin, ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false'], {
     cwd
   });
   reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');

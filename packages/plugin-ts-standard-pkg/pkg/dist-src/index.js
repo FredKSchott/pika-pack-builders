@@ -89,6 +89,8 @@ export async function build({ cwd, out, options, reporter }) {
         'es2019',
         '--module',
         'esnext',
+        '--noEmit',
+        'false',
     ], { cwd });
     reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
     reporter.created(path.join(out, 'dist-types', 'index.d.ts'), 'types');
