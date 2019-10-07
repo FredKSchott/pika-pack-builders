@@ -79,7 +79,7 @@ export async function beforeJob({cwd}: BuilderOptions) {
 
 export async function afterJob({out, reporter}: BuilderOptions) {
   reporter.info('Linting with standard-pkg...');
-  const linter = new Lint(path.join(out, 'dist-src'));
+  const linter = new Lint(path.join(out, 'dist-src'), {ignoreExtensions: true});
   await linter.init();
   linter.summary();
 }
