@@ -86,7 +86,7 @@ function getConfigData(cwd: string, out: string, tsConfigPath: string) {
     /**
      * Configures how the API report file (*.api.md) will be generated.
      */
-    apiReport: {enabled: false, reportFileName: '<packageName>.api.md'},
+    apiReport: {enabled: false, reportFileName: 'report.api.md'},
     docModel: {enabled: false},
     tsdocMetadata: {enabled: false},
     dtsRollup: {
