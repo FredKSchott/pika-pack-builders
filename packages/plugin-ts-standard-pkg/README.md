@@ -38,6 +38,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 This plugin runs `tsc` internally, so it supports all [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) options defined in your project-level config file (like `compilerOptions` & `exclude`).
 
 - `"tsconfig"`: Optional, the relative path to the `tsconfig.json` config file to use. Defaults to the top-level project TypeScript config file, if one exists.
+- `"args"`: Optional, an array of additional arguments for tsc. Example: `["--build"]`
 
 
 ## Result
