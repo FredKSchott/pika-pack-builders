@@ -8,6 +8,12 @@ function getTsConfigPath(options, cwd) {
   return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
 
+function getTscBin(cwd) {
+  return require.resolve('typescript/bin/tsc', {
+    paths: [cwd],
+  });
+}
+
 export function manifest(manifest) {
   manifest.types = manifest.types || 'dist-types/index.d.ts';
 }
@@ -21,7 +27,7 @@ export async function beforeBuild({options, cwd}: BuilderOptions) {
 
 export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
   await (async () => {
-    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
+    const tscBin = getTscBin(cwd);
     const writeToTypings = path.join(out, 'dist-types/index.d.ts');
     const importAsNode = path.join(out, 'dist-node', 'index.js');
 

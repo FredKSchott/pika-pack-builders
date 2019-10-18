@@ -42,9 +42,14 @@ function getTsConfigPath(options, cwd) {
   return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
 
+function getTscBin(cwd) {
+  return require.resolve('typescript/bin/tsc', {
+    paths: [cwd],
+  });
+}
+
 export async function beforeBuild({cwd, options, reporter}: BuilderOptions) {
-  const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-  if (!fs.existsSync(tscBin)) {
+  if (!fs.existsSync(getTscBin(cwd))) {
     throw new MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
   }
   const tsConfigPath = getTsConfigPath(options, cwd);
@@ -91,9 +96,8 @@ export function manifest(newManifest) {
 }
 
 export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
-  const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
   await execa(
-    tscBin,
+    getTscBin(cwd),
     [
       '--outDir',
       path.join(out, 'dist-src/'),
