@@ -98,7 +98,8 @@ export function manifest(newManifest) {
   return newManifest;
 }
 
-export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
+export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {    
+  const additionalArgs = options.args || [];
   await execa(
     getTscBin(cwd),
     [
@@ -115,6 +116,7 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
       'esnext',
       '--noEmit',
       'false',
+      ...additionalArgs,
     ],
     {cwd},
   );

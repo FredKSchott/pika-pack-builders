@@ -46,6 +46,7 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
 
     const tsConfigPath = getTsConfigPath(options, cwd);
     const tscBin = getTscBin(cwd);
+    const additionalArgs = options.args || [];
     if (tscBin && fs.existsSync(tsConfigPath)) {
       await execa(
         tscBin,
@@ -58,6 +59,7 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
           tsConfigPath,
           '--declarationDir',
           path.join(out, 'dist-types/'),
+          ...additionalArgs,
         ],
         {cwd},
       );

@@ -37,6 +37,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 ## Options
 
 - `"tsconfig"`: The relative path to the `tsconfig.json` config file to use. Defaults to the top-level project TypeScript config file, if one exists.
+- `"args"`: Optional, an array of additional arguments for tsc. Example: `["--build"]`
 
 
 ## Result
