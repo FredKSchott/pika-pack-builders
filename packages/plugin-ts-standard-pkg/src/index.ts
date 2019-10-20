@@ -43,13 +43,16 @@ function getTsConfigPath(options, cwd) {
 }
 
 function getTscBin(cwd) {
-  return require.resolve('typescript/bin/tsc', {
-    paths: [cwd],
-  });
+  try {
+    return require.resolve('typescript/bin/tsc', {paths: [cwd]});
+  } catch (err) {
+    // ignore err
+    return null;
+  }
 }
 
 export async function beforeBuild({cwd, options, reporter}: BuilderOptions) {
-  if (!fs.existsSync(getTscBin(cwd))) {
+  if (!getTscBin(cwd)) {
     throw new MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
   }
   const tsConfigPath = getTsConfigPath(options, cwd);
