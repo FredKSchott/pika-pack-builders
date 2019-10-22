@@ -37,9 +37,17 @@ function readCompilerOptions(configPath) {
 function getTsConfigPath(options, cwd) {
     return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
+function getTscBin(cwd) {
+    try {
+        return require.resolve('typescript/bin/tsc', { paths: [cwd] });
+    }
+    catch (err) {
+        // ignore err
+        return null;
+    }
+}
 export async function beforeBuild({ cwd, options, reporter }) {
-    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-    if (!fs.existsSync(tscBin)) {
+    if (!getTscBin(cwd)) {
         throw new MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
     }
     const tsConfigPath = getTsConfigPath(options, cwd);
@@ -49,10 +57,12 @@ export async function beforeBuild({ cwd, options, reporter }) {
     const tsConfig = readCompilerOptions(tsConfigPath);
     const { target, module: mod } = tsConfig;
     if (target !== tsc.ScriptTarget.ES2019) {
-        reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${target}". You may encounter problems building.`);
+        const _target = tsc.ScriptTarget[target] || '';
+        reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${_target ? _target.toLowerCase() : target}". You may encounter problems building.`);
     }
     if (mod !== tsc.ModuleKind.ESNext) {
-        reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
+        const _mod = tsc.ModuleKind[mod] || '';
+        reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${_mod ? _mod.toLowerCase() : mod}". You may encounter problems building.`);
     }
 }
 export async function beforeJob({ cwd }) {
@@ -66,7 +76,7 @@ export async function beforeJob({ cwd }) {
 }
 export async function afterJob({ out, reporter }) {
     reporter.info('Linting with standard-pkg...');
-    const linter = new Lint(path.join(out, 'dist-src'));
+    const linter = new Lint(path.join(out, 'dist-src'), { ignoreExtensions: true });
     await linter.init();
     linter.summary();
 }
@@ -76,8 +86,8 @@ export function manifest(newManifest) {
     return newManifest;
 }
 export async function build({ cwd, out, options, reporter }) {
-    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-    await execa(tscBin, [
+    const additionalArgs = options.args || [];
+    await execa(getTscBin(cwd), [
         '--outDir',
         path.join(out, 'dist-src/'),
         '-d',
@@ -91,6 +101,7 @@ export async function build({ cwd, out, options, reporter }) {
         'esnext',
         '--noEmit',
         'false',
+        ...additionalArgs,
     ], { cwd });
     reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
     reporter.created(path.join(out, 'dist-types', 'index.d.ts'), 'types');

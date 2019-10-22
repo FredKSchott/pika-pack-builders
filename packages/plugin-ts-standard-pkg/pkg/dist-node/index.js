@@ -51,14 +51,23 @@ function getTsConfigPath(options, cwd) {
   return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
 
+function getTscBin(cwd) {
+  try {
+    return require.resolve('typescript/bin/tsc', {
+      paths: [cwd]
+    });
+  } catch (err) {
+    // ignore err
+    return null;
+  }
+}
+
 async function beforeBuild({
   cwd,
   options,
   reporter
 }) {
-  const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-
-  if (!fs.existsSync(tscBin)) {
+  if (!getTscBin(cwd)) {
     throw new types.MessageError('"tsc" executable not found. Make sure "typescript" is installed as a project dependency.');
   }
 
@@ -75,11 +84,15 @@ async function beforeBuild({
   } = tsConfig;
 
   if (target !== tsc.ScriptTarget.ES2019) {
-    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${target}". You may encounter problems building.`);
+    const _target = tsc.ScriptTarget[target] || '';
+
+    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${_target ? _target.toLowerCase() : target}". You may encounter problems building.`);
   }
 
   if (mod !== tsc.ModuleKind.ESNext) {
-    reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${mod}". You may encounter problems building.`);
+    const _mod = tsc.ModuleKind[mod] || '';
+
+    reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${_mod ? _mod.toLowerCase() : mod}". You may encounter problems building.`);
   }
 }
 async function beforeJob({
@@ -100,7 +113,9 @@ async function afterJob({
   reporter
 }) {
   reporter.info('Linting with standard-pkg...');
-  const linter = new standardPkg.Lint(path.join(out, 'dist-src'));
+  const linter = new standardPkg.Lint(path.join(out, 'dist-src'), {
+    ignoreExtensions: true
+  });
   await linter.init();
   linter.summary();
 }
@@ -115,8 +130,8 @@ async function build({
   options,
   reporter
 }) {
-  const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
-  await execa(tscBin, ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false'], {
+  const additionalArgs = options.args || [];
+  await execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false', ...additionalArgs], {
     cwd
   });
   reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
