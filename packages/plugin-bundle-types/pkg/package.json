@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-bundle-types",
   "description": "A @pika/pack plugin: Bundle & tree-shake all TypeScript definitions into a single file.",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "license": "MIT",
   "files": [
     "dist-*/",
@@ -15,14 +15,14 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
-    "@pika/types": "^0.6.1",
     "@microsoft/api-extractor": "^7.1.5",
+    "@pika/types": "^0.7.0",
     "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.6.1",
-    "@pika/plugin-ts-standard-pkg": "^0.6.1",
+    "@pika/plugin-build-node": "^0.7.0",
+    "@pika/plugin-ts-standard-pkg": "^0.7.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },
