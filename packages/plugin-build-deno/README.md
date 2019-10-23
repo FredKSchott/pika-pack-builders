@@ -34,6 +34,11 @@ yarn add @pika/plugin-build-deno --dev
 For more information about @pika/pack & help getting started, [check out the main project repo](https://github.com/pikapkg/pack).
 
 
+## Options
+
+- `"entrypoint"` (Default: `"deno"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string or an array of strings. Changing this is not recommended for most usage.
+
+
 ## Result
 
 1. Adds a TypeScript distribution to your built package: `dist-deno/`

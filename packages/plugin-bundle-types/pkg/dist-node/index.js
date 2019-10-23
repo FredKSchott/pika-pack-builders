@@ -73,7 +73,7 @@ function getConfigData(cwd, out, tsConfigPath) {
      */
     apiReport: {
       enabled: false,
-      reportFileName: '<packageName>.api.md'
+      reportFileName: 'report.api.md'
     },
     docModel: {
       enabled: false

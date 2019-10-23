@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { MessageError } from '@pika/types';
 import { rollup } from 'rollup';
+const DEFAULT_ENTRYPOINT = 'deno';
 export async function beforeJob({ out }) {
     const srcDirectory = path.join(out, 'dist-src/');
     if (!fs.existsSync(srcDirectory)) {
@@ -12,8 +13,14 @@ export async function beforeJob({ out }) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
 }
-export function manifest(manifest) {
-    manifest.module = manifest.module || 'dist-web/index.js';
+export function manifest(manifest, { options }) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+        keys = [keys];
+    }
+    for (const key of keys) {
+        manifest[key] = manifest[key] || 'dist-web/index.js';
+    }
 }
 export async function build({ out, options, reporter }) {
     const writeToWeb = path.join(out, 'dist-web', 'index.js');

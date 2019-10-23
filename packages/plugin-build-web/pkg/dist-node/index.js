@@ -9,6 +9,7 @@ var fs = _interopDefault(require('fs'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
+const DEFAULT_ENTRYPOINT = 'deno';
 async function beforeJob({
   out
 }) {
@@ -24,8 +25,18 @@ async function beforeJob({
     throw new types.MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }
-function manifest(manifest) {
-  manifest.module = manifest.module || 'dist-web/index.js';
+function manifest(manifest, {
+  options
+}) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-web/index.js';
+  }
 }
 async function build({
   out,

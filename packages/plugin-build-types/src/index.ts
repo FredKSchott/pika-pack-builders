@@ -3,6 +3,7 @@ import fs from 'fs';
 import mkdirp from 'mkdirp';
 import execa from 'execa';
 import {BuilderOptions, MessageError} from '@pika/types';
+const DEFAULT_ENTRYPOINT = 'types';
 
 function getTsConfigPath(options, cwd) {
   return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
@@ -17,8 +18,14 @@ function getTscBin(cwd) {
   }
 }
 
-export function manifest(manifest) {
-  manifest.types = manifest.types || 'dist-types/index.d.ts';
+export function manifest(manifest, {options}: BuilderOptions) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+  }
 }
 
 export async function beforeBuild({options, cwd}: BuilderOptions) {

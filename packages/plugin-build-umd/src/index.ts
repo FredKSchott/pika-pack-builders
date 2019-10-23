@@ -6,6 +6,7 @@ import fs from 'fs';
 import rollupBabel from 'rollup-plugin-babel';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
+const DEFAULT_ENTRYPOINT = 'umd:main';
 
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-src/');
@@ -18,8 +19,14 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export function manifest(manifest) {
-  manifest['umd:main'] = 'dist-umd/index.js';
+export function manifest(manifest, {options}: BuilderOptions) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-umd/index.js';
+  }
 }
 
 export async function build({out, reporter, options}: BuilderOptions): Promise<void> {

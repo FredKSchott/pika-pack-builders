@@ -26,6 +26,7 @@
     "build": "pika-pack build"
   },
   "dependencies": {
+    "@pika/types": "^0.6.1",
     "@types/node": "^10.12.18",
     "rollup": "^1.1.0"
   },
@@ -33,7 +34,6 @@
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.6.1",
     "@pika/plugin-ts-standard-pkg": "^0.6.1",
-    "@pika/types": "^0.6.1",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

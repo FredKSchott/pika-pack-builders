@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
-
+const DEFAULT_ENTRYPOINT = 'deno';
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
@@ -14,8 +14,14 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export function manifest(manifest) {
-  manifest.module = manifest.module || 'dist-web/index.js';
+export function manifest(manifest, {options}: BuilderOptions) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-web/index.js';
+  }
 }
 
 export async function build({out, options, reporter}: BuilderOptions): Promise<void> {

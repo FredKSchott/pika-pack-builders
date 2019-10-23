@@ -72,7 +72,7 @@ try {
 `
         : ``
     }
-let hasBundled = true    
+let hasBundled = true
 
 try {
   require.resolve('./index.bundled.js');

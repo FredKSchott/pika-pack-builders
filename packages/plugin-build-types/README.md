@@ -1,7 +1,7 @@
 # @pika/plugin-build-types
 
 > A [@pika/pack](https://github.com/pikapkg/pack) build plugin.
-> Automatically adds TypeScript type definitions to your package build. 
+> Automatically adds TypeScript type definitions to your package build.
 
 *Note: This plugin is not needed if you are already writing TypeScript and using the [ts-standard-pkg](/packages/plugin-ts-standard-pkg) plugin.*
 
@@ -38,6 +38,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 - `"tsconfig"`: The relative path to the `tsconfig.json` config file to use. Defaults to the top-level project TypeScript config file, if one exists.
 - `"args"`: Optional, an array of additional arguments for tsc. Example: `["--build"]`
+- `"entrypoint"` (Default: `"types"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string or an array of strings. Changing this is not recommended for most usage.
 
 
 ## Result

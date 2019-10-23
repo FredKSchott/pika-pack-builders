@@ -6,6 +6,7 @@ import fs from 'fs';
 import rollupBabel from 'rollup-plugin-babel';
 import { MessageError } from '@pika/types';
 import { rollup } from 'rollup';
+const DEFAULT_ENTRYPOINT = 'umd:main';
 export async function beforeJob({ out }) {
     const srcDirectory = path.join(out, 'dist-src/');
     if (!fs.existsSync(srcDirectory)) {
@@ -16,8 +17,14 @@ export async function beforeJob({ out }) {
         throw new MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
     }
 }
-export function manifest(manifest) {
-    manifest['umd:main'] = 'dist-umd/index.js';
+export function manifest(manifest, { options }) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+        keys = [keys];
+    }
+    for (const key of keys) {
+        manifest[key] = manifest[key] || 'dist-umd/index.js';
+    }
 }
 export async function build({ out, reporter, options }) {
     const umdExportName = options.name || manifest.name;

@@ -15,16 +15,13 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
+    "@pika/types": "^0.6.1",
     "execa": "^2.0.0",
-    "standard-pkg": "^0.4.0"
-  },
-  "peerDependencies": {
-    "typescript": "*"
+    "standard-pkg": "^0.5.0"
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.6.1",
-    "@pika/types": "^0.6.1",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

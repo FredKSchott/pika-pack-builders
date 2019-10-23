@@ -10,8 +10,10 @@ var util = _interopDefault(require('util'));
 var glob = _interopDefault(require('glob'));
 var mkdirp = _interopDefault(require('mkdirp'));
 
+const DEFAULT_ENTRYPOINT = 'deno';
 async function manifest(manifest, {
-  cwd
+  cwd,
+  options
 }) {
   const pathToTsconfig = path.join(cwd, 'tsconfig.json');
 
@@ -19,7 +21,15 @@ async function manifest(manifest, {
     return;
   }
 
-  manifest.deno = manifest.deno || 'dist-deno/index.ts';
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-deno/index.ts';
+  }
 }
 async function build({
   cwd,

@@ -15,9 +15,20 @@ var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
+const DEFAULT_ENTRYPOINT = 'main';
 const DEFAULT_MIN_NODE_VERSION = '8';
-function manifest(manifest) {
-  manifest.main = manifest.main || 'dist-node/index.js';
+function manifest(manifest, {
+  options
+}) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-node/index.js';
+  }
 }
 async function beforeJob({
   out

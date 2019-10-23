@@ -82,7 +82,7 @@ try {
   // We don't have/need this on legacy builds and dev builds
 }
 ` : ``}
-let hasBundled = true    
+let hasBundled = true
 
 try {
   require.resolve('./index.bundled.js');

@@ -10,12 +10,35 @@ var mkdirp = _interopDefault(require('mkdirp'));
 var execa = _interopDefault(require('execa'));
 var types = require('@pika/types');
 
+const DEFAULT_ENTRYPOINT = 'types';
+
 function getTsConfigPath(options, cwd) {
   return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
 
-function manifest(manifest) {
-  manifest.types = manifest.types || 'dist-types/index.d.ts';
+function getTscBin(cwd) {
+  try {
+    return require.resolve('typescript/bin/tsc', {
+      paths: [cwd]
+    });
+  } catch (err) {
+    // ignore err
+    return null;
+  }
+}
+
+function manifest(manifest, {
+  options
+}) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+  }
 }
 async function beforeBuild({
   options,
@@ -34,7 +57,6 @@ async function build({
   reporter
 }) {
   await (async () => {
-    const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
     const writeToTypings = path.join(out, 'dist-types/index.d.ts');
     const importAsNode = path.join(out, 'dist-node', 'index.js');
 
@@ -51,9 +73,11 @@ async function build({
     }
 
     const tsConfigPath = getTsConfigPath(options, cwd);
+    const tscBin = getTscBin(cwd);
+    const additionalArgs = options.args || [];
 
-    if (fs.existsSync(tscBin) && fs.existsSync(tsConfigPath)) {
-      await execa(tscBin, ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--project', tsConfigPath, '--declarationDir', path.join(out, 'dist-types/')], {
+    if (tscBin && fs.existsSync(tsConfigPath)) {
+      await execa(tscBin, ['-d', '--emitDeclarationOnly', '--declarationMap', 'false', '--project', tsConfigPath, '--declarationDir', path.join(out, 'dist-types/'), ...additionalArgs], {
         cwd
       });
       return;

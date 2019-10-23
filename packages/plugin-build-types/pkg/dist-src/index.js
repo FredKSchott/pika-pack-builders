@@ -3,11 +3,27 @@ import fs from 'fs';
 import mkdirp from 'mkdirp';
 import execa from 'execa';
 import { MessageError } from '@pika/types';
+const DEFAULT_ENTRYPOINT = 'types';
 function getTsConfigPath(options, cwd) {
     return path.resolve(cwd, options.tsconfig || 'tsconfig.json');
 }
-export function manifest(manifest) {
-    manifest.types = manifest.types || 'dist-types/index.d.ts';
+function getTscBin(cwd) {
+    try {
+        return require.resolve('typescript/bin/tsc', { paths: [cwd] });
+    }
+    catch (err) {
+        // ignore err
+        return null;
+    }
+}
+export function manifest(manifest, { options }) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+        keys = [keys];
+    }
+    for (const key of keys) {
+        manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+    }
 }
 export async function beforeBuild({ options, cwd }) {
     const tsConfigPath = getTsConfigPath(options, cwd);
@@ -17,7 +33,6 @@ export async function beforeBuild({ options, cwd }) {
 }
 export async function build({ cwd, out, options, reporter }) {
     await (async () => {
-        const tscBin = path.join(cwd, 'node_modules/.bin/tsc');
         const writeToTypings = path.join(out, 'dist-types/index.d.ts');
         const importAsNode = path.join(out, 'dist-node', 'index.js');
         if (fs.existsSync(path.join(cwd, 'index.d.ts'))) {
@@ -31,7 +46,9 @@ export async function build({ cwd, out, options, reporter }) {
             return;
         }
         const tsConfigPath = getTsConfigPath(options, cwd);
-        if (fs.existsSync(tscBin) && fs.existsSync(tsConfigPath)) {
+        const tscBin = getTscBin(cwd);
+        const additionalArgs = options.args || [];
+        if (tscBin && fs.existsSync(tsConfigPath)) {
             await execa(tscBin, [
                 '-d',
                 '--emitDeclarationOnly',
@@ -41,6 +58,7 @@ export async function build({ cwd, out, options, reporter }) {
                 tsConfigPath,
                 '--declarationDir',
                 path.join(out, 'dist-types/'),
+                ...additionalArgs,
             ], { cwd });
             return;
         }

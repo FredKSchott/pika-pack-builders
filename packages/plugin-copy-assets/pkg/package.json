@@ -15,6 +15,7 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
+    "@pika/types": "^0.6.1",
     "copy-concurrently": "^1.0.5"
   },
   "devDependencies": {

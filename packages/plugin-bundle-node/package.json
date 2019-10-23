@@ -30,6 +30,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
+    "@pika/types": "^0.6.1",
     "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
     "builtin-modules": "^3.0.0",
     "rollup": "^1.1.0",
@@ -43,7 +44,6 @@
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.6.1",
     "@pika/plugin-ts-standard-pkg": "^0.6.1",
-    "@pika/types": "^0.6.1",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   }

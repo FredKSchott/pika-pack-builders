@@ -13,6 +13,7 @@ var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
+const DEFAULT_ENTRYPOINT = 'umd:main';
 async function beforeJob({
   out
 }) {
@@ -28,8 +29,18 @@ async function beforeJob({
     throw new types.MessageError('"dist-src/index.js" is the expected standard entrypoint, but it does not exist.');
   }
 }
-function manifest(manifest) {
-  manifest['umd:main'] = 'dist-umd/index.js';
+function manifest(manifest, {
+  options
+}) {
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-umd/index.js';
+  }
 }
 async function build({
   out,

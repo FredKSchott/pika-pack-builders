@@ -3,12 +3,19 @@ import fs from 'fs';
 import util from 'util';
 import glob from 'glob';
 import mkdirp from 'mkdirp';
-export async function manifest(manifest, { cwd }) {
+const DEFAULT_ENTRYPOINT = 'deno';
+export async function manifest(manifest, { cwd, options }) {
     const pathToTsconfig = path.join(cwd, 'tsconfig.json');
     if (!fs.existsSync(pathToTsconfig)) {
         return;
     }
-    manifest.deno = manifest.deno || 'dist-deno/index.ts';
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+        keys = [keys];
+    }
+    for (const key of keys) {
+        manifest[key] = manifest[key] || 'dist-deno/index.ts';
+    }
 }
 export async function build({ cwd, out, options }) {
     const pathToTsconfig = path.join(cwd, 'tsconfig.json');
