@@ -28,13 +28,12 @@ export async function beforeJob({out}: BuilderOptions) {
 }
 
 export function manifest(manifest, {options}: BuilderOptions) {
-  const entrypoint = options.entrypoint || DEFAULT_ENTRYPOINT;
-  if (entrypoint instanceof Array) {
-    entrypoint.forEach(e => {
-      manifest[e] = 'dist-web/index.bundled.js';
-    });
-  } else {
-    manifest[entrypoint] = 'dist-web/index.bundled.js';
+  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+  if (typeof keys === 'string') {
+    keys = [keys];
+  }
+  for (const key of keys) {
+    manifest[key] = manifest[key] || 'dist-web/index.bundled.js';
   }
 }
 
