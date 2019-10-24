@@ -32,6 +32,9 @@ yarn add @pika/plugin-bundle-types --dev
 
 For more information about @pika/pack & help getting started, [check out the main project repo](https://github.com/pikapkg/pack).
 
+## Options
+
+- `"tsconfig"`: The relative path to the `tsconfig.json` config file to use. Defaults to the top-level project TypeScript config file, if one exists.
 
 ## Result
 
