@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
-const DEFAULT_ENTRYPOINT = 'deno';
+const DEFAULT_ENTRYPOINT = 'module';
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-src/');
   if (!fs.existsSync(srcDirectory)) {
