@@ -231,12 +231,14 @@ export async function beforeJob({out}: BuilderOptions) {
 }
 
 export function manifest(manifest, {options}: BuilderOptions) {
-  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
-  if (typeof keys === 'string') {
-    keys = [keys];
-  }
-  for (const key of keys) {
-    manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+  if (options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+    }
   }
 }
 

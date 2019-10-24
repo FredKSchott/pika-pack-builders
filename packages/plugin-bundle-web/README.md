@@ -39,7 +39,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 - `"namedExports"` (Default: `undefined`): Ecplicitly specify unresolvable named exports (See [`rollup-plugin-commonjs`](https://github.com/rollup/rollup-plugin-commonjs/tree/v9.2.0#custom-named-exports) for more information).
 - `"minify"` (Default: `true`): Specify if bundle should be minifed using [`terser`](https://github.com/terser-js/terser) or not. Can also be [`terser` options object](https://github.com/terser-js/terser#minify-options) to further tweak minification.
 - `"targets"` (Default: `{"esmodules": true}`): The browsers supported/targeted by the build. Defaults to support all browsers that support ES Module (ESM) syntax.
-- `"entrypoint"` (Default: `"browser"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string or an array of strings. Changing this is not recommended for most usage.
+- `"entrypoint"` (Default: `"browser"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string, an array of strings, or `null` to disable entrypoint. Changing this is not recommended for most usage.
   - `{"entrypoint": "browser"}` will create an "browser" entrypoint that points to "dist-web/index.bundled.js". This is supported by both [`unpkg`](https://unpkg.com) and [`jsdelivr`](https://jsdelivr.com).
   - `{"entrypoint": ["unpkg", "jsdelivr"]}` will create both "unpkg" & "jsdelivr" "dist-web/index.bundled.js" entrypoints.
 
