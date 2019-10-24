@@ -41,7 +41,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 - `"targets"` (Default: `{"esmodules": true}`): The browsers supported/targeted by the build. Defaults to support all browsers that support ES Module (ESM) syntax.
 - `"entrypoint"`: Add a package.json entrypoint for the bundled build. perfect for pointing [UNPKG](https://unpkg.com/) and other CDNs to this build. 
   - `{"entrypoint": "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js".
-  - `{"entrypoint": ["unpkg", "jsdeliver"]}` will create both "unpkg" & "jsdeliver" "dist-web/index.bundled.js" entrypoints.
+  - `{"entrypoint": ["unpkg", "jsdelivr"]}` will create both "unpkg" & "jsdelivr" "dist-web/index.bundled.js" entrypoints.
 
 ## Result
 
