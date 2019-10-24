@@ -1,7 +1,7 @@
 {
   "name": "@pika/plugin-copy-assets",
   "description": "A @pika/pack plugin: Copies static assets into your built package directory.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "license": "MIT",
   "files": [
     "dist-*/",
@@ -15,13 +15,13 @@
     "url": "https://github.com/pikapkg/builders.git"
   },
   "dependencies": {
-    "@pika/types": "^0.7.0",
+    "@pika/types": "^0.7.1",
     "copy-concurrently": "^1.0.5"
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.7.0",
-    "@pika/plugin-ts-standard-pkg": "^0.7.0",
+    "@pika/plugin-build-node": "^0.7.1",
+    "@pika/plugin-ts-standard-pkg": "^0.7.1",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },

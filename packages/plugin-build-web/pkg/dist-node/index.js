@@ -9,7 +9,7 @@ var fs = _interopDefault(require('fs'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
-const DEFAULT_ENTRYPOINT = 'deno';
+const DEFAULT_ENTRYPOINT = 'module';
 async function beforeJob({
   out
 }) {
