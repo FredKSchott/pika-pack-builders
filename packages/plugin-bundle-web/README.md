@@ -40,8 +40,8 @@ For more information about @pika/pack & help getting started, [check out the mai
 - `"minify"` (Default: `true`): Specify if bundle should be minifed using [`terser`](https://github.com/terser-js/terser) or not. Can also be [`terser` options object](https://github.com/terser-js/terser#minify-options) to further tweak minification.
 - `"targets"` (Default: `{"esmodules": true}`): The browsers supported/targeted by the build. Defaults to support all browsers that support ES Module (ESM) syntax.
 - `"entrypoint"`: Add a package.json entrypoint for the bundled build. perfect for pointing [UNPKG](https://unpkg.com/) and other CDNs to this build. 
-  - `{"entrypoint: "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js".
-  - `{"entrypoint: ["unpkg", "jsdeliver"]}` will create both "unpkg" & "jsdeliver" "dist-web/index.bundled.js" entrypoints.
+  - `{"entrypoint": "unpkg"}` will create an "unpkg" entrypoint that points to "dist-web/index.bundled.js".
+  - `{"entrypoint": ["unpkg", "jsdeliver"]}` will create both "unpkg" & "jsdeliver" "dist-web/index.bundled.js" entrypoints.
 
 ## Result
 
