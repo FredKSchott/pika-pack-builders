@@ -122,6 +122,8 @@ export async function build({cwd, out, options, reporter}: BuilderOptions): Prom
       'esnext',
       '--noEmit',
       'false',
+      '--sourceMap',
+      'false',
       ...additionalArgs,
     ],
     {cwd},
