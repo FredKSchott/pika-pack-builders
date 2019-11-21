@@ -44,5 +44,4 @@ This repo contains the official build plugins for @pika/pack.
 - [`pika-plugin-pkg-node`](https://www.npmjs.com/package/pika-plugin-pkg-node): Package a Node.js app into an executable.
 - [`pika-plugin-merge-properties`](https://github.com/jabuco/pika-plugin-merge-properties): Merge selected existing package.json properties into built package.json
 - [`pika-plugin-add-properties`](https://github.com/jabuco/pika-plugin-add-properties): Add custom values to built package.json
-
-
+- [`pika-plugin-package.json`](https://github.com/yumauri/pika-plugin-package.json): Modify (add/remove/merge) built `pkg/package.json` with new properties.
