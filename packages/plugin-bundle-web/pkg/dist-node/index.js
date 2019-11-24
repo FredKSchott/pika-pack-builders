@@ -17,6 +17,7 @@ var fs = _interopDefault(require('fs'));
 var types = require('@pika/types');
 var rollup = require('rollup');
 
+const DEFAULT_ENTRYPOINT = 'browser';
 async function beforeJob({
   out
 }) {
@@ -35,13 +36,15 @@ async function beforeJob({
 function manifest(manifest, {
   options
 }) {
-  if (options.entrypoint) {
-    if (options.entrypoint instanceof Array) {
-      options.entrypoint.forEach(entrypoint => {
-        manifest[entrypoint] = 'dist-web/index.bundled.js';
-      });
-    } else {
-      manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+  if (options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
+
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-web/index.bundled.js';
     }
   }
 }

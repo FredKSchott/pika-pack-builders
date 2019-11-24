@@ -101,6 +101,8 @@ export async function build({ cwd, out, options, reporter }) {
         'esnext',
         '--noEmit',
         'false',
+        '--sourceMap',
+        'false',
         ...additionalArgs,
     ], { cwd });
     reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');

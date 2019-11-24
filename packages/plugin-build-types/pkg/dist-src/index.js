@@ -17,12 +17,14 @@ function getTscBin(cwd) {
     }
 }
 export function manifest(manifest, { options }) {
-    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
-    if (typeof keys === 'string') {
-        keys = [keys];
-    }
-    for (const key of keys) {
-        manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+    if (options.entrypoint !== null) {
+        let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+        if (typeof keys === 'string') {
+            keys = [keys];
+        }
+        for (const key of keys) {
+            manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+        }
     }
 }
 export async function beforeBuild({ options, cwd }) {

@@ -11,12 +11,14 @@ import { rollup } from 'rollup';
 const DEFAULT_ENTRYPOINT = 'main';
 const DEFAULT_MIN_NODE_VERSION = '8';
 export function manifest(manifest, { options }) {
-    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
-    if (typeof keys === 'string') {
-        keys = [keys];
-    }
-    for (const key of keys) {
-        manifest[key] = manifest[key] || 'dist-node/index.js';
+    if (options.entrypoint !== null) {
+        let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+        if (typeof keys === 'string') {
+            keys = [keys];
+        }
+        for (const key of keys) {
+            manifest[key] = manifest[key] || 'dist-node/index.js';
+        }
     }
 }
 export async function beforeJob({ out }) {

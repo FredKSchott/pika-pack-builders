@@ -20,14 +20,16 @@ const DEFAULT_MIN_NODE_VERSION = '8';
 function manifest(manifest, {
   options
 }) {
-  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+  if (options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
 
-  if (typeof keys === 'string') {
-    keys = [keys];
-  }
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
 
-  for (const key of keys) {
-    manifest[key] = manifest[key] || 'dist-node/index.js';
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-node/index.js';
+    }
   }
 }
 async function beforeJob({

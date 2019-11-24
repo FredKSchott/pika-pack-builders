@@ -32,14 +32,16 @@ async function beforeJob({
 function manifest(manifest, {
   options
 }) {
-  let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+  if (options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
 
-  if (typeof keys === 'string') {
-    keys = [keys];
-  }
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
 
-  for (const key of keys) {
-    manifest[key] = manifest[key] || 'dist-umd/index.js';
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-umd/index.js';
+    }
   }
 }
 async function build({

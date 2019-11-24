@@ -3,6 +3,7 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 import { MessageError } from '@pika/types';
 import { Extractor, ExtractorConfig } from '@microsoft/api-extractor';
+const DEFAULT_ENTRYPOINT = 'types';
 /**
  * Config file for API Extractor.  For more info, please visit: https://api-extractor.com
  */
@@ -133,9 +134,16 @@ export async function beforeJob({ out }) {
         throw new MessageError('A "dist-types/index.d.ts" entrypoint is required, but none was found.');
     }
 }
-export function manifest(newManifest) {
-    newManifest.types = 'dist-types/index.d.ts';
-    return newManifest;
+export function manifest(manifest, { options }) {
+    if (options.entrypoint !== null) {
+        let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+        if (typeof keys === 'string') {
+            keys = [keys];
+        }
+        for (const key of keys) {
+            manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+        }
+    }
 }
 export async function build({ cwd, out, options, reporter, manifest }) {
     const typesBundledLoc = path.join(out, 'dist-types-bundled/');

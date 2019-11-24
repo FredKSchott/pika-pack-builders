@@ -9,12 +9,14 @@ export async function manifest(manifest, { cwd, options }) {
     if (!fs.existsSync(pathToTsconfig)) {
         return;
     }
-    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
-    if (typeof keys === 'string') {
-        keys = [keys];
-    }
-    for (const key of keys) {
-        manifest[key] = manifest[key] || 'dist-deno/index.ts';
+    if (options.entrypoint !== null) {
+        let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+        if (typeof keys === 'string') {
+            keys = [keys];
+        }
+        for (const key of keys) {
+            manifest[key] = manifest[key] || 'dist-deno/index.ts';
+        }
     }
 }
 export async function build({ cwd, out, options }) {

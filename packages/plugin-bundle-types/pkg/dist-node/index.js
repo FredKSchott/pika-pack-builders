@@ -10,6 +10,7 @@ var rimraf = _interopDefault(require('rimraf'));
 var types = require('@pika/types');
 var apiExtractor = require('@microsoft/api-extractor');
 
+const DEFAULT_ENTRYPOINT = 'types';
 /**
  * Config file for API Extractor.  For more info, please visit: https://api-extractor.com
  */
@@ -166,9 +167,20 @@ async function beforeJob({
     throw new types.MessageError('A "dist-types/index.d.ts" entrypoint is required, but none was found.');
   }
 }
-function manifest(newManifest) {
-  newManifest.types = 'dist-types/index.d.ts';
-  return newManifest;
+function manifest(manifest, {
+  options
+}) {
+  if (options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
+
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+    }
+  }
 }
 async function build({
   cwd,
