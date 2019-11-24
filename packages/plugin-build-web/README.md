@@ -34,7 +34,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 ## Options
 
 - `"sourcemap"` (Default: `"true"`): Adds a [source map](https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for this build.
-- `"entrypoint"` (Default: `"module"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string or an array of strings. Changing this is not recommended for most usage.
+- `"entrypoint"` (Default: `"module"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string, an array of strings, or `null` to disable entrypoint. Changing this is not recommended for most usage.
 
 
 ## Result

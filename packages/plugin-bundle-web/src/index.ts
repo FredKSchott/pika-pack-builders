@@ -12,6 +12,8 @@ import fs from 'fs';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
+const DEFAULT_ENTRYPOINT = 'browser';
+
 export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-web/');
   if (!fs.existsSync(srcDirectory)) {
@@ -26,13 +28,13 @@ export async function beforeJob({out}: BuilderOptions) {
 }
 
 export function manifest(manifest, {options}: BuilderOptions) {
-  if (options.entrypoint) {
-    if (options.entrypoint instanceof Array) {
-      options.entrypoint.forEach(entrypoint => {
-        manifest[entrypoint] = 'dist-web/index.bundled.js';
-      });
-    } else {
-      manifest[options.entrypoint] = 'dist-web/index.bundled.js';
+  if(options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-web/index.bundled.js';
     }
   }
 }

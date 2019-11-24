@@ -3,6 +3,7 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 import {BuilderOptions, MessageError} from '@pika/types';
 import {Extractor, ExtractorConfig, ExtractorResult, IConfigFile} from '@microsoft/api-extractor';
+const DEFAULT_ENTRYPOINT = 'types';
 
 /**
  * Config file for API Extractor.  For more info, please visit: https://api-extractor.com
@@ -229,9 +230,16 @@ export async function beforeJob({out}: BuilderOptions) {
   }
 }
 
-export function manifest(newManifest) {
-  newManifest.types = 'dist-types/index.d.ts';
-  return newManifest;
+export function manifest(manifest, {options}: BuilderOptions) {
+  if (options.entrypoint !== null) {
+    let keys = options.entrypoint || [DEFAULT_ENTRYPOINT];
+    if (typeof keys === 'string') {
+      keys = [keys];
+    }
+    for (const key of keys) {
+      manifest[key] = manifest[key] || 'dist-types/index.d.ts';
+    }
+  }
 }
 
 export async function build({cwd, out, options, reporter, manifest}: BuilderOptions): Promise<void> {

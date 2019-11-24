@@ -38,7 +38,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 - `"tsconfig"`: The relative path to the `tsconfig.json` config file to use. Defaults to the top-level project TypeScript config file, if one exists.
 - `"args"`: Optional, an array of additional arguments for tsc. Example: `["--build"]`
-- `"entrypoint"` (Default: `"types"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string or an array of strings. Changing this is not recommended for most usage.
+- `"entrypoint"` (Default: `"types"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string, an array of strings, or `null` to disable entrypoint. Changing this is not recommended for most usage.
 
 
 ## Result
