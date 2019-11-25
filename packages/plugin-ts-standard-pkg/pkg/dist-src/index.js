@@ -87,7 +87,7 @@ export function manifest(newManifest) {
 }
 export async function build({ cwd, out, options, reporter }) {
     const additionalArgs = options.args || [];
-    await execa(getTscBin(cwd), [
+    const result = execa(getTscBin(cwd), [
         '--outDir',
         path.join(out, 'dist-src/'),
         '-d',
@@ -105,6 +105,13 @@ export async function build({ cwd, out, options, reporter }) {
         'false',
         ...additionalArgs,
     ], { cwd });
+    result.stderr.pipe(process.stderr);
+    result.stdout.pipe(process.stdout);
+    await result.catch(err => {
+        // Small formatting improvement.
+        console.log('');
+        throw err;
+    });
     reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
     reporter.created(path.join(out, 'dist-types', 'index.d.ts'), 'types');
 }

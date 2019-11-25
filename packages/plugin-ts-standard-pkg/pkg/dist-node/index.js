@@ -131,8 +131,15 @@ async function build({
   reporter
 }) {
   const additionalArgs = options.args || [];
-  await execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false', '--sourceMap', 'false', ...additionalArgs], {
+  const result = execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false', '--sourceMap', 'false', ...additionalArgs], {
     cwd
+  });
+  result.stderr.pipe(process.stderr);
+  result.stdout.pipe(process.stdout);
+  await result.catch(err => {
+    // Small formatting improvement.
+    console.log('');
+    throw err;
   });
   reporter.created(path.join(out, 'dist-src', 'index.js'), 'esnext');
   reporter.created(path.join(out, 'dist-types', 'index.d.ts'), 'types');
