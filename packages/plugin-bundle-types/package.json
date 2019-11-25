@@ -26,9 +26,10 @@
     "build": "pika-pack build"
   },
   "dependencies": {
-    "@microsoft/api-extractor": "^7.1.5",
     "@pika/types": "^0.7.1",
-    "rimraf": "^2.6.3"
+    "rollup": "^1.1.0",
+    "rimraf": "^3.0.0",
+    "rollup-plugin-dts": "^1.1.12"
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
