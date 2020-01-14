@@ -45,3 +45,4 @@ This repo contains the official build plugins for @pika/pack.
 - [`pika-plugin-merge-properties`](https://github.com/jabuco/pika-plugin-merge-properties): Merge selected existing package.json properties into built package.json
 - [`pika-plugin-add-properties`](https://github.com/jabuco/pika-plugin-add-properties): Add custom values to built package.json
 - [`pika-plugin-package.json`](https://github.com/yumauri/pika-plugin-package.json): Modify (add/remove/merge) built `pkg/package.json` with new properties.
+- [`pika-plugin-typedefs-to-flow`](https://github.com/atomicpages/pika-plugin-typedefs-to-flow): Convert typescript definitions to flow types
