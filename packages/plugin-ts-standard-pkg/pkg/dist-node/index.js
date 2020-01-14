@@ -4,6 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var copy = _interopDefault(require('copy-concurrently'));
 var path = _interopDefault(require('path'));
 var fs = _interopDefault(require('fs'));
 var execa = _interopDefault(require('execa'));
@@ -130,9 +131,12 @@ async function build({
   options,
   reporter
 }) {
+  // Original source files are needed for declaration maps
+  const includedSrcDirectory = path.join(out, 'src/');
+  await copy(path.join(cwd, 'src/'), includedSrcDirectory);
   const additionalArgs = options.args || [];
-  const result = execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false', '--sourceMap', 'false', ...additionalArgs], {
-    cwd
+  const result = execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--declarationMap', 'true', '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false', '--sourceMap', 'false', ...additionalArgs], {
+    cwd: includedSrcDirectory
   });
   result.stderr.pipe(process.stderr);
   result.stdout.pipe(process.stdout);

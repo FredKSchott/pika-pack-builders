@@ -1,3 +1,4 @@
+import copy from 'copy-concurrently';
 import path from 'path';
 import fs from 'fs';
 import execa from 'execa';
@@ -86,6 +87,9 @@ export function manifest(newManifest) {
     return newManifest;
 }
 export async function build({ cwd, out, options, reporter }) {
+    // Original source files are needed for declaration maps
+    const includedSrcDirectory = path.join(out, 'src/');
+    await copy(path.join(cwd, 'src/'), includedSrcDirectory);
     const additionalArgs = options.args || [];
     const result = execa(getTscBin(cwd), [
         '--outDir',
@@ -93,6 +97,8 @@ export async function build({ cwd, out, options, reporter }) {
         '-d',
         '--declarationDir',
         path.join(out, 'dist-types/'),
+        '--declarationMap',
+        'true',
         '--project',
         getTsConfigPath(options, cwd),
         '--target',
@@ -104,7 +110,7 @@ export async function build({ cwd, out, options, reporter }) {
         '--sourceMap',
         'false',
         ...additionalArgs,
-    ], { cwd });
+    ], { cwd: includedSrcDirectory });
     result.stderr.pipe(process.stderr);
     result.stdout.pipe(process.stdout);
     await result.catch(err => {
