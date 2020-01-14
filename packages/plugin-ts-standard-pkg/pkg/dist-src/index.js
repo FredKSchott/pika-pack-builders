@@ -56,13 +56,13 @@ export async function beforeBuild({ cwd, options, reporter }) {
     }
     const tsConfig = readCompilerOptions(tsConfigPath);
     const { target, module: mod } = tsConfig;
-    if (target !== tsc.ScriptTarget.ES2019) {
+    if (target !== tsc.ScriptTarget.ES2020) {
         const _target = tsc.ScriptTarget[target] || '';
-        reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${_target ? _target.toLowerCase() : target}". You may encounter problems building.`);
+        reporter.warning(`tsconfig.json [compilerOptions.target] should be "ES2020", but found "${_target ? _target.toLowerCase() : target}". You may encounter problems building.`);
     }
     if (mod !== tsc.ModuleKind.ESNext) {
         const _mod = tsc.ModuleKind[mod] || '';
-        reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${_mod ? _mod.toLowerCase() : mod}". You may encounter problems building.`);
+        reporter.warning(`tsconfig.json [compilerOptions.module] should be "ESNext", but found "${_mod ? _mod.toLowerCase() : mod}". You may encounter problems building.`);
     }
 }
 export async function beforeJob({ cwd }) {
@@ -96,7 +96,7 @@ export async function build({ cwd, out, options, reporter }) {
         '--project',
         getTsConfigPath(options, cwd),
         '--target',
-        'es2019',
+        'es2020',
         '--module',
         'esnext',
         '--noEmit',
