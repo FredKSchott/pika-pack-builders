@@ -61,11 +61,17 @@ export async function beforeBuild({cwd, options, reporter}: BuilderOptions) {
   }
   const tsConfig = readCompilerOptions(tsConfigPath);
   const {target, module: mod} = tsConfig;
-  if (target !== tsc.ScriptTarget.ES2020) {
+  const buildTarget = tsc.ScriptTarget.ES2020 || tsc.ScriptTarget.ES2019;
+  if (!tsc.ScriptTarget.ES2020) {
+    reporter.warning(
+      `tsconfig.json [compilerOptions.target] - This version of TypeScript does not support ES2020 compilation. Falling back to "ES2019".`,
+    );
+  }
+  if (target !== buildTarget) {
     const _target = tsc.ScriptTarget[target] || '';
     reporter.warning(
-      `tsconfig.json [compilerOptions.target] should be "ES2020", but found "${
-        _target ? _target.toLowerCase() : target
+      `tsconfig.json [compilerOptions.target] should be "${tsc.ScriptTarget[buildTarget]}", but found "${
+        _target ? _target : target
       }". You may encounter problems building.`,
     );
   }
@@ -73,7 +79,7 @@ export async function beforeBuild({cwd, options, reporter}: BuilderOptions) {
     const _mod = tsc.ModuleKind[mod] || '';
     reporter.warning(
       `tsconfig.json [compilerOptions.module] should be "ESNext", but found "${
-        _mod ? _mod.toLowerCase() : mod
+        _mod ? _mod : mod
       }". You may encounter problems building.`,
     );
   }
