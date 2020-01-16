@@ -39,7 +39,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 ## Result
 
-1. Adds a web distribution to your built package: `dist-web/index.js` Targets Modern (ES2019) syntax optimized for bundlers & web tooling.
+1. Adds a web distribution to your built package: `dist-web/index.js` Targets Modern (ES2020) syntax optimized for bundlers & web tooling.
 1. Adds a "module" entrypoint to your built `package.json` manifest.
 
 Packages that use this plugin will work on the Pika CDN. To support running directly from UNPKG, check out [plugin-bundle-web](/packages/plugin-bundle-web).

@@ -83,16 +83,16 @@ async function beforeBuild({
     module: mod
   } = tsConfig;
 
-  if (target !== tsc.ScriptTarget.ES2019) {
+  if (target !== tsc.ScriptTarget.ES2020) {
     const _target = tsc.ScriptTarget[target] || '';
 
-    reporter.warning(`tsconfig.json [compilerOptions.target] should be "es2019", but found "${_target ? _target.toLowerCase() : target}". You may encounter problems building.`);
+    reporter.warning(`tsconfig.json [compilerOptions.target] should be "ES2020", but found "${_target ? _target.toLowerCase() : target}". You may encounter problems building.`);
   }
 
   if (mod !== tsc.ModuleKind.ESNext) {
     const _mod = tsc.ModuleKind[mod] || '';
 
-    reporter.warning(`tsconfig.json [compilerOptions.module] should be "esnext", but found "${_mod ? _mod.toLowerCase() : mod}". You may encounter problems building.`);
+    reporter.warning(`tsconfig.json [compilerOptions.module] should be "ESNext", but found "${_mod ? _mod.toLowerCase() : mod}". You may encounter problems building.`);
   }
 }
 async function beforeJob({
@@ -131,7 +131,7 @@ async function build({
   reporter
 }) {
   const additionalArgs = options.args || [];
-  const result = execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2019', '--module', 'esnext', '--noEmit', 'false', '--sourceMap', 'false', ...additionalArgs], {
+  const result = execa(getTscBin(cwd), ['--outDir', path.join(out, 'dist-src/'), '-d', '--declarationDir', path.join(out, 'dist-types/'), '--project', getTsConfigPath(options, cwd), '--target', 'es2020', '--module', 'esnext', '--noEmit', 'false', '--sourceMap', 'false', ...additionalArgs], {
     cwd
   });
   result.stderr.pipe(process.stderr);
