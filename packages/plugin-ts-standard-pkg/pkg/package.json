@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@pika/types": "^0.8.1",
+    "copy-concurrently": "^1.0.5",
     "execa": "^2.0.0",
     "standard-pkg": "^0.5.0"
   },
