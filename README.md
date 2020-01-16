@@ -11,8 +11,8 @@ This repo contains the official build plugins for @pika/pack.
 
 > **NOTE: Include a source builder early in your pipeline.** Source builders take your project source code (ESNext, TS, etc.) and compile it to standard, ES2018 JavaScript. Other builders will then consume that standardized build to base their own work off of.
 
- - [`@pika/plugin-standard-pkg`](https://github.com/pikapkg/builders/tree/master/packages/plugin-standard-pkg/): Compiles JavaScript/TypeScript to ES2018. Supports personalized, top-level `.babelrc` plugins/config.
- - [`@pika/plugin-ts-standard-pkg`](https://github.com/pikapkg/builders/tree/master/packages/plugin-ts-standard-pkg/): Compiles TypeScript to ES2018 (Uses `tsc` internally instead of Babel, and builds type definitions automatically).
+ - [`@pika/plugin-standard-pkg`](https://github.com/pikapkg/builders/tree/master/packages/plugin-standard-pkg/): Compiles JavaScript/TypeScript to ES2020. Supports personalized, top-level `.babelrc` plugins/config.
+ - [`@pika/plugin-ts-standard-pkg`](https://github.com/pikapkg/builders/tree/master/packages/plugin-ts-standard-pkg/): Compiles TypeScript to ES2020 (Uses `tsc` internally instead of Babel, and builds type definitions automatically).
  - [`@pika/plugin-copy-assets`](https://github.com/pikapkg/builders/tree/master/packages/plugin-copy-assets/): Copies static assets from your root source directory into the built `pkg/` directory.
  
 #### Distribution Builders:
