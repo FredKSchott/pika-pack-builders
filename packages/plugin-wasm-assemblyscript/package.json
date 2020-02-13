@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-wasm-assemblyscript",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A @pika/pack plugin: Builds TypeScript as WASM via AssemblyScript.",
   "main": "pkg/dist-node/index.js",
   "license": "MIT",
@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.9.0",
-    "@pika/plugin-standard-pkg": "^0.9.0",
+    "@pika/plugin-build-node": "^0.9.1",
+    "@pika/plugin-standard-pkg": "^0.9.1",
     "@types/node": "^10.12.18"
   },
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
