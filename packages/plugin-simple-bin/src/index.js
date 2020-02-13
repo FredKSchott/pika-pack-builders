@@ -90,8 +90,8 @@ if (cli.autoRun) {
 
 const run = cli.run || cli.cli || cli.default;
 run(process.argv).catch(function (error) {
-  console.error(error.stack || error.message || error);
-  process.exitCode = 1;
+  console.error(`\n${error.stack || error.message || error}\n`);
+  process.exit(1);
 });
 `
   );
