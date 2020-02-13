@@ -93,7 +93,7 @@ if (cli.autoRun) {
 
 const run = cli.run || cli.cli || cli.default;
 run(process.argv).catch(function (error) {
-  console.error(\`\n${error.stack || error.message || error}\n\`);
+  console.error(\`\n\$\{error.stack || error.message || error\}\n\`);
   process.exit(1);
 });
 `);
