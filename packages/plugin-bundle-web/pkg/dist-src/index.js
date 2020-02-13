@@ -1,6 +1,6 @@
-import rollupCommonJs from 'rollup-plugin-commonjs';
-import rollupJson from 'rollup-plugin-json';
-import rollupNodeResolve from 'rollup-plugin-node-resolve';
+import rollupCommonJs from '@rollup/plugin-commonjs';
+import rollupJson from '@rollup/plugin-json';
+import rollupNodeResolve from '@rollup/plugin-node-resolve';
 import { terser as rollupTerser } from 'rollup-plugin-terser';
 import rollupBabel from 'rollup-plugin-babel';
 import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';

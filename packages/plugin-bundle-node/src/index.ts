@@ -7,9 +7,9 @@ import builtinModules from 'builtin-modules';
 import * as fs from 'fs';
 import * as path from 'path';
 import rollupBabel from 'rollup-plugin-babel';
-import rollupCommonJs from 'rollup-plugin-commonjs';
-import rollupJson from 'rollup-plugin-json';
-import rollupNodeResolve from 'rollup-plugin-node-resolve';
+import rollupCommonJs from '@rollup/plugin-commonjs';
+import rollupJson from '@rollup/plugin-json';
+import rollupNodeResolve from '@rollup/plugin-node-resolve';
 import {rollup} from 'rollup';
 
 const DEFAULT_MIN_NODE_VERSION = '8';

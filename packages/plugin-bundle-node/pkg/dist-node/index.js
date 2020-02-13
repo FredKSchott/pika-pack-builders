@@ -13,9 +13,9 @@ var builtinModules = _interopDefault(require('builtin-modules'));
 var fs = require('fs');
 var path = require('path');
 var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
-var rollupCommonJs = _interopDefault(require('rollup-plugin-commonjs'));
-var rollupJson = _interopDefault(require('rollup-plugin-json'));
-var rollupNodeResolve = _interopDefault(require('rollup-plugin-node-resolve'));
+var rollupCommonJs = _interopDefault(require('@rollup/plugin-commonjs'));
+var rollupJson = _interopDefault(require('@rollup/plugin-json'));
+var rollupNodeResolve = _interopDefault(require('@rollup/plugin-node-resolve'));
 var rollup = require('rollup');
 
 const DEFAULT_MIN_NODE_VERSION = '8';

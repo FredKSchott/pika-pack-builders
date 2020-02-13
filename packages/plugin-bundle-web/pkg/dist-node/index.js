@@ -4,9 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var rollupCommonJs = _interopDefault(require('rollup-plugin-commonjs'));
-var rollupJson = _interopDefault(require('rollup-plugin-json'));
-var rollupNodeResolve = _interopDefault(require('rollup-plugin-node-resolve'));
+var rollupCommonJs = _interopDefault(require('@rollup/plugin-commonjs'));
+var rollupJson = _interopDefault(require('@rollup/plugin-json'));
+var rollupNodeResolve = _interopDefault(require('@rollup/plugin-node-resolve'));
 var rollupPluginTerser = require('rollup-plugin-terser');
 var rollupBabel = _interopDefault(require('rollup-plugin-babel'));
 var babelPluginDynamicImportSyntax = _interopDefault(require('@babel/plugin-syntax-dynamic-import'));
