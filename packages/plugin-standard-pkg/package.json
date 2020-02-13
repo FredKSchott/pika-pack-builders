@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-standard-pkg",
-  "version": "0.8.1",
+  "version": "0.8.3",
   "description": "A @pika/pack plugin: Builds your package source as standard, ES2018 JavaScript.",
   "license": "MIT",
   "main": "pkg/dist-node/index.js",
@@ -26,14 +26,14 @@
     "build": "pika-pack build"
   },
   "dependencies": {
-    "@pika/types": "^0.8.1",
+    "@pika/types": "^0.8.3",
     "@types/node": "^10.12.18",
     "standard-pkg": "^0.5.0"
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.8.1",
-    "@pika/plugin-ts-standard-pkg": "^0.8.1",
+    "@pika/plugin-build-node": "^0.8.3",
+    "@pika/plugin-ts-standard-pkg": "^0.8.3",
     "typescript": "^3.0.0"
   },
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593"
