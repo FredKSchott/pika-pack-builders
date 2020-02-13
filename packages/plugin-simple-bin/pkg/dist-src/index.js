@@ -1,7 +1,7 @@
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
 import { MessageError } from '@pika/types';
-const BIN_FILENAME = "dist-node/index.bin.js";
+const BIN_FILENAME = 'dist-node/index.bin.js';
 export function beforeBuild({
   options
 }) {
@@ -12,13 +12,13 @@ export function beforeBuild({
 export async function beforeJob({
   out
 }) {
-  const nodeDirectory = path.join(out, "dist-node");
+  const nodeDirectory = path.join(out, 'dist-node');
 
   if (!fs.existsSync(nodeDirectory)) {
     throw new MessageError('"dist-node/" does not exist, or was not yet created in the pipeline.');
   }
 
-  const nodeEntrypoint = path.join(out, "dist-node/index.js");
+  const nodeEntrypoint = path.join(out, 'dist-node/index.js');
 
   if (!fs.existsSync(nodeEntrypoint)) {
     throw new MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
@@ -53,8 +53,8 @@ export function build({
   const binFilename = path.join(out, BIN_FILENAME);
 
   if (v8CompileCache) {
-    const v8CompileCacheRead = path.join(cwd, "node_modules/v8-compile-cache/v8-compile-cache.js");
-    const v8CompileCacheWrite = path.join(out, "dist-node/v8-compile-cache.js");
+    const v8CompileCacheRead = path.join(cwd, 'node_modules/v8-compile-cache/v8-compile-cache.js');
+    const v8CompileCacheWrite = path.join(out, 'dist-node/v8-compile-cache.js');
     fs.copyFileSync(v8CompileCacheRead, v8CompileCacheWrite);
   }
 
@@ -93,10 +93,10 @@ if (cli.autoRun) {
 
 const run = cli.run || cli.cli || cli.default;
 run(process.argv).catch(function (error) {
-  console.error(error.stack || error.message || error);
-  process.exitCode = 1;
+  console.error(\`\n${error.stack || error.message || error}\n\`);
+  process.exit(1);
 });
 `);
-  fs.chmodSync(binFilename, "755");
+  fs.chmodSync(binFilename, '755');
   reporter.created(path.join(out, BIN_FILENAME), `bin.${options.bin}`);
 }
