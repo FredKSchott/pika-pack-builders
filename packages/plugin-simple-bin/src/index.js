@@ -1,47 +1,44 @@
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
 import {MessageError} from '@pika/types';
-const BIN_FILENAME = "dist-node/index.bin.js";
+const BIN_FILENAME = 'dist-node/index.bin.js';
 
-export function beforeBuild({ options }) {
+export function beforeBuild({options}) {
   if (!options.bin) {
-    return new MessageError(
-      'option "bin" must be defined. Example: {"bin": "example-cli"}'
-    );
+    return new MessageError('option "bin" must be defined. Example: {"bin": "example-cli"}');
   }
 }
 
 export async function beforeJob({out}) {
-  const nodeDirectory = path.join(out, "dist-node");
+  const nodeDirectory = path.join(out, 'dist-node');
   if (!fs.existsSync(nodeDirectory)) {
     throw new MessageError('"dist-node/" does not exist, or was not yet created in the pipeline.');
   }
-  const nodeEntrypoint = path.join(out, "dist-node/index.js");
+  const nodeEntrypoint = path.join(out, 'dist-node/index.js');
   if (!fs.existsSync(nodeEntrypoint)) {
     throw new MessageError('"dist-node/index.js" is the expected standard entrypoint, but it does not exist.');
   }
   const testModuleInterface = await import(nodeEntrypoint);
   if (!(testModuleInterface.run || testModuleInterface.cli || testModuleInterface.default)) {
-    throw new MessageError('"dist-node/index.js" must export a "run", "cli", or "default" function for the CLI to run.');
+    throw new MessageError(
+      '"dist-node/index.js" must export a "run", "cli", or "default" function for the CLI to run.',
+    );
   }
 }
 
-export function manifest(newManifest, { options }) {
-  const { bin } = options;
+export function manifest(newManifest, {options}) {
+  const {bin} = options;
   newManifest.bin = newManifest.bin || {};
   newManifest.bin[bin] = BIN_FILENAME;
   return newManifest;
 }
 
-export function build({ out, cwd, options, reporter }) {
-  const { minNodeVersion, v8CompileCache } = options;
+export function build({out, cwd, options, reporter}) {
+  const {minNodeVersion, v8CompileCache} = options;
   const binFilename = path.join(out, BIN_FILENAME);
   if (v8CompileCache) {
-    const v8CompileCacheRead = path.join(
-      cwd,
-      "node_modules/v8-compile-cache/v8-compile-cache.js"
-    );
-    const v8CompileCacheWrite = path.join(out, "dist-node/v8-compile-cache.js");
+    const v8CompileCacheRead = path.join(cwd, 'node_modules/v8-compile-cache/v8-compile-cache.js');
+    const v8CompileCacheWrite = path.join(out, 'dist-node/v8-compile-cache.js');
     fs.copyFileSync(v8CompileCacheRead, v8CompileCacheWrite);
   }
 
@@ -50,8 +47,8 @@ export function build({ out, cwd, options, reporter }) {
     `#!/usr/bin/env node
 'use strict';
 ${
-      minNodeVersion
-        ? `
+  minNodeVersion
+    ? `
 const ver = process.versions.node;
 const majorVer = parseInt(ver.split('.')[0], 10);
 
@@ -60,8 +57,8 @@ if (majorVer < ${minNodeVersion}) {
   process.exit(1);
 }
 `
-        : ``
-    }${
+    : ``
+}${
       v8CompileCache
         ? `
 try {
@@ -90,12 +87,12 @@ if (cli.autoRun) {
 
 const run = cli.run || cli.cli || cli.default;
 run(process.argv).catch(function (error) {
-  console.error(`\n${error.stack || error.message || error}\n`);
+  console.error(\`\n\$\{error.stack || error.message || error\}\n\`);
   process.exit(1);
 });
-`
+`,
   );
 
-  fs.chmodSync(binFilename, "755");
+  fs.chmodSync(binFilename, '755');
   reporter.created(path.join(out, BIN_FILENAME), `bin.${options.bin}`);
 }
