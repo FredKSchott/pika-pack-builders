@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-build-umd",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "A @pika/pack plugin: Adds a UMD distribution to your package, built to be flexible & run on legacy browsers & environments.",
   "license": "MIT",
   "main": "pkg/dist-node/index.js",
@@ -30,14 +30,14 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
-    "@pika/types": "^0.8.1",
+    "@pika/types": "^0.8.2",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.3.0"
   },
   "devDependencies": {
     "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.8.1",
-    "@pika/plugin-ts-standard-pkg": "^0.8.1",
+    "@pika/plugin-build-node": "^0.8.2",
+    "@pika/plugin-ts-standard-pkg": "^0.8.2",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   },
