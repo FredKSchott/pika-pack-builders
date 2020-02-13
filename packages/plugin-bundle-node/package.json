@@ -1,6 +1,6 @@
 {
   "name": "@pika/plugin-bundle-node",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "A @pika/pack plugin: Adds a bundled Node.js distribution to your package.",
   "license": "MIT",
   "main": "pkg/dist-node/index.js",
@@ -30,7 +30,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
-    "@pika/types": "^0.8.2",
+    "@pika/types": "^0.9.0",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-json": "^4.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
@@ -42,8 +42,8 @@
   "gitHead": "88aa979a8caee0ea92510ef2f1006fcc2fdd8593",
   "devDependencies": {
     "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.8.2",
-    "@pika/plugin-ts-standard-pkg": "^0.8.2",
+    "@pika/plugin-build-node": "^0.9.0",
+    "@pika/plugin-ts-standard-pkg": "^0.9.0",
     "@types/node": "^10.12.18",
     "typescript": "^3.0.0"
   }
