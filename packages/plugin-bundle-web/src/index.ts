@@ -18,7 +18,7 @@ export async function beforeJob({out}: BuilderOptions) {
   const srcDirectory = path.join(out, 'dist-web/');
   if (!fs.existsSync(srcDirectory)) {
     throw new MessageError(
-      '"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-dev" to precede in pipeline.',
+      '"dist-web/" does not exist. "plugin-bundle-web" requires "plugin-build-web" to precede in pipeline.',
     );
   }
   const srcEntrypoint = path.join(out, 'dist-web/index.js');
