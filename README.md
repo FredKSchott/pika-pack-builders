@@ -18,7 +18,7 @@ This repo contains the official build plugins for @pika/pack.
 #### Distribution Builders:
 
  - [`@pika/plugin-build-deno`](https://github.com/pikapkg/builders/tree/master/packages/plugin-build-deno/): Builds a distribution that runs on Deno (TS projects only).
- - [`@pika/plugin-build-node`](https://github.com/pikapkg/builders/tree/master/packages/plugin-build-node/): Builds a distribution that runs on Node LTS (v6+).
+ - [`@pika/plugin-build-node`](https://github.com/pikapkg/builders/tree/master/packages/plugin-build-node/): Builds a distribution that runs on Node LTS (v10+).
  - [`@pika/plugin-build-types`](https://github.com/pikapkg/builders/tree/master/packages/plugin-build-types/): Builds TypeScript definitions from your TS, or automatically generate them from your JS. Not required if you use `@pika/plugin-ts-standard-pkg`.
  - [`@pika/plugin-build-web`](https://github.com/pikapkg/builders/tree/master/packages/plugin-build-web/): Builds an ESM distribution optimized for browsers & bundlers.
 
