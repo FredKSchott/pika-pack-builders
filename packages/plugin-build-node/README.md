@@ -43,5 +43,5 @@ For more information about @pika/pack & help getting started, [check out the mai
 
 1. Adds a Node.js distribution to your built package: `dist-node/index.js`
   1. Common.js (CJS) Module Syntax
-  1. Transpiled to run on Node.js LTS (Currently, supports Node.js version v6+)
+  1. Transpiled to run on Node.js LTS (Currently, supports Node.js version v10+)
 1. Adds a "main" entrypoint to your built `package.json` manifest.
