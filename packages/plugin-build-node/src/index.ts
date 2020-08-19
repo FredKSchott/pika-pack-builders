@@ -10,7 +10,7 @@ import {BuilderOptions, MessageError} from '@pika/types';
 import {rollup} from 'rollup';
 
 const DEFAULT_ENTRYPOINT = 'main';
-const DEFAULT_MIN_NODE_VERSION = '8';
+const DEFAULT_MIN_NODE_VERSION = '10';
 
 export function manifest(manifest, {options}: BuilderOptions) {
   if (options.entrypoint !== null) {
