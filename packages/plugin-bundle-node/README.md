@@ -35,7 +35,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 ## Options
 
 - `"sourcemap"` (Default: `"true"`): Adds a [source map](https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for this build.
-- `"minNodeVersion"` (Default: `"8"`): This plugin will bundle your package for the current minimum [Node.js LTS](https://github.com/nodejs/Release) major version. This option allows you to target later versions of Node.js only.
+- `"minNodeVersion"` (Default: `"10"`): This plugin will bundle your package for the current minimum [Node.js LTS](https://github.com/nodejs/Release) major version. This option allows you to target later versions of Node.js only.
 
 
 ## Result
