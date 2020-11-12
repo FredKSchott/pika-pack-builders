@@ -112,7 +112,7 @@ export function manifest(newManifest) {
 
 export async function build({cwd, out, options, reporter}: BuilderOptions): Promise<void> {
   const additionalArgs = options.args || [];
-  const result = execa(
+  const result = execa.node(
     getTscBin(cwd),
     [
       '--outDir',

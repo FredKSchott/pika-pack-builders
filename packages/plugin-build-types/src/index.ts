@@ -70,7 +70,7 @@ To generate types automatically:
     }
 
     reporter.info('no manual type definitions found, auto-generating...');
-    await execa(
+    await execa.node(
       tscBin,
       [
         '-d',
