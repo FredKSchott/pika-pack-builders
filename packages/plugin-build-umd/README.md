@@ -37,6 +37,7 @@ For more information about @pika/pack & help getting started, [check out the mai
 - `"sourcemap"` (Default: `"true"`): Adds a [source map](https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for this build.
 - `"name"` (Defaults: your package name): Sets the name that your package is attached to on the `window` object.
 - `"entrypoint"` (Default: `"umd:main"`): Customize the package.json manifest entrypoint set by this plugin. Accepts either a string, an array of strings, or `null` to disable entrypoint. Changing this is not recommended for most usage.
+- `"exports"` (Default: `"named"`): Customize rollup [`output.exports`](option https://rollupjs.org/guide/en/#outputexports).
 
 
 ## Result
