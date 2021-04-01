@@ -72,7 +72,7 @@ export async function build({out, reporter, options}: BuilderOptions): Promise<v
   await result.write({
     file: writeToUmd,
     format: 'umd',
-    exports: 'named',
+    exports: options.exports === undefined ? 'named' : options.exports,
     name: umdExportName,
     sourcemap: options.sourcemap === undefined ? true : options.sourcemap,
   });
