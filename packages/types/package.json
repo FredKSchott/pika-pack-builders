@@ -6,6 +6,11 @@
   "keywords": [
     "pika-pkg"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snowpackjs/pika-pack-builders.git",
+    "directory": "packages/types"
+  },
   "files": [
     "dist-*/",
     "assets/",
