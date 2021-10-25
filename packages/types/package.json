@@ -6,6 +6,11 @@
   "keywords": [
     "pika-pkg"
   ],
+  "repository": {
+    "type": "git",
+    "url": "@pika/babel-plugin-esm-import-rewrite.git",
+    "directory": "packages/types"
+  },
   "files": [
     "dist-*/",
     "assets/",

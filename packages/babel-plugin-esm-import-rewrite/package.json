@@ -16,6 +16,11 @@
       ]
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snowpackjs/pika-pack-builders.git",
+    "directory": "packages/babel-plugin-esm-import-rewrite"
+  },
   "scripts": {
     "build": "pika-pack build"
   },
